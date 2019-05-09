@@ -1,10 +1,8 @@
 package AgChSaJo.JumpOrDie;
 
-public abstract class Obstacle implements IObstacle{
+public abstract class Obstacle {
 
-    private double height, width, x, y;
+    protected double height, width, x=100, y=0;
 
-    public void move(){
-        x--;
-    }
+    abstract void move();
 }
