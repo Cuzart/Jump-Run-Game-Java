@@ -2,9 +2,9 @@ package AgChSaJo.JumpOrDie;
 
 public abstract class Obstacle implements IObstacle{
 
-    private double oHeight, oWidth, oX, oY;
+    private double height, width, x, y;
 
     public void move(){
-        oX--;
+        x--;
     }
 }
