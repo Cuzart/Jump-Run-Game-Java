@@ -6,11 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.Scanner;
+import AgChSaJo.JumpOrDie.*;
 
 public class Scorelist {
-    double finalScore = getFinalScore(double finalScore)
+    double finalScore = Player.getFinalScore(double finalScore)
     String finalScore = Double.toString(finalScore)
-    String nickname = getNickname(String nickname);
+    String nickname = Player.getNickname(String nickname);
     public void createEntry() { //writes the new score in the file ScoreList.txt if the finalScore is bigger than the ones in the file or the file has less than 20 scores
         try {
             int lines = CountLines();
@@ -30,6 +31,7 @@ public class Scorelist {
 
         try {
             BufferedReader br = new BufferedReader("ScoreList.txt");
+            String thisLine;
             while ((thisLine = br.readLine()) != null) {
                 numberOfLines ++;
             }
