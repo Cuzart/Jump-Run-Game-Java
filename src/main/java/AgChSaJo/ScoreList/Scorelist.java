@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import AgChSaJo.JumpOrDie.*;
@@ -48,15 +49,17 @@ public class Scorelist {
     public void ScoreLists(){ //convert the file into two lists one for the nicknames and one for the scores
         String inputFileName = "ScoreList.txt";
         File inputFile = new File(inputFileName);
-        List<String> nicknames= null;
-        List<Double> values=new ArrayList<>();
+        HashMap<String,double> sL = new HashMap<String, double>();
+        //List<String> nicknames= null;
+        //List<Double> values=new ArrayList<>();
         try{
             Scanner sc = new Scanner(inputFile);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String [] parts = line.split(" : ");
-                nicknames.add(parts[0]);
-                values.add(Double.parseDouble(parts[1]));
+                sL.put(parts[0], Double.parseDouble(parts[1]));
+                //nicknames.add(parts[0]);
+                //values.add(Double.parseDouble(parts[1]));
 
             }
             return nicknames;
