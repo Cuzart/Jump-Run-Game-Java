@@ -4,20 +4,25 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import AgChSaJo.JumpOrDie.*;
 
 public class Scorelist {
-    double finalScore = Player.getFinalScore(double finalScore)
-    String finalScore = Double.toString(finalScore)
-    String nickname = Player.getNickname(String nickname);
+    double finalScore = 0;
+    String finalScores = null;
+    String nickname = null;
     public void createEntry() { //writes the new score in the file ScoreList.txt if the finalScore is bigger than the ones in the file or the file has less than 20 scores
         try {
             int lines = CountLines();
             if (lines < 20) {
+                public Player player = new Player();
+                finalScore = player.getFinalScore();
+                finalScores = Double.toString(finalScore);
+                nickname = player.getNickname();
                 FileWriter fw = new FileWriter("ScoreList.txt");
-                fw.write(nickname + " : " + finalScore);
+                fw.write(nickname + " : " + finalScores);
                 fw.close();
             } else if (finalScore > LowerScore()) {
 
@@ -44,7 +49,7 @@ public class Scorelist {
         String inputFileName = "ScoreList.txt";
         File inputFile = new File(inputFileName);
         List<String> nicknames= null;
-        List<Double> values=null;
+        List<Double> values=new ArrayList<>();
         try{
             Scanner sc = new Scanner(inputFile);
             while (sc.hasNextLine()) {
