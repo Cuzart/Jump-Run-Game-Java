@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import AgChSaJo.JumpOrDie.*;
 
-public class Scorelist {
+/*public class Scorelist {
     double finalScore = 0;
     String finalScores = null;
     String nickname = null;
@@ -71,8 +71,8 @@ public class Scorelist {
     }
     void getLowerScore() {
 
-        }
     }
+
 
     /*void readFile(){
         Scanner s = new Scanner(new File("ScoreList.txt"));
@@ -82,5 +82,5 @@ public class Scorelist {
         }
         s.close();
 
-    } */
-}
+    }
+}*/

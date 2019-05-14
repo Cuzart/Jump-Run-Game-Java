@@ -5,8 +5,9 @@ import java.util.Timer;
 
 public class JumpOrDie {
     public static void main(String[] args) {
+        ObstacleManager.obstacle1 = ObstacleManager.generate();
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TestTimerTask(),1000,500);
+        timer.scheduleAtFixedRate(new TestTimerTask(),1000,100);
 
        /* try {
             System.out.println("Main starts sleeping "+ new Date());
