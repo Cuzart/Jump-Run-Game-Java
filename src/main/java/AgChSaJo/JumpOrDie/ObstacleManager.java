@@ -5,6 +5,8 @@ import java.util.Random;
 class ObstacleManager {
 
     static Obstacle obstacle1, obstacle2;
+    private static double obstacleSpeed = 1;
+    private static int obstacleCount = 0;
 
     static Obstacle generate(){
         Random r = new Random();
@@ -20,12 +22,28 @@ class ObstacleManager {
         }
     }
 
-    static void manageObstacleLifetime(int level){
+    static void manageObstacleLifetime(){
         if (obstacle1.x <=-5){
             obstacle1 = generate();
+            obstacleCount++;
         }
-       /* if(level==2){
-        }*/
+        if(obstacleCount >= 5){
+            if (obstacle2 == null && obstacle1.x <=50){
+                obstacle2 = generate();
+            }
+        }
+        if (obstacle2 != null && obstacle2.x <=-5){
+            obstacle2 = generate();
+            obstacleCount++;
+        }
+        switch (obstacleCount){
+            case 10: obstacleSpeed = 1.5; break;
+            case 20: obstacleSpeed = 2; break;
+        }
+    }
+
+    static double getObstacleSpeed(){
+        return obstacleSpeed;
     }
 
 }
