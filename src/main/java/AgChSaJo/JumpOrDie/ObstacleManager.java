@@ -20,33 +20,49 @@ class ObstacleManager {
         int kind = r.nextInt(2);
         switch (kind){
             case 0:
-                System.out.println("new Fence");
+                log.debug("new Fence generated");
                 return new Fence();
             case 1:
-                System.out.println("new Hedge");
+                log.debug("new Hedge generated");
                 return new Hedge();
-            default: return new Fence();
+            default:
+                log.warn("Should not happen - Fence generated");
+                return new Fence();
         }
     }
 
     static void manageObstacleLifetime(){
+
         if (obstacle1.x <=-5){
             obstacle1 = generate();
             obstacleCount++;
-            log.debug("Obstacle überstanden");
         }
-        if(obstacleCount >= 5){
-            if (obstacle2 == null && obstacle1.x <=50){
-                obstacle2 = generate();
+
+        if(obstacle2 == null){
+            if(obstacleCount >= 5){
+                if (obstacle2 == null && obstacle1.x <=50){
+                    obstacle2 = generate();
+                    log.info("second Obstacle on screen");
+                }
             }
+        }else if (obstacle2.x <=-5){
+                obstacle2 = generate();
+                obstacleCount++;
         }
-        if (obstacle2 != null && obstacle2.x <=-5){
-            obstacle2 = generate();
-            obstacleCount++;
-        }
+
+
+
+
+
         switch (obstacleCount){
-            case 10: obstacleSpeed = 1.5; break;
-            case 20: obstacleSpeed = 2; break;
+            case 10:
+                log.debug("set obstacleSpeed to 1.5");
+                obstacleSpeed = 1.5;
+                break;
+            case 20:
+                obstacleSpeed = 2;
+                log.debug("set obstacleSpeed to 2");
+                break;
         }
     }
 
