@@ -31,6 +31,18 @@
       <version>2.11.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>11.0.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>11.0.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -75,6 +87,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.1</version>
+        <configuration>
+          <mainClass>JumpOrDie</mainClass>  <!--main-Class angeben-->
+        </configuration>
       </plugin>
 
     </plugins>

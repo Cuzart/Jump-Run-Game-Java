@@ -1,8 +1,15 @@
 package AgChSaJo.JumpOrDie;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Random;
 
+
+
 class ObstacleManager {
+
+    private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
     static Obstacle obstacle1, obstacle2;
     private static double obstacleSpeed = 1;
@@ -26,6 +33,7 @@ class ObstacleManager {
         if (obstacle1.x <=-5){
             obstacle1 = generate();
             obstacleCount++;
+            log.debug("Obstacle überstanden");
         }
         if(obstacleCount >= 5){
             if (obstacle2 == null && obstacle1.x <=50){
