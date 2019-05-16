@@ -1,8 +1,6 @@
 package AgChSaJo.JumpOrDie;
 
-import AgChSaJo.IPlayer;
-
-public class Player implements IPlayer {
+public class Player{
 
     private String nickname;
     private double finalScore, score;
@@ -13,6 +11,10 @@ public class Player implements IPlayer {
         width = 3;
         y = 0;
     }
+    Player(String nickname, double finalScore){
+        this.nickname = nickname;
+        this.finalScore = finalScore;
+    }
 
     void setNickname(String nickname) {
         this.nickname = nickname;
@@ -22,9 +24,6 @@ public class Player implements IPlayer {
     }
     public double getFinalScore() {
         return finalScore;
-    }
-    public String[] getStats (){
-        return new String[]{nickname, Double.toString(finalScore)};
     }
     void jump(){
         boolean maxHeight = false;
