@@ -1,13 +1,14 @@
 package AgChSaJo.JumpOrDie;
 
-public class Hedge extends Obstacle{
 
-    public Hedge (){
+class Hedge extends Obstacle{
+
+    Hedge (){
         height=5;
         width=10;
     }
 
-    void move(){
-        x--;
+    void move(double speed){
+        x -= speed;
     }
 }

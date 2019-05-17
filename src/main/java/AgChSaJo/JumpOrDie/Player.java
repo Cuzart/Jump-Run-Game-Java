@@ -1,14 +1,22 @@
 package AgChSaJo.JumpOrDie;
 
-import AgChSaJo.IPlayer;
-
-public class Player implements IPlayer {
+public class Player{
 
     private String nickname;
     private double finalScore, score;
-    private double pHeight, pWidth, pY;
+    private double height, width, y;
 
-    public void setNickname(String nickname) {
+    Player(){
+        height = 15;
+        width = 3;
+        y = 0;
+    }
+    Player(String nickname, double finalScore){
+        this.nickname = nickname;
+        this.finalScore = finalScore;
+    }
+
+    void setNickname(String nickname) {
         this.nickname = nickname;
     }
     public String getNickname(){
@@ -17,14 +25,19 @@ public class Player implements IPlayer {
     public double getFinalScore() {
         return finalScore;
     }
-    public String[] getStats (){
-        return new String[]{nickname, Double.toString(finalScore)};
-    }
     void jump(){
-        pY += 2;
+        boolean maxHeight = false;
+        if (!maxHeight){
+            y++;
+            if (y==15){
+                maxHeight = true;
+            }
+        }else{
+            y--;
+        }
     }
     void duck(){
-        pHeight/=2;
+        height/=2;
     }
 
 }

@@ -1,14 +1,15 @@
 package AgChSaJo.JumpOrDie;
 
-public class Fence extends Obstacle{
 
-    public Fence (){
+class Fence extends Obstacle{
+
+    Fence (){
         height=10;
         width=3;
     }
 
-    void move(){
-        x--;
+    void move(double speed){
+        x -= speed;
     }
 
 }
