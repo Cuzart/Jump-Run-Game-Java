@@ -1,23 +1,100 @@
 package AgChSaJo.ScoreList;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+
 import AgChSaJo.JumpOrDie.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import java.io.File;
 
 public class Scorelist {
-    double finalScore = 0;
+
+    private JSONArray readPlayerList() {
+        JSONParser parser = new JSONParser();
+        try (FileReader reader =new FileReader("ScoreList.json")){
+
+            Object obj = parser.parse(reader);
+
+            JSONArray players = (JSONArray) obj;
+            players.forEach( player -> parsePlayersObject( (JSONObject) player));
+
+            return players;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static void parsePlayersObject(JSONObject player) {
+        JSONObject playersObject = (JSONObject) player.get("player");
+        String name = (String) playersObject.get("name");
+        double score = (double) playersObject.get("score");
+
+
+    }
+    private JSONArray addPlayer(){
+        JSONArray players = readPlayerList();
+        JSONObject player = parsePlayersObject();
+        Player p = new Player();
+        double finalScore = p.getFinalScore();
+        String nickname = p.getNickname();
+        int place= 0;
+        for (int i = 0; i<players.size();i++){
+
+            double score = players.get("score");
+
+            if(score< finalScore) {
+                break;
+            }else{
+                place++;
+            }
+
+        }
+        if (place<10){
+            JSONObject player = new JSONObject();
+
+            players.getJsonArray(place).put;
+            players[11].delete();
+        }
+        return players;
+
+
+    }
+    private void deleteExistingFile(){
+            try(File f = new File("ScoreList.json")) {
+
+                if (f.exists()) {
+                    f.delete("ScoreList.json"); //you might want to check if delete was successfull
+                }
+                f.createNewFile("ScoreList.json");
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+    private void writePlayerList(){
+        JSONArray players = addPlayer();
+        try (FileWriter file = new FileWriter("ScoreList.json")) {
+            file.write(players.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /*double finalScore = 0;
     String finalScores = null;
     String nickname = null;
+    ArrayList<Player> = null;
     public void createEntry() { //writes the new score in the file ScoreList.txt if the finalScore is bigger than the ones in the file or the file has less than 20 scores
         try {
-            int lines = CountLines();
-            if (lines < 20) {
+
+            if () {
                 public Player player = new Player();
                 finalScore = player.getFinalScore();
                 finalScores = Double.toString(finalScore);
@@ -71,10 +148,10 @@ public class Scorelist {
     }
     void getLowerScore() {
 
-        }
     }
 
-    /*void readFile(){
+
+    void readFile(){
         Scanner s = new Scanner(new File("ScoreList.txt"));
         ArrayList<String> scores = new ArrayList<String>();
         while (s.hasNext()){
@@ -83,4 +160,12 @@ public class Scorelist {
         s.close();
 
     } */
+    public static void main(String[] args) {
+        Scorelist a = new Scorelist();
+        readPlayerList();
+        addPlayer();
+        deleteExistingFile();
+        writePlayerList();
+    }
+
 }
