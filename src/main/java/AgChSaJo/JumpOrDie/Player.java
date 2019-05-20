@@ -11,7 +11,7 @@ public class Player{
         width = 3;
         y = 0;
     }
-    Player(String nickname, double finalScore){
+    public Player(String nickname, double finalScore){
         this.nickname = nickname;
         this.finalScore = finalScore;
     }
