@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.MenuController">
+   <children>
+      <VBox alignment="CENTER" layoutX="150.0" layoutY="150.0" prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <Button fx:id="bStartGame" alignment="CENTER" mnemonicParsing="false" onAction="#startGame" text="Start Game" textAlignment="CENTER" />
+            <Button fx:id="bScorelist" mnemonicParsing="false" onAction="#showScorelist" text="Scorelist" />
+            <Button fx:id="bExitGame" mnemonicParsing="false" onAction="#exitGame" text="Exit Game" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

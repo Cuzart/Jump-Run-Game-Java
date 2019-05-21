@@ -4,6 +4,6 @@ module AgChSaJo {                     //package-Name
     requires log4j.api;
     requires json.simple;
     //opens AgChSaJo to javafx.fxml, log4j.api;
-    exports AgChSaJo.JumpOrDie;
+    exports AgChSaJo.GUI;
     exports AgChSaJo.ScoreList;
 }
