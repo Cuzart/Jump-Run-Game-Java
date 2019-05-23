@@ -10,12 +10,13 @@ public class ObstacleTimer extends TimerTask {
         if (ObstacleManager.obstacle2 != null){
             ObstacleManager.obstacle2.move(ObstacleManager.getObstacleSpeed());
         }
-        /*if (ObstacleManager.obstacle2 == null) {
-            System.out.println("Obstacle 1: " + ObstacleManager.obstacle1.x);
+        if (ObstacleManager.obstacle2 == null) {
+            System.out.println("Obstacle 1: " + ObstacleManager.obstacle1.getX());
         }else {
-            System.out.println("Obstacle 1: " + ObstacleManager.obstacle1.x+" | "+"Obstacle 2: "+ObstacleManager.obstacle2.x);
-        }*/
+            System.out.println("Obstacle 1: " + ObstacleManager.obstacle1.getX()+" | "+"Obstacle 2: "+ObstacleManager.obstacle2.getX());
+        }
 
         ObstacleManager.manageObstacleLifetime();
+        Board.checkCollision(ObstacleManager.getCloserObstacle());
     }
 }

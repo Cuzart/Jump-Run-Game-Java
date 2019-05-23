@@ -3,20 +3,17 @@ package AgChSaJo.JumpOrDie;
 import java.util.Timer;
 
 public class JumpOrDie {
+
+    private static Timer timer = new Timer();
+    static boolean playing = true;
+
     public static void main(String[] args) {
-        ObstacleManager.obstacle1 = ObstacleManager.generate();
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new ObstacleTimer(),1000,100);
+        play();
+    }
 
-       /* try {
-            System.out.println("Main starts sleeping "+ new Date());
-            Thread.sleep(5000);
-        }catch (InterruptedException e){
-            System.out.println("fail");
-        }
-        System.out.println("main cancels task");
-        timer.cancel();*/
-
-
+    static void play(){
+        ObstacleManager.setUp();
+        Board.activePlayer = new Player();
+        timer.schedule(new ObstacleTimer(),100);
     }
 }

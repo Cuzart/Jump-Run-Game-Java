@@ -12,8 +12,8 @@ class ObstacleManager {
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
     static Obstacle obstacle1, obstacle2;
-    private static double obstacleSpeed = 1;
-    private static int obstacleCount = 0;
+    private static double obstacleSpeed;
+    private static int obstacleCount;
 
     static Obstacle generate(){
         Random r = new Random();
@@ -33,19 +33,19 @@ class ObstacleManager {
 
     static void manageObstacleLifetime(){
 
-        if (obstacle1.x <=-5){
+        if (obstacle1.getX() <=0){
             obstacle1 = generate();
             obstacleCount++;
         }
 
         if(obstacle2 == null){
             if(obstacleCount >= 5){
-                if (obstacle2 == null && obstacle1.x <=50){
+                if (obstacle2 == null && obstacle1.getX() <=50){
                     obstacle2 = generate();
                     log.info("second Obstacle on screen");
                 }
             }
-        }else if (obstacle2.x <=-5){
+        }else if (obstacle2.getX() <=0){
                 obstacle2 = generate();
                 obstacleCount++;
         }
@@ -68,6 +68,25 @@ class ObstacleManager {
 
     static double getObstacleSpeed(){
         return obstacleSpeed;
+    }
+
+    static Obstacle getCloserObstacle(){
+        if (obstacle2 ==null ){
+            return obstacle1;
+        }else {
+            if (obstacle1.getX()<obstacle2.getX()){
+                return obstacle1;
+            }else{
+                return obstacle2;
+            }
+        }
+    }
+
+    static void setUp(){
+        obstacle1 = generate();
+        obstacle2 = null;
+        obstacleSpeed = 1;
+        obstacleCount = 0;
     }
 
 }

@@ -4,12 +4,12 @@ package AgChSaJo.JumpOrDie;
 class Fence extends Obstacle{
 
     Fence (){
-        height=10;
-        width=3;
+        setHeight(10);
+        setWidth(10);
     }
 
     void move(double speed){
-        x -= speed;
+        setX(getX()-speed);
     }
 
 }
