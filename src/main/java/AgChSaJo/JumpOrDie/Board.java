@@ -13,19 +13,12 @@ public class Board {
         double playerX = activePlayer.getX();
         double playerXEnd = activePlayer.getXEnd();
 
-        //Check collision
-        if (obstacle.getX()>=playerX && obstacle.getX()<=playerXEnd){
-            if (activePlayer.getY()<=obstacle.getHeight()){
-                log.info("Game Over - Collision detected");
-                return true;
-            }
-        }else if (obstacle.getXEnd()>=playerX && obstacle.getXEnd()<=playerXEnd ){
+        if (obstacle.getX() <= playerXEnd && obstacle.getXEnd() >= playerX){
             if (activePlayer.getY()<=obstacle.getHeight()){
                 log.info("Game Over - Collision detected");
                 return true;
             }
         }
-        //log.debug("all good");
         return false;
     }
 }
