@@ -25,7 +25,7 @@ public class Board {
                 return true;
             }
         }
-        log.debug("all good");
+        //log.debug("all good");
         return false;
     }
 }

@@ -10,6 +10,7 @@ public class ObstacleTimer extends TimerTask {
         if (ObstacleManager.obstacle2 != null){
             ObstacleManager.obstacle2.move(ObstacleManager.getObstacleSpeed());
         }
+
         if (ObstacleManager.obstacle2 == null) {
             System.out.println("Obstacle 1: " + ObstacleManager.obstacle1.getX());
         }else {

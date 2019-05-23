@@ -9,11 +9,12 @@ public class JumpOrDie {
 
     public static void main(String[] args) {
         play();
+
     }
 
     static void play(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
-        timer.schedule(new ObstacleTimer(),100);
+        timer.scheduleAtFixedRate(new ObstacleTimer(),1000,100);
     }
 }
