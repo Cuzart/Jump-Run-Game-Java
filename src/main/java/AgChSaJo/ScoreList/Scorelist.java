@@ -80,7 +80,7 @@ public class Scorelist {
     }
     private void deleteExistingFile(){
             try {
-                final File f = new File("AgChSaJo/ScoreList/ScoreList.json");
+                final File f = new File("ScoreList.json");
                 if (f.exists()) {
                     f.delete();
                 }
@@ -91,7 +91,7 @@ public class Scorelist {
     }
     private void writePlayerList(JSONArray players){
         try {
-            FileWriter file = new FileWriter("AgChSaJo/ScoreList/ScoreList.json");
+            FileWriter file = new FileWriter("ScoreList.json");
             file.write(players.toJSONString());
             file.flush();
 
