@@ -3,20 +3,19 @@ package AgChSaJo.GUI;
 import AgChSaJo.ScoreList.Scorelist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-
+import AgChSaJo.JumpOrDie.JumpOrDie;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+public class MenuController {
 
-    }
+
     @FXML
-    public void startGame (ActionEvent event){
-
+    public void startGame (ActionEvent event) throws IOException {
+        //Menu.getApplication().setScene("/fxml/Menu.fxml", "Menu");
+        JumpOrDie.play();
     }
 
     @FXML

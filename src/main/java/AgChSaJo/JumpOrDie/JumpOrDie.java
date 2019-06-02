@@ -12,7 +12,7 @@ public class JumpOrDie {
 
     }
 
-    static void play(){
+    public static void play(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
         timer.scheduleAtFixedRate(new ObstacleTimer(),1000,100);
