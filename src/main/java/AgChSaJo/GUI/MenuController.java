@@ -1,22 +1,17 @@
 package AgChSaJo.GUI;
 
+import AgChSaJo.JumpOrDie.JumpOrDie;
 import AgChSaJo.ScoreList.Scorelist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MenuController {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
     @FXML
     public void startGame (ActionEvent event){
-
+        App.window.setScene(App.jumpOrDie);
+        JumpOrDie.play();
     }
 
     @FXML

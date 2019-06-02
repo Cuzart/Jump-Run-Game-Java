@@ -1,5 +1,6 @@
 package AgChSaJo.JumpOrDie;
 
+import AgChSaJo.GUI.App;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,18 +36,21 @@ class ObstacleManager {
 
         if (obstacle1.getX() <=0){
             obstacle1 = generate();
+            App.setupGUIObstacle(1,obstacle1);
             obstacleCount++;
         }
 
         if(obstacle2 == null){
             if(obstacleCount >= 5){
-                if (obstacle2 == null && obstacle1.getX() <=50){
+                if (obstacle1.getX() <=50){
                     obstacle2 = generate();
+                    App.setupGUIObstacle(2,obstacle2);
                     log.info("second Obstacle on screen");
                 }
             }
         }else if (obstacle2.getX() <=0){
                 obstacle2 = generate();
+                App.setupGUIObstacle(2,obstacle2);
                 obstacleCount++;
         }
 
@@ -56,12 +60,13 @@ class ObstacleManager {
 
         switch (obstacleCount){
             case 10:
-                log.debug("set obstacleSpeed to 1.5");
-                obstacleSpeed = 1.5;
+
+                obstacleSpeed = 4;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
             case 20:
-                obstacleSpeed = 2;
-                log.debug("set obstacleSpeed to 2");
+                obstacleSpeed = 6;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
         }
     }
@@ -84,8 +89,9 @@ class ObstacleManager {
 
     static void setUp(){
         obstacle1 = generate();
+        App.setupGUIObstacle(1,obstacle1);
         obstacle2 = null;
-        obstacleSpeed = 1;
+        obstacleSpeed = 2;
         obstacleCount = 0;
     }
 

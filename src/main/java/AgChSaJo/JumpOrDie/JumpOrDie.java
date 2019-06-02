@@ -5,16 +5,19 @@ import java.util.Timer;
 public class JumpOrDie {
 
     private static Timer timer = new Timer();
-    static boolean playing = true;
+    private static ObstacleTimer obstacleTimer;
 
-    public static void main(String[] args) {
-        play();
 
-    }
-
-    static void play(){
+    public static void play(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
-        timer.scheduleAtFixedRate(new ObstacleTimer(),1000,100);
+        obstacleTimer = new ObstacleTimer();
+        timer.schedule(obstacleTimer,1000,10);
+    }
+    public static void stop(){
+        obstacleTimer.cancel();
+    }
+    public static void close(){
+        timer.cancel();
     }
 }
