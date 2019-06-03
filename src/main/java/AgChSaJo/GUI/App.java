@@ -1,12 +1,12 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.JumpOrDie.JumpOrDie;
-import AgChSaJo.JumpOrDie.Obstacle;
+import AgChSaJo.JumpOrDie.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -18,8 +18,7 @@ public class App extends Application {
 
     static Stage window;
     static Scene menu, jumpOrDie;
-    private static Node player;
-    private static Rectangle obstacle1, obstacle2;
+    private static Rectangle obstacle1, obstacle2, player;
 
 
     public static void main(String[] args) {
@@ -33,16 +32,29 @@ public class App extends Application {
         //menu
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
         menu = new Scene(root,800,500);
-
-        //
+        //Game
         Parent gameLayout = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
         jumpOrDie = new Scene(gameLayout,800,500);
         obstacle1 = (Rectangle) gameLayout.lookup("#obstacle1");
-        obstacle2 = (Rectangle) gameLayout.lookup("'obstacle2");
+        obstacle2 = (Rectangle) gameLayout.lookup("#obstacle2");
+        player = (Rectangle) gameLayout.lookup("#player");
+        jumpOrDie.setOnKeyPressed(keyEvent -> {
+            KeyCode keyCode = keyEvent.getCode();
+            if (keyCode.equals(KeyCode.SPACE)){
+                if (!Board.getJumping()) {
+                    JumpOrDie.jumpTimer.scheduleAtFixedRate(new PlayerJumpTimer(), 10, 10);
+                    Board.setJumping(true);
+                }
+                return;
+            }
+            if (keyCode.equals(KeyCode.ESCAPE)){
+                JumpOrDie.stop();
+                App.window.setScene(App.menu);
+            }
+        });
 
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
-
         window.setTitle("JumpOrDie");
         window.setScene(menu);
         window.show();
@@ -63,16 +75,27 @@ public class App extends Application {
         }
         node.setTranslateX(node.getTranslateX()-speed);
     }
-    public static void setupGUIObstacle(int obstacle, Obstacle o){
-        Node node;
-        if (obstacle ==2){
-            node = obstacle2;
+    public static void setupGUIObstacle(int obNumber, Obstacle o){
+        Rectangle rectangle;
+        if (obNumber == 2){
+            rectangle = obstacle2;
         }else{
-            node = obstacle1;
+            rectangle = obstacle1;
         }
 
-        node.setTranslateX(0);
-        node.resize(o.getWidth(),o.getHeight());
+        if(o.getHeight()==100){ // if obstacle is Fence
+            rectangle.setTranslateY(-50);
+        }else{      //obstacle is Hedge
+            rectangle.setTranslateY(0);
+        }
+        rectangle.setTranslateX(0);
+        rectangle.setHeight(o.getHeight());
+        rectangle.setWidth(o.getWidth());
     }
+    public static void moveGUIPlayer(Player p){
+        player.setTranslateY(-p.getY());
+    }
+
+
 
 }

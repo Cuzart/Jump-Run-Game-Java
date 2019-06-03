@@ -16,6 +16,8 @@ class ObstacleManager {
     private static double obstacleSpeed;
     private static int obstacleCount;
 
+    private static final int obstacleEnd = -50;
+
     static Obstacle generate(){
         Random r = new Random();
         int kind = r.nextInt(2);
@@ -34,7 +36,7 @@ class ObstacleManager {
 
     static void manageObstacleLifetime(){
 
-        if (obstacle1.getX() <=0){
+        if (obstacle1.getX() <= obstacleEnd){
             obstacle1 = generate();
             App.setupGUIObstacle(1,obstacle1);
             obstacleCount++;
@@ -42,13 +44,13 @@ class ObstacleManager {
 
         if(obstacle2 == null){
             if(obstacleCount >= 5){
-                if (obstacle1.getX() <=50){
+                if (obstacle1.getX() <=400){
                     obstacle2 = generate();
                     App.setupGUIObstacle(2,obstacle2);
                     log.info("second Obstacle on screen");
                 }
             }
-        }else if (obstacle2.getX() <=0){
+        }else if (obstacle2.getX() <= obstacleEnd){
                 obstacle2 = generate();
                 App.setupGUIObstacle(2,obstacle2);
                 obstacleCount++;

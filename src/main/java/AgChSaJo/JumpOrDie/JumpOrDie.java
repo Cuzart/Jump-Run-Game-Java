@@ -5,6 +5,7 @@ import java.util.Timer;
 public class JumpOrDie {
 
     private static Timer timer = new Timer();
+    public static Timer jumpTimer = new Timer();
     private static ObstacleTimer obstacleTimer;
 
 
@@ -19,5 +20,6 @@ public class JumpOrDie {
     }
     public static void close(){
         timer.cancel();
+        jumpTimer.cancel();
     }
 }

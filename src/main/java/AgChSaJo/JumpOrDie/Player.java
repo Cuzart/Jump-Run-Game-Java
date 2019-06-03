@@ -8,11 +8,11 @@ public class Player implements IPlayer {
     private double finalScore;
     private double height, width,
             y = 0,
-            x = 10;
+            x = 100;
 
     Player(){
-        height = 15;
-        width = 3;
+        height = 120;
+        width = 60;
     }
     public Player(String nickname, double finalScore){
         this.nickname = nickname;
@@ -44,14 +44,13 @@ public class Player implements IPlayer {
 
     void jump(boolean maxHeight){
         if (!maxHeight){
-            y++;
+            y+=2;
         }else{
-            y--;
+            y-=2;
         }
-        System.out.println(y);
     }
-    void duck(){
+    /*void duck(){
         height/=2;
-    }
+    }*/
 
 }

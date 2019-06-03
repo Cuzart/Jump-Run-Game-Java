@@ -8,6 +8,7 @@ public class Board {
     private static Logger log = LogManager.getLogger(Board.class);
 
     static Player activePlayer;
+    private static boolean jumping = false;
 
     static boolean checkCollision(Obstacle obstacle){
         double playerX = activePlayer.getX();
@@ -20,5 +21,12 @@ public class Board {
             }
         }
         return false;
+    }
+    public static void setJumping(boolean v){
+        jumping = v;
+        log.debug("Set Jumping to: "+ v);
+    }
+    public static boolean getJumping(){
+        return jumping;
     }
 }
