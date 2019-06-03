@@ -15,7 +15,7 @@ public class Board {
 
         if (obstacle.getX() <= playerXEnd && obstacle.getXEnd() >= playerX){
             if (activePlayer.getY()<=obstacle.getHeight()){
-                log.info("Game Over - Collision detected");
+                log.info("GameController Over - Collision detected");
                 return true;
             }
         }

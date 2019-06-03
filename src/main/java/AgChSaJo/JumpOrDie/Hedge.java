@@ -4,8 +4,8 @@ package AgChSaJo.JumpOrDie;
 class Hedge extends Obstacle{
 
     Hedge (){
-        setHeight(5);
-        setWidth(10);
+        setHeight(50);
+        setWidth(100);
     }
 
     void move(double speed){

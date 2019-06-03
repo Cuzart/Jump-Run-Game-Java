@@ -1,20 +1,16 @@
 package AgChSaJo.GUI;
 
+import AgChSaJo.JumpOrDie.JumpOrDie;
 import AgChSaJo.ScoreList.Scorelist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import AgChSaJo.JumpOrDie.JumpOrDie;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class MenuController {
 
-
     @FXML
-    public void startGame (ActionEvent event) throws IOException {
-        //Menu.getApplication().setScene("/fxml/Menu.fxml", "Menu");
+    public void startGame (ActionEvent event){
+        App.window.setScene(App.jumpOrDie);
         JumpOrDie.play();
     }
 

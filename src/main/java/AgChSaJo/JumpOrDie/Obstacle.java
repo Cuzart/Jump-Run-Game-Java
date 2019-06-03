@@ -2,12 +2,15 @@ package AgChSaJo.JumpOrDie;
 
 public abstract class Obstacle {
 
-    private double height, width, x=100, y=0;
+    private double height, width, x=800, y=450;
 
     abstract void move(double speed);
 
     public double getHeight() {
         return height;
+    }
+    public double getWidth (){
+        return width;
     }
     public double getXEnd() {
         return x+width;
