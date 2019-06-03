@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +18,8 @@ public class App extends Application {
 
     static Stage window;
     static Scene menu, jumpOrDie;
-    private static Node obstacle1, obstacle2, player;
+    private static Node player;
+    private static Rectangle obstacle1, obstacle2;
 
 
     public static void main(String[] args) {
@@ -35,8 +37,8 @@ public class App extends Application {
         //
         Parent gameLayout = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
         jumpOrDie = new Scene(gameLayout,800,500);
-        obstacle1 = gameLayout.lookup("#obstacle1");
-        obstacle2 = gameLayout.lookup("'obstacle2");
+        obstacle1 = (Rectangle) gameLayout.lookup("#obstacle1");
+        obstacle2 = (Rectangle) gameLayout.lookup("'obstacle2");
 
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
@@ -70,7 +72,7 @@ public class App extends Application {
         }
 
         node.setTranslateX(0);
-        //node.resize(o.getWidth(),o.getHeight());
+        node.resize(o.getWidth(),o.getHeight());
     }
 
 }
