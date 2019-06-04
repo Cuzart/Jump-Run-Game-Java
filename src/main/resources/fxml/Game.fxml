@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.GameController">
-   <children>
-      <Rectangle fx:id="obstacle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" width="50.0" />
-      <Rectangle fx:id="obstacle2" arcHeight="5.0" arcWidth="5.0" fill="#98ff1f" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" height="120.0" layoutX="100.0" layoutY="380.0" strokeType="INSIDE" width="60.0" />
-   </children>
+   <Rectangle fx:id="obstacle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" width="50.0" />
+   <Rectangle fx:id="obstacle2" arcHeight="5.0" arcWidth="5.0" fill="#98ff1f" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+   <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" height="120.0" layoutX="100.0" layoutY="380.0" strokeType="INSIDE" width="60.0" />
+   <VBox fx:id="pauseControl" alignment="CENTER" layoutX="250.0" layoutY="175.0" prefHeight="150.0" prefWidth="300.0" spacing="20.0" visible="false">
+      <Button mnemonicParsing="false" onAction="#resumeGame" prefHeight="40.0" prefWidth="300.0" text="Resume">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Button>
+      <Button mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="40.0" prefWidth="300.0" text="Back to Menu">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Button>
+   </VBox>
+   <VBox fx:id="gameOverControl" alignment="CENTER" disable="true" layoutX="250.0" layoutY="130.0" prefHeight="200.0" prefWidth="300.0" spacing="10.0" visible="false">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="300.0" text="Save your Score!" textAlignment="CENTER">
+         <font>
+            <Font name="Forte" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nickname" alignment="CENTER" prefHeight="35.0" promptText="whoami" />
+      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Play Again" />
+      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Back to Menu" />
+   </VBox>
 </AnchorPane>

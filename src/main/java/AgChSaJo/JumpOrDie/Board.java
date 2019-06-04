@@ -7,7 +7,7 @@ public class Board {
 
     private static Logger log = LogManager.getLogger(Board.class);
 
-    static Player activePlayer;
+    public static Player activePlayer;
     private static boolean jumping = false;
 
     static boolean checkCollision(Obstacle obstacle){

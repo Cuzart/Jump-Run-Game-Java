@@ -1,14 +1,11 @@
 package AgChSaJo.JumpOrDie;
 
-import AgChSaJo.GUI.App;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Random;
 
 
-
-class ObstacleManager {
+public class ObstacleManager {
 
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
@@ -18,7 +15,8 @@ class ObstacleManager {
 
     private static final int obstacleEnd = -50;
 
-    static Obstacle generate(){
+
+    private static Obstacle generate(){
         Random r = new Random();
         int kind = r.nextInt(2);
         switch (kind){
@@ -33,12 +31,10 @@ class ObstacleManager {
                 return new Fence();
         }
     }
-
     static void manageObstacleLifetime(){
 
         if (obstacle1.getX() <= obstacleEnd){
             obstacle1 = generate();
-            App.setupGUIObstacle(1,obstacle1);
             obstacleCount++;
         }
 
@@ -46,13 +42,11 @@ class ObstacleManager {
             if(obstacleCount >= 5){
                 if (obstacle1.getX() <=400){
                     obstacle2 = generate();
-                    App.setupGUIObstacle(2,obstacle2);
                     log.info("second Obstacle on screen");
                 }
             }
         }else if (obstacle2.getX() <= obstacleEnd){
                 obstacle2 = generate();
-                App.setupGUIObstacle(2,obstacle2);
                 obstacleCount++;
         }
 
@@ -76,7 +70,6 @@ class ObstacleManager {
     static double getObstacleSpeed(){
         return obstacleSpeed;
     }
-
     static Obstacle getCloserObstacle(){
         if (obstacle2 ==null ){
             return obstacle1;
@@ -88,13 +81,16 @@ class ObstacleManager {
             }
         }
     }
+    public static Obstacle[] getObstacles(){
+        return new Obstacle[] {obstacle1,obstacle2};
+    }
 
     static void setUp(){
         obstacle1 = generate();
-        App.setupGUIObstacle(1,obstacle1);
         obstacle2 = null;
         obstacleSpeed = 2;
         obstacleCount = 0;
     }
+
 
 }
