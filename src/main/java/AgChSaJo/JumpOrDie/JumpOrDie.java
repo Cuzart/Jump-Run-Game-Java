@@ -1,25 +1,22 @@
 package AgChSaJo.JumpOrDie;
 
-import java.util.Timer;
-
 public class JumpOrDie {
 
-    private static Timer timer = new Timer();
-    public static Timer jumpTimer = new Timer();
-    private static ObstacleTimer obstacleTimer;
 
-
-    public static void play(){
+    public static void playAgain(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
-        obstacleTimer = new ObstacleTimer();
-        timer.schedule(obstacleTimer,1000,10);
+        Board.startObstacleTimerTask(1000);
+        Board.resetJumpingVariables();
+    }
+    public static void resumeGame(){
+        Board.startObstacleTimerTask(5000);
+        Board.startJumpTimerTask(5000);
     }
     public static void stop(){
-        obstacleTimer.cancel();
+        Board.stopTimerTasks();
     }
-    public static void close(){
-        timer.cancel();
-        jumpTimer.cancel();
+    public static void closeGame(){
+        Board.closeTimers();
     }
 }

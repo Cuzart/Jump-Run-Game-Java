@@ -16,6 +16,7 @@ public class GameController {
 
     private Parent gameLayout;
     private static Timer timer = new Timer();
+    private static GameAnimationTimer animation;
 
     public Rectangle player;
     public Rectangle obstacle1;
@@ -29,12 +30,13 @@ public class GameController {
     public void backToMenu(){
         JumpOrDie.stop();
         showPauseControl(false);
-        stop();
+        stopAnimation();
         App.window.setScene(App.menu);
     }
     @FXML
     public void resumeGame(){
         showPauseControl(false);
+        JumpOrDie.resumeGame();
     }
 
     void setUp() throws Exception{
@@ -48,10 +50,7 @@ public class GameController {
         App.jumpOrDie.setOnKeyPressed(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
             if (keyCode.equals(KeyCode.SPACE)){
-                if (!Board.getJumping()) {
-                    JumpOrDie.jumpTimer.scheduleAtFixedRate(new PlayerJumpTimer(), 10, 10);
-                    Board.setJumping(true);
-                }
+                Board.playerJump();
                 return;
             }
             if (keyCode.equals(KeyCode.ESCAPE)){
@@ -61,11 +60,13 @@ public class GameController {
         });
     }
 
-    static void start(){
-        timer.scheduleAtFixedRate(new GameAnimationTimer(),0,10);
+    void startAnimation(){
+        resetGUI();
+        animation = new GameAnimationTimer();
+        timer.scheduleAtFixedRate(animation,10,10);
     }
-    static void stop(){
-        timer.cancel();
+    void stopAnimation(){
+        animation.cancel();
     }
 
     void animatePlayer(){
@@ -102,6 +103,11 @@ public class GameController {
         }
         rec.setHeight(o.getHeight());
         rec.setWidth(o.getWidth());
+    }
+    private void resetGUI(){
+        obstacle1.setTranslateX(0);
+        obstacle2.setTranslateX(0);
+        //player.setTranslateY(0);
     }
 
     private void showPauseControl(boolean b){

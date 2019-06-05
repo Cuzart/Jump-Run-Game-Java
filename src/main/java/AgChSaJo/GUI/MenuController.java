@@ -15,8 +15,8 @@ public class MenuController {
     @FXML
     public void startGame (ActionEvent event){
         App.window.setScene(App.jumpOrDie);
-        JumpOrDie.play();
-        GameController.start();
+        JumpOrDie.playAgain();
+        App.gameController.startAnimation();
     }
     @FXML
     public void showScorelist(ActionEvent event){

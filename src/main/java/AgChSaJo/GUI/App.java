@@ -40,10 +40,11 @@ public class App extends Application {
 
 
     private void closeApp (){
-        JumpOrDie.close();
-        GameController.stop();
+        JumpOrDie.closeGame();
+        gameController.stopAnimation();
         log.info("Close request");
         //safeScorelist
+        System.exit(0);
     }
 
 }
