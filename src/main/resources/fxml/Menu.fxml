@@ -5,15 +5,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.MenuController">
    <children>
       <VBox id="bg" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css">
          <children>
-            <ImageView id="bg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="pane">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="iv">
                <image>
-                  <Image url="@icon.png" />
+                  <Image url="@../images/icon.png" />
                </image>
                <VBox.margin>
                   <Insets top="50.0" />
@@ -21,7 +22,7 @@
             </ImageView>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#startGame" prefHeight="40.0" prefWidth="300.0" styleClass="button" stylesheets="@style.css" text="Start Game">
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="80.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
                </VBox.margin>
             </Button>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#showScorelist" prefHeight="40.0" prefWidth="300.0" styleClass="button" text="ScoreList">
@@ -36,5 +37,7 @@
             </Button>
          </children>
       </VBox>
+      <Pane prefHeight="500.0" prefWidth="125.0" styleClass="pane" stylesheets="@style.css" />
+      <Pane layoutX="675.0" prefHeight="500.0" prefWidth="125.0" styleClass="pane" stylesheets="@style.css" />
    </children>
 </AnchorPane>

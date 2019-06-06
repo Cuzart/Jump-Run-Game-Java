@@ -1,4 +1,4 @@
-package AgChSaJo.ScoreList;
+/*package AgChSaJo.ScoreList;
 
 import java.io.*;
 
@@ -10,8 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 
 public class Scorelist {
@@ -67,7 +66,7 @@ public class Scorelist {
         String name = (String) playersObject.get("name");
         double score = (double) playersObject.get("score");
         }
-    */
+
     private ArrayList<Player> addPlayer(){
         ArrayList<Player> ScoreList = readPlayerList();
         Player player = JumpOrDie.getPlayer();
@@ -89,7 +88,7 @@ public class Scorelist {
         }
         return players;
 
-    */
+
         return ScoreList;
     }
     private void deleteExistingFile(){
@@ -132,3 +131,4 @@ public class Scorelist {
     }
 
 }
+*/
