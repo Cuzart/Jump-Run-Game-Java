@@ -14,6 +14,7 @@ public class Player implements IPlayer {
         height = 120;
         width = 60;
     }
+
     public Player(String nickname, double finalScore){
         this.nickname = nickname;
         this.finalScore = finalScore;

@@ -7,13 +7,17 @@
 }
 
 .pane {
-    -fx-background-image: url("/fxml/icon.png");
-    -fx-background-position: center center;
+    -fx-background-color: black;
+    -fx-opacity: 0.05;
+
 }
 
-/*.button {
-    -fx-background-color: gray;
-    -fx-pref-height: 30;
-    -fx-pref-width: 300;
+.button {
+    -fx-background-radius: 20px;
+}
+/*
+.iv {
+    -fx-background-image: url("/images/icon.png");
+    -fx-background-position: center center;
 }
  */
