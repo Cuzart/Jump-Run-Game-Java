@@ -42,12 +42,9 @@ public class Player implements IPlayer {
         return x;
     }
 
-    void jump(boolean maxHeight){
-        if (!maxHeight){
-            y+=2;
-        }else{
-            y-=2;
-        }
+
+    void jump(double speed){
+        y += speed;
     }
     /*void duck(){
         height/=2;

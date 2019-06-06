@@ -6,7 +6,7 @@ public class ObstacleTimer extends TimerTask {
 
     @Override
     public void run() {
-        double speed = ObstacleManager.getObstacleSpeed();
+        double speed = Board.getGameSpeed();
         ObstacleManager.obstacle1.move(speed);
         if (ObstacleManager.obstacle2 != null){
             ObstacleManager.obstacle2.move(speed);

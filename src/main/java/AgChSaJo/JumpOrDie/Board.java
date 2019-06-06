@@ -13,11 +13,12 @@ public class Board {
     private static Timer jumpTimer = new Timer();
     private static ObstacleTimer obstacleTimerTask;
     private static PlayerJumpTimer jumpTimerTask;
+    private static int period = 20;
 
     public static Player activePlayer;
     private static boolean jumping = false;
     static int jumpCounter = 0;
-    static boolean maxHeight = false;
+    private static double gameSpeed;
 
     static boolean checkCollision(Obstacle obstacle){
         double playerX = activePlayer.getX();
@@ -38,23 +39,29 @@ public class Board {
     public static void playerJump(){
         if (!jumping) {
             jumpTimerTask = new PlayerJumpTimer();
-            jumpTimer.scheduleAtFixedRate(jumpTimerTask, 5, 10);
+            jumpTimer.scheduleAtFixedRate(jumpTimerTask, 5,period);
             Board.setJumping(true);
         }
     }
     static void resetJumpingVariables(){
         setJumping(false);
-        maxHeight = false;
         jumpCounter = 0;
+    }
+
+    static void setGameSpeed(double speed){
+        gameSpeed = speed;
+    }
+    static double getGameSpeed(){
+        return gameSpeed;
     }
 
     static void startObstacleTimerTask(long delay){
         obstacleTimerTask = new ObstacleTimer();
-        obstacleTimer.schedule(obstacleTimerTask,delay,10);
+        obstacleTimer.schedule(obstacleTimerTask,delay,period);
     }
     static void startJumpTimerTask(long delay){
         jumpTimerTask = new PlayerJumpTimer();
-        jumpTimer.scheduleAtFixedRate(jumpTimerTask, delay, 10);
+        jumpTimer.scheduleAtFixedRate(jumpTimerTask, delay, period);
     }
     static void stopTimerTasks(){
         obstacleTimerTask.cancel();

@@ -10,7 +10,7 @@ public class ObstacleManager {
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
     static Obstacle obstacle1, obstacle2;
-    private static double obstacleSpeed;
+    //private static double obstacleSpeed;
     private static int obstacleCount;
 
     private static final int obstacleEnd = -50;
@@ -57,19 +57,16 @@ public class ObstacleManager {
         switch (obstacleCount){
             case 10:
 
-                obstacleSpeed = 4;
-                log.debug("set obstacleSpeed to "+obstacleSpeed);
+                Board.setGameSpeed(4);
+                log.debug("set obstacleSpeed to "+Board.getGameSpeed());
                 break;
             case 20:
-                obstacleSpeed = 6;
-                log.debug("set obstacleSpeed to "+obstacleSpeed);
+                Board.setGameSpeed(6);
+                log.debug("set obstacleSpeed to "+Board.getGameSpeed());
                 break;
         }
     }
 
-    static double getObstacleSpeed(){
-        return obstacleSpeed;
-    }
     static Obstacle getCloserObstacle(){
         if (obstacle2 ==null ){
             return obstacle1;
@@ -88,7 +85,7 @@ public class ObstacleManager {
     static void setUp(){
         obstacle1 = generate();
         obstacle2 = null;
-        obstacleSpeed = 2;
+        Board.setGameSpeed(4);
         obstacleCount = 0;
     }
 
