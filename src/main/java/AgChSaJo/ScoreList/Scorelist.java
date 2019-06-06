@@ -9,57 +9,70 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 public class Scorelist {
 
-    private JSONArray readPlayerList() {
+    //private static ArrayList<Player> ScoreList = new ArrayList(10);
+
+    private ArrayList readPlayerList() {
         JSONParser parser = new JSONParser();
-        JSONArray players=null;
+        JSONArray sList = null;
+        ArrayList<Player> ScoreList = null;
         try {
-            FileReader reader =new FileReader("ScoreList.json");
+            FileReader reader = new FileReader("ScoreList.json");
 
             Object obj = parser.parse(reader);
 
-            players = (JSONArray) obj;
+            sList = (JSONArray) obj;
+            ScoreList = (ArrayList<Player>) new ArrayList(sList.size());
+            for (int i = 0; i < sList.size(); i++) {
+                JSONObject p = (JSONObject) sList.get(i);
+                String name = (String) p.get("name");
+                double score = (double) p.get("score");
+                Player player = new Player(name, score);
+                ScoreList.add(i, player);
+            }
+
+            return ScoreList;
             //players.forEach( player -> parsePlayersObject( (JSONObject) player));
 
 
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             try {
                 new File("ScoreList.json").createNewFile();
                 Object obj = parser.parse(new FileReader("ScoreList.json"));
 
-                players = (JSONArray) obj;
-                return players;
+                sList = (JSONArray) obj;
+                return sList;
             } catch (IOException e1) {
                 e1.printStackTrace();
             } catch (ParseException e1) {
                 e1.printStackTrace();
             }
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return players;
+        return ScoreList;
     }
 
-    private static void parsePlayersObject(JSONObject player) {
+    /*private static void parsePlayersObject(JSONObject player) {
         JSONObject playersObject = (JSONObject) player.get("player");
         String name = (String) playersObject.get("name");
         double score = (double) playersObject.get("score");
-
-
-    }
-    private JSONArray addPlayer(Player p){
-        JSONArray players = readPlayerList();
-        double finalScore = p.getFinalScore();
-        String nickname = p.getNickname();
-        for (int i = 0; i<players.size();i++){
+        }
+    */
+    private ArrayList<Player> addPlayer(){
+        ArrayList<Player> ScoreList = readPlayerList();
+        Player player = JumpOrDie.getPlayer();
+        ScoreList.add(player);
+        /*for (int i = 0; i<players.size();i++){
             JSONObject player = (JSONObject) players.get(i);
             Long score = (Long) player.get("score");
 
@@ -76,7 +89,8 @@ public class Scorelist {
         }
         return players;
 
-
+    */
+        return ScoreList;
     }
     private void deleteExistingFile(){
             try {
@@ -89,8 +103,17 @@ public class Scorelist {
                 e.printStackTrace();
             }
     }
-    private void writePlayerList(JSONArray players){
+
+
+    private void writePlayerList(ArrayList<Player> ScoreList){
         try {
+            ArrayList<Player> ScoreList = addPlayer();
+            Gson gson = new Gson();
+
+            JsonElement element =
+                    gson.toJsonTree(customerList , new TypeToken<List<Customer>>() {}.getType());
+
+            JsonArray jsonArray = element.getAsJsonArray();
             FileWriter file = new FileWriter("ScoreList.json");
             file.write(players.toJSONString());
             file.flush();
