@@ -1,0 +1,19 @@
+
+#bg {
+    -fx-background-image: url("3075.jpg");
+    -fx-background-position: center center;
+    -fx-background-size: 800 500;
+
+}
+
+.pane {
+    -fx-background-image: url("/fxml/icon.png");
+    -fx-background-position: center center;
+}
+
+/*.button {
+    -fx-background-color: gray;
+    -fx-pref-height: 30;
+    -fx-pref-width: 300;
+}
+ */

@@ -1,26 +1,22 @@
 package AgChSaJo.JumpOrDie;
 
-import java.util.Timer;
-
 public class JumpOrDie {
 
-    private static Timer timer = new Timer();
-    static boolean playing = true;
-    public static void main(String[] args) {
-        play();
 
-    }
-
-
-    static Player player = new Player("Tom,", 10); //dummie Spieler
-
-    public static Player getPlayer() { //weg zu greifen!! ich lösche es später, wann der path ist gestellt.
-        return player;
-    }
-
-    static void play(){
+    public static void playAgain(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
-        timer.scheduleAtFixedRate(new ObstacleTimer(),1000,100);
+        Board.startObstacleTimerTask(1000);
+        Board.resetJumpingVariables();
+    }
+    public static void resumeGame(){
+        Board.startObstacleTimerTask(5000);
+        Board.startJumpTimerTask(5000);
+    }
+    public static void stop(){
+        Board.stopTimerTasks();
+    }
+    public static void closeGame(){
+        Board.closeTimers();
     }
 }

@@ -4,16 +4,14 @@ import java.util.TimerTask;
 
 public class PlayerJumpTimer extends TimerTask {
 
-    private int count = 0;
-    private boolean maxheight = false;
-
     @Override
     public void run() {
-        count++;
-        Board.activePlayer.jump(maxheight);
-        if (count==15){
-            maxheight = true;
-        }else if (count == 30){
+        Board.jumpCounter++;
+        Board.activePlayer.jump(Board.maxHeight);
+        if (Board.jumpCounter==80){
+            Board.maxHeight = true;
+        }else if (Board.jumpCounter == 160){
+            Board.resetJumpingVariables();
             this.cancel();
         }
     }

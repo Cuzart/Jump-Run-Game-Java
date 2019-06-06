@@ -1,32 +1,35 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.ScoreList.Scorelist;
+import AgChSaJo.JumpOrDie.JumpOrDie;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MenuController {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private Parent root;
 
-    }
     @FXML
     public void startGame (ActionEvent event){
-
+        App.window.setScene(App.jumpOrDie);
+        JumpOrDie.playAgain();
+        App.gameController.startAnimation();
     }
-
     @FXML
     public void showScorelist(ActionEvent event){
 
     }
-
     @FXML
     public void exitGame (ActionEvent event){
         System.exit(0);
+    }
+
+    void setUp() throws Exception{
+        root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
+        App.menu = new Scene(root,800,500);
     }
 
 }

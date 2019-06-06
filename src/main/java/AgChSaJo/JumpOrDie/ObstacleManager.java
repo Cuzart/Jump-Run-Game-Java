@@ -2,12 +2,10 @@ package AgChSaJo.JumpOrDie;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Random;
 
 
-
-class ObstacleManager {
+public class ObstacleManager {
 
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
@@ -15,7 +13,10 @@ class ObstacleManager {
     private static double obstacleSpeed;
     private static int obstacleCount;
 
-    static Obstacle generate(){
+    private static final int obstacleEnd = -50;
+
+
+    private static Obstacle generate(){
         Random r = new Random();
         int kind = r.nextInt(2);
         switch (kind){
@@ -30,22 +31,21 @@ class ObstacleManager {
                 return new Fence();
         }
     }
-
     static void manageObstacleLifetime(){
 
-        if (obstacle1.getX() <=0){
+        if (obstacle1.getX() <= obstacleEnd){
             obstacle1 = generate();
             obstacleCount++;
         }
 
         if(obstacle2 == null){
             if(obstacleCount >= 5){
-                if (obstacle2 == null && obstacle1.getX() <=50){
+                if (obstacle1.getX() <=400){
                     obstacle2 = generate();
                     log.info("second Obstacle on screen");
                 }
             }
-        }else if (obstacle2.getX() <=0){
+        }else if (obstacle2.getX() <= obstacleEnd){
                 obstacle2 = generate();
                 obstacleCount++;
         }
@@ -56,12 +56,13 @@ class ObstacleManager {
 
         switch (obstacleCount){
             case 10:
-                log.debug("set obstacleSpeed to 1.5");
-                obstacleSpeed = 1.5;
+
+                obstacleSpeed = 4;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
             case 20:
-                obstacleSpeed = 2;
-                log.debug("set obstacleSpeed to 2");
+                obstacleSpeed = 6;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
         }
     }
@@ -69,7 +70,6 @@ class ObstacleManager {
     static double getObstacleSpeed(){
         return obstacleSpeed;
     }
-
     static Obstacle getCloserObstacle(){
         if (obstacle2 ==null ){
             return obstacle1;
@@ -81,12 +81,16 @@ class ObstacleManager {
             }
         }
     }
+    public static Obstacle[] getObstacles(){
+        return new Obstacle[] {obstacle1,obstacle2};
+    }
 
     static void setUp(){
         obstacle1 = generate();
         obstacle2 = null;
-        obstacleSpeed = 1;
+        obstacleSpeed = 2;
         obstacleCount = 0;
     }
+
 
 }
