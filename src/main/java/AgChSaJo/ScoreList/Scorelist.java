@@ -1,21 +1,46 @@
-/*package AgChSaJo.ScoreList;
+package AgChSaJo.ScoreList;
 
 import java.io.*;
 
 import AgChSaJo.JumpOrDie.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import com.google.gson.Gson;
+
 
 
 
 public class Scorelist {
 
     //private static ArrayList<Player> ScoreList = new ArrayList(10);
+    public static List<Player> loadPattern(){
+        ArrayList<Player> ScoreList = new ArrayList<>();
+        Gson gson = new Gson();
+        JsonParser jsonParser = new JsonParser();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("ScoreList.json"));
+            JsonElement jsonElement = jsonParser.parse(br);
+
+        //Create generic type
+            Type type = new TypeToken<List<Player>>() {}.getType();
+            return gson.fromJson(jsonElement, type);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return ScoreList;
+}
 
     private ArrayList readPlayerList() {
         JSONParser parser = new JSONParser();
@@ -66,11 +91,12 @@ public class Scorelist {
         String name = (String) playersObject.get("name");
         double score = (double) playersObject.get("score");
         }
-
+    */
     private ArrayList<Player> addPlayer(){
         ArrayList<Player> ScoreList = readPlayerList();
         Player player = JumpOrDie.getPlayer();
         ScoreList.add(player);
+
         /*for (int i = 0; i<players.size();i++){
             JSONObject player = (JSONObject) players.get(i);
             Long score = (Long) player.get("score");
@@ -82,7 +108,7 @@ public class Scorelist {
                 players.add(i,playerjson);
             }
 
-        }
+        }*/
         if (players.size()>10){
             players.remove(10);
         }
@@ -102,7 +128,9 @@ public class Scorelist {
                 e.printStackTrace();
             }
     }
+    private  getPlayers(ArrayList<Player> ScoreList){
 
+    }
 
     private void writePlayerList(ArrayList<Player> ScoreList){
         try {
@@ -131,4 +159,3 @@ public class Scorelist {
     }
 
 }
-*/
