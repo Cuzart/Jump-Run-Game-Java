@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 public class Scorelist {
 
     //private static ArrayList<Player> ScoreList = new ArrayList(10);
-    public static List<Player> loadPattern(){
+    /*public static List<Player> loadPattern(){
         ArrayList<Player> ScoreList = new ArrayList<>();
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
@@ -92,7 +92,7 @@ public class Scorelist {
         double score = (double) playersObject.get("score");
         }
     */
-    private ArrayList<Player> addPlayer(){
+    /*private ArrayList<Player> addPlayer(){
         ArrayList<Player> ScoreList = readPlayerList();
         Player player = JumpOrDie.getPlayer();
         ScoreList.add(player);
@@ -109,7 +109,7 @@ public class Scorelist {
             }
 
         }*/
-        if (players.size()>10){
+      /*  if (players.size()>10){
             players.remove(10);
         }
         return players;
@@ -156,6 +156,6 @@ public class Scorelist {
         JSONArray scorelistJSONArray = scorelist.addPlayer(p1);
         scorelist.deleteExistingFile();
         scorelist.writePlayerList(scorelistJSONArray);
-    }
+    }*/
 
 }

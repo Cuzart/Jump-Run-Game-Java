@@ -23,6 +23,9 @@ public class Player implements IPlayer {
     void setNickname(String nickname) {
         this.nickname = nickname;
     }
+    void setFinalScore(double score){
+        finalScore = score;
+    }
     public String getNickname(){
         return nickname;
     }
@@ -30,16 +33,16 @@ public class Player implements IPlayer {
         return finalScore;
     }
 
-    public double getHeight() {
+    double getHeight() {
         return height;
     }
-    public double getXEnd() {
+    double getXEnd() {
         return x+width;
     }
     public double getY() {
         return y;
     }
-    public double getX (){
+    double getX (){
         return x;
     }
 

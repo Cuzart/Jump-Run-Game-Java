@@ -1,6 +1,5 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.JumpOrDie.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,7 +13,7 @@ public class App extends Application {
     static Stage window;
     static Scene menu, jumpOrDie;
     private static MenuController menuController = new MenuController();
-    static GameController gameController = new GameController();
+    public static GameController gameController = new GameController();
 
 
 
@@ -39,11 +38,11 @@ public class App extends Application {
     }
 
 
-    private void closeApp (){
-        JumpOrDie.closeGame();
+    static void closeApp (){
+        gameController.jumpOrDie.closeGame();
         gameController.stopAnimation();
-        log.info("Close request");
-        //safeScorelist
+        log.info("Close request - saveScoreList");
+        //saveScorelist
         System.exit(0);
     }
 

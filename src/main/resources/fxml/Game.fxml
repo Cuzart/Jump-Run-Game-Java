@@ -10,6 +10,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.GameController">
+   <Label fx:id="scoreView" alignment="CENTER_RIGHT" layoutX="350.0" layoutY="49.0" prefWidth="100.0" text="Score">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
    <Rectangle fx:id="obstacle1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" width="50.0" />
    <Rectangle fx:id="obstacle2" arcHeight="5.0" arcWidth="5.0" fill="#98ff1f" height="50.0" layoutX="800.0" layoutY="450.0" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
    <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" height="120.0" layoutX="100.0" layoutY="380.0" strokeType="INSIDE" width="60.0" />
@@ -32,7 +37,7 @@
          </font>
       </Label>
       <TextField fx:id="nickname" alignment="CENTER" prefHeight="35.0" promptText="whoami" />
-      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Play Again" />
-      <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" text="Back to Menu" />
+      <Button mnemonicParsing="false" onAction="#savePlayAgain" prefHeight="40.0" prefWidth="300.0" text="Play Again" />
+      <Button mnemonicParsing="false" onAction="#saveBackToMenu" prefHeight="40.0" prefWidth="300.0" text="Back to Menu" />
    </VBox>
 </AnchorPane>

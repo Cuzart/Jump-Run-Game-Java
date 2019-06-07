@@ -15,7 +15,7 @@ public class MenuController {
     @FXML
     public void startGame (ActionEvent event){
         App.window.setScene(App.jumpOrDie);
-        JumpOrDie.playAgain();
+        App.gameController.jumpOrDie.playAgain();
         App.gameController.startAnimation();
     }
     @FXML
@@ -24,7 +24,7 @@ public class MenuController {
     }
     @FXML
     public void exitGame (ActionEvent event){
-        System.exit(0);
+        App.closeApp();
     }
 
     void setUp() throws Exception{

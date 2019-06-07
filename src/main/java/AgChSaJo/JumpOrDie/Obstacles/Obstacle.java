@@ -1,10 +1,12 @@
-package AgChSaJo.JumpOrDie;
+package AgChSaJo.JumpOrDie.Obstacles;
 
 public abstract class Obstacle {
 
     private double height, width, x=800, y=450;
 
-    abstract void move(double speed);
+    public void move(double speed){
+        setX(getX()-speed);
+    }
 
     public double getHeight() {
         return height;
@@ -22,13 +24,13 @@ public abstract class Obstacle {
         return y;
     }
 
-    public void setHeight(double height) {
+    void setHeight(double height) {
         this.height = height;
     }
-    public void setWidth(double width) {
+    void setWidth(double width) {
         this.width = width;
     }
-    public void setX(double x) {
+    private void setX(double x) {
         this.x = x;
     }
     public void setY(double y) {

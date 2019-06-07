@@ -1,5 +1,6 @@
 package AgChSaJo.JumpOrDie;
 
+import AgChSaJo.JumpOrDie.Obstacles.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Random;
@@ -10,7 +11,7 @@ public class ObstacleManager {
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
     static Obstacle obstacle1, obstacle2;
-    //private static double obstacleSpeed;
+    private static double obstacleSpeed;
     private static int obstacleCount;
 
     private static final int obstacleEnd = -50;
@@ -18,14 +19,20 @@ public class ObstacleManager {
 
     private static Obstacle generate(){
         Random r = new Random();
-        int kind = r.nextInt(2);
+        int kind = r.nextInt(4);
         switch (kind){
             case 0:
                 log.debug("new Fence generated");
                 return new Fence();
             case 1:
+                log.debug("new Tree generated");
+                return new Tree();
+            case 2:
                 log.debug("new Hedge generated");
                 return new Hedge();
+            case 3:
+                log.debug("new BigHedge generated");
+                return new BigHedge();
             default:
                 log.warn("Should not happen - Fence generated");
                 return new Fence();
@@ -50,21 +57,27 @@ public class ObstacleManager {
                 obstacleCount++;
         }
 
-
-
-
-
         switch (obstacleCount){
+            case 5:
+                obstacleSpeed = 7;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
+                break;
             case 10:
-
-                Board.setGameSpeed(4);
-                log.debug("set obstacleSpeed to "+Board.getGameSpeed());
+                obstacleSpeed = 7.5;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
+                break;
+            case 15:
+                obstacleSpeed = 8;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
             case 20:
-                Board.setGameSpeed(6);
-                log.debug("set obstacleSpeed to "+Board.getGameSpeed());
+                obstacleSpeed = 8.5;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
         }
+    }
+    static double calculateScoreAdd(){
+        return obstacleCount+obstacleSpeed;
     }
 
     static Obstacle getCloserObstacle(){
@@ -81,11 +94,14 @@ public class ObstacleManager {
     public static Obstacle[] getObstacles(){
         return new Obstacle[] {obstacle1,obstacle2};
     }
+    static double getObstacleSpeed(){
+        return obstacleSpeed;
+    }
 
     static void setUp(){
         obstacle1 = generate();
         obstacle2 = null;
-        Board.setGameSpeed(4);
+        obstacleSpeed = 6;
         obstacleCount = 0;
     }
 

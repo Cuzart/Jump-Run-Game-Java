@@ -1,5 +1,8 @@
 package AgChSaJo.JumpOrDie;
 
+import AgChSaJo.GUI.App;
+import AgChSaJo.GUI.GameController;
+import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,21 +19,21 @@ public class Board {
     private static int period = 20;
 
     public static Player activePlayer;
-    private static boolean jumping = false;
+    private static boolean jumping;
     static int jumpCounter = 0;
-    private static double gameSpeed;
+    private static double score;
 
-    static boolean checkCollision(Obstacle obstacle){
+    static void checkCollision(Obstacle obstacle){
         double playerX = activePlayer.getX();
         double playerXEnd = activePlayer.getXEnd();
 
         if (obstacle.getX() <= playerXEnd && obstacle.getXEnd() >= playerX){
             if (activePlayer.getY()<=obstacle.getHeight()){
-                log.info("GameController Over - Collision detected");
-                return true;
+                log.info("GameOver - Collision detected");
+                stopTimerTasks();
+                App.gameController.gameOver();
             }
         }
-        return false;
     }
     private static void setJumping(boolean v){
         jumping = v;
@@ -48,13 +51,6 @@ public class Board {
         jumpCounter = 0;
     }
 
-    static void setGameSpeed(double speed){
-        gameSpeed = speed;
-    }
-    static double getGameSpeed(){
-        return gameSpeed;
-    }
-
     static void startObstacleTimerTask(long delay){
         obstacleTimerTask = new ObstacleTimer();
         obstacleTimer.schedule(obstacleTimerTask,delay,period);
@@ -65,10 +61,22 @@ public class Board {
     }
     static void stopTimerTasks(){
         obstacleTimerTask.cancel();
-        jumpTimerTask.cancel();
+        if(jumpTimerTask != null) {
+            jumpTimerTask.cancel();
+        }
     }
     static void closeTimers(){
         obstacleTimer.cancel();
         jumpTimer.cancel();
+    }
+
+    static synchronized void addToScore(double add){
+        score += add;
+    }
+    public static double getScore(){
+        return score;
+    }
+    static void resetScore(){
+        score = 0;
     }
 }

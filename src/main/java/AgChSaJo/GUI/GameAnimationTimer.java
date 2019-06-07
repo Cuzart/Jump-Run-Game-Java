@@ -8,5 +8,6 @@ public class GameAnimationTimer extends TimerTask {
     public void run() {
         App.gameController.animatePlayer();
         App.gameController.animateObstacles();
+        App.gameController.updateScoreView();
     }
 }
