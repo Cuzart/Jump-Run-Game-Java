@@ -1,13 +1,13 @@
 package AgChSaJo.GUI;
 
-import java.util.TimerTask;
+import javafx.animation.AnimationTimer;
 
-public class GameAnimationTimer extends TimerTask {
+
+public class GameAnimationTimer extends AnimationTimer {
 
     @Override
-    public void run() {
-        App.gameController.animatePlayer();
-        App.gameController.animateObstacles();
+    public void handle(long l) {
+        App.gameController.animateGame();
         App.gameController.updateScoreView();
     }
 }

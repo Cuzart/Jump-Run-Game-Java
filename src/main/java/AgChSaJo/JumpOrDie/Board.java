@@ -21,7 +21,7 @@ public class Board {
     public static Player activePlayer;
     private static boolean jumping;
     static int jumpCounter = 0;
-    private static double score;
+    private static int score;
 
     static void checkCollision(Obstacle obstacle){
         double playerX = activePlayer.getX();
@@ -70,10 +70,10 @@ public class Board {
         jumpTimer.cancel();
     }
 
-    static synchronized void addToScore(double add){
+    static synchronized void addToScore(int add){
         score += add;
     }
-    public static double getScore(){
+    public static int getScore(){
         return score;
     }
     static void resetScore(){

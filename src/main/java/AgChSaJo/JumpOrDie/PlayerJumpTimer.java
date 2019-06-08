@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 public class PlayerJumpTimer extends TimerTask {
 
-
     @Override
     public void run() {
         Board.jumpCounter++;
@@ -16,7 +15,5 @@ public class PlayerJumpTimer extends TimerTask {
         } else if (Board.jumpCounter >=25){
             Board.activePlayer.jump(-10);
         }
-
-        System.out.println(Board.activePlayer.getY());
     }
 }

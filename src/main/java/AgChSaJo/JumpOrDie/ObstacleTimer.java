@@ -14,6 +14,5 @@ public class ObstacleTimer extends TimerTask {
 
         ObstacleManager.manageObstacleLifetime();
         Board.checkCollision(ObstacleManager.getCloserObstacle());
-        Board.addToScore(ObstacleManager.calculateScoreAdd());
     }
 }

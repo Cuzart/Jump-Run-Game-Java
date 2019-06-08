@@ -1,8 +1,12 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.IGame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class JumpOrDie implements IGame {
+
+    private static Logger log = LogManager.getLogger(JumpOrDie.class);
 
 
     public void playAgain(){
@@ -11,6 +15,7 @@ public class JumpOrDie implements IGame {
         Board.startObstacleTimerTask(1000);
         Board.resetJumpingVariables();
         Board.resetScore();
+        log.info("Start new Game");
     }
     public void resumeGame(){
         Board.startObstacleTimerTask(5000);

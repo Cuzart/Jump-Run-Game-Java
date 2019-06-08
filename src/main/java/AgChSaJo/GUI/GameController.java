@@ -7,30 +7,32 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
-import java.util.Timer;
 
 public class GameController {
 
 
     IGame jumpOrDie = new JumpOrDie();
-
+    private GameAnimationTimer animationTimer = new GameAnimationTimer();
     private Parent gameLayout;
-    private static Timer timer = new Timer();
-    private static GameAnimationTimer animation;
 
-    public Rectangle player;
-    public Rectangle obstacle1;
-    public Rectangle obstacle2;
     public VBox pauseControl;
     public VBox gameOverControl;
     public TextField nickname;
     public Label scoreView;
+    public Canvas canvas;
+
+    private GraphicsContext gc;
+    private Image background = new Image(getClass().getResourceAsStream("/images/background.jpg"));
+    private double distanceFromBottom = 25;
 
 
     @FXML
@@ -63,12 +65,12 @@ public class GameController {
     void setUp() throws Exception{
         gameLayout = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
         App.jumpOrDie = new Scene(gameLayout,800,500);
-        obstacle1 = (Rectangle) gameLayout.lookup("#obstacle1");
-        obstacle2 = (Rectangle) gameLayout.lookup("#obstacle2");
-        player = (Rectangle) gameLayout.lookup("#player");
         pauseControl = (VBox)gameLayout.lookup("#pauseControl");
         gameOverControl = (VBox)gameLayout.lookup("#gameOverControl");
         scoreView = (Label) gameLayout.lookup("#scoreView");
+        canvas = (Canvas) gameLayout.lookup("#canvas");
+        gc = canvas.getGraphicsContext2D();
+        gc.drawImage(background,0,0);
         App.jumpOrDie.setOnKeyPressed(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
             if (keyCode.equals(KeyCode.SPACE)){
@@ -82,57 +84,48 @@ public class GameController {
         });
     }
 
-    void startAnimation(){
-        resetGUI();
-        animation = new GameAnimationTimer();
-        timer.scheduleAtFixedRate(animation,10,10);
-    }
-    void stopAnimation(){
-        animation.cancel();
-    }
+    void animateGame (){
 
-    void animatePlayer(){
-        player.setTranslateY(-Board.activePlayer.getY());
+        gc.drawImage(background,0,0);
+        animatePlayer();
+        animateObstacles();
     }
-    void animateObstacles(){
-        Obstacle[] obstacles = ObstacleManager.getObstacles();
+    private void animatePlayer(){
+        gc.setFill(Color.BLACK);
+        double x = Board.activePlayer.getX();
+        double y = canvas.getHeight()-Board.activePlayer.getHeight()-Board.activePlayer.getY()-distanceFromBottom;
+        double width = Board.activePlayer.getWidth();
+        double height = Board.activePlayer.getHeight();
+        gc.fillRect(x,y,width,height);
+    }
+    private void animateObstacles(){
+        Obstacle ob1 = ObstacleManager.obstacle1;
+        Obstacle ob2 = ObstacleManager.obstacle2;
 
-        if (obstacles[0].getX()==800){
-            resizeObstacle(obstacles[0],1);
+
+        double x1 = ob1.getX();
+        double y1 = canvas.getHeight()-ob1.getHeight()-ob1.getY()-distanceFromBottom;
+        gc.setFill(Color.ORANGE);
+        gc.fillRect(x1,y1, ob1.getWidth(), ob1.getHeight());
+
+        if (ob2 !=null){
+            double x2 = ob2.getX();
+            double y2 = canvas.getHeight()-ob2.getHeight()-ob2.getY()-distanceFromBottom;
+            gc.setFill(Color.OLIVE);
+            gc.fillRect(x2,y2, ob2.getWidth(), ob2.getHeight());
         }
-        obstacle1.setTranslateX(obstacles[0].getX()-800);
 
-        if (obstacles[1]!=null) {
-            if (obstacles[1].getX()==800){
-                resizeObstacle(obstacles[1],2);
-            }
-            obstacle2.setTranslateX(obstacles[1].getX()-800);
-        }
+
 
     }
     void updateScoreView(){
-        //scoreView.setText(Double.toString(Board.getScore()));
+        scoreView.setText(""+Board.getScore());
     }
-    private void resizeObstacle(Obstacle o, int i){
-        Rectangle rec;
-        if (i == 2){
-            rec=obstacle2;
-        }else{
-            rec=obstacle1;
-        }
-
-        if (o.getHeight()== 100){
-            rec.setTranslateY(-50);
-        }else{
-            rec.setTranslateY(0);
-        }
-        rec.setHeight(o.getHeight());
-        rec.setWidth(o.getWidth());
+    void startAnimation(){
+        animationTimer.start();
     }
-    private void resetGUI(){
-        obstacle1.setTranslateX(0);
-        obstacle2.setTranslateX(0);
-        player.setTranslateY(0);
+    void stopAnimation(){
+        animationTimer.stop();
     }
 
     private void showPauseControl(boolean b){

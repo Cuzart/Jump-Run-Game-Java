@@ -2,7 +2,7 @@ package AgChSaJo.JumpOrDie.Obstacles;
 
 public abstract class Obstacle {
 
-    private double height, width, x=800, y=450;
+    private double height, width, x=800, y=0;
 
     public void move(double speed){
         setX(getX()-speed);

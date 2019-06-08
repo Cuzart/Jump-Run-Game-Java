@@ -5,7 +5,7 @@ import AgChSaJo.IPlayer;
 public class Player implements IPlayer {
 
     private String nickname;
-    private double finalScore;
+    private int finalScore;
     private double height, width,
             y = 0,
             x = 100;
@@ -15,7 +15,7 @@ public class Player implements IPlayer {
         width = 60;
     }
 
-    public Player(String nickname, double finalScore){
+    public Player(String nickname, int finalScore){
         this.nickname = nickname;
         this.finalScore = finalScore;
     }
@@ -23,7 +23,7 @@ public class Player implements IPlayer {
     void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    void setFinalScore(double score){
+    void setFinalScore(int score){
         finalScore = score;
     }
     public String getNickname(){
@@ -33,8 +33,11 @@ public class Player implements IPlayer {
         return finalScore;
     }
 
-    double getHeight() {
+    public double getHeight() {
         return height;
+    }
+    public double getWidth(){
+        return width;
     }
     double getXEnd() {
         return x+width;
@@ -42,7 +45,7 @@ public class Player implements IPlayer {
     public double getY() {
         return y;
     }
-    double getX (){
+    public double getX (){
         return x;
     }
 
