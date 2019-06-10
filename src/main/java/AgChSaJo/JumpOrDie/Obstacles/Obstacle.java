@@ -14,9 +14,6 @@ public abstract class Obstacle {
     public double getWidth (){
         return width;
     }
-    public double getXEnd() {
-        return x+width;
-    }
     public double getX() {
         return x;
     }
@@ -33,7 +30,7 @@ public abstract class Obstacle {
     private void setX(double x) {
         this.x = x;
     }
-    public void setY(double y) {
+    void setY(double y) {
         this.y = y;
     }
 }

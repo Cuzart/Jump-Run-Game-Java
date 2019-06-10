@@ -39,9 +39,6 @@ public class Player implements IPlayer {
     public double getWidth(){
         return width;
     }
-    double getXEnd() {
-        return x+width;
-    }
     public double getY() {
         return y;
     }
@@ -53,8 +50,13 @@ public class Player implements IPlayer {
     void jump(double speed){
         y += speed;
     }
-    /*void duck(){
-        height/=2;
-    }*/
+    void duck(boolean b){
+        if (b){
+            height/=2;
+        }else{
+            height*=2;
+        }
+
+    }
 
 }

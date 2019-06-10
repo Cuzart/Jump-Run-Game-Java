@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 
+
 public class GameController {
 
 
@@ -71,15 +72,29 @@ public class GameController {
         canvas = (Canvas) gameLayout.lookup("#canvas");
         gc = canvas.getGraphicsContext2D();
         gc.drawImage(background,0,0);
+        setUpKeyListener();
+    }
+    private void setUpKeyListener(){
         App.jumpOrDie.setOnKeyPressed(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
-            if (keyCode.equals(KeyCode.SPACE)){
+            if (keyCode.equals(KeyCode.SPACE)||keyCode.equals(KeyCode.UP)){
                 Board.playerJump();
+                return;
+            }
+            if (keyCode.equals((KeyCode.DOWN))){
+                Board.playerDuck();
                 return;
             }
             if (keyCode.equals(KeyCode.ESCAPE) && gameOverControl.isDisabled()){
                 jumpOrDie.stopGame();
                 showPauseControl(true);
+            }
+
+        });
+        App.jumpOrDie.setOnKeyReleased(keyEvent -> {
+            KeyCode keyCode = keyEvent.getCode();
+            if (keyCode.equals((KeyCode.DOWN))){
+                Board.setDucking(false);
             }
         });
     }

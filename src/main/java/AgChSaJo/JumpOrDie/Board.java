@@ -1,7 +1,6 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.GUI.App;
-import AgChSaJo.GUI.GameController;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,16 +18,32 @@ public class Board {
     private static int period = 20;
 
     public static Player activePlayer;
-    private static boolean jumping;
+    private static boolean jumping, ducking;
     static int jumpCounter = 0;
     private static int score;
 
+    /**
+     *    y2|    |
+     *      |    |
+     *    y1|    |
+     *      x1   x2
+     *
+     * @param obstacle which is near player
+     */
     static void checkCollision(Obstacle obstacle){
-        double playerX = activePlayer.getX();
-        double playerXEnd = activePlayer.getXEnd();
+        double playerX1 = activePlayer.getX();
+        double playerX2 = playerX1 + activePlayer.getWidth();
+        double obstacleX1 = obstacle.getX();
+        double obstacleX2 = obstacleX1 + obstacle.getWidth();
 
-        if (obstacle.getX() <= playerXEnd && obstacle.getXEnd() >= playerX){
-            if (activePlayer.getY()<=obstacle.getHeight()){
+        //Collision zone
+        if (obstacleX1 <= playerX2 && obstacleX2 >= playerX1){
+            double playerY1 = activePlayer.getY();
+            double playerY2 = playerY1 + activePlayer.getHeight();
+            double obstacleY1 = obstacle.getY();
+            double obstacleY2 = obstacleY1 + obstacle.getHeight();
+
+            if (playerY1<= obstacleY2 && playerY2 >= obstacleY1){
                 log.info("GameOver - Collision detected");
                 stopTimerTasks();
                 App.gameController.gameOver();
@@ -37,7 +52,7 @@ public class Board {
     }
     private static void setJumping(boolean v){
         jumping = v;
-        log.debug("Set Jumping to: "+ v);
+        log.debug("Set jumping to: "+ v);
     }
     public static void playerJump(){
         if (!jumping) {
@@ -49,6 +64,21 @@ public class Board {
     static void resetJumpingVariables(){
         setJumping(false);
         jumpCounter = 0;
+    }
+
+    public static void setDucking(boolean b){
+        ducking = b;
+        log.debug("Set ducking to: "+ b);
+        if(!b){
+            activePlayer.duck(false);
+        }
+    }
+    public static void playerDuck(){
+        if (!ducking){
+            activePlayer.duck(true);
+            Board.setDucking(true);
+        }
+
     }
 
     static void startObstacleTimerTask(long delay){

@@ -19,7 +19,7 @@ public class ObstacleManager {
 
     private static Obstacle generate(){
         Random r = new Random();
-        int kind = r.nextInt(4);
+        int kind = r.nextInt(6);
         switch (kind){
             case 0:
                 log.debug("new Fence generated");
@@ -33,6 +33,12 @@ public class ObstacleManager {
             case 3:
                 log.debug("new BigHedge generated");
                 return new BigHedge();
+            case 4:
+                log.debug("new Butterfly generated");
+                return new Butterfly();
+            case 5:
+                log.debug("new Eagle generated");
+                return new Eagle();
             default:
                 log.warn("Should not happen - Fence generated");
                 return new Fence();
