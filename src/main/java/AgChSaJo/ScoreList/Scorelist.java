@@ -86,9 +86,9 @@ public class Scorelist {
         scoreList.sort(Player::compareTo);
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
        readScoreList();
        System.out.println(scoreList);
-    }*/
+    }
 
 }
