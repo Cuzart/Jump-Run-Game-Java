@@ -11,9 +11,10 @@ public class App extends Application {
     private static Logger log = LogManager.getLogger(App.class);
 
     static Stage window;
-    static Scene menu, jumpOrDie;
+    static Scene menu, jumpOrDie, scoreList;
     private static MenuController menuController = new MenuController();
     public static GameController gameController = new GameController();
+    private static ScoreController scoreController = new ScoreController();
 
 
 
@@ -27,6 +28,7 @@ public class App extends Application {
 
         menuController.setUp();
         gameController.setUp();
+        //scoreController.setUp();
 
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);

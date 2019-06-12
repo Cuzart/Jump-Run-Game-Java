@@ -8,7 +8,9 @@ public class JumpOrDie implements IGame {
 
     private static Logger log = LogManager.getLogger(JumpOrDie.class);
 
-
+    /**
+     * resets activePlayer and all variables and starts a new game
+     */
     public void playAgain(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
@@ -17,13 +19,25 @@ public class JumpOrDie implements IGame {
         Board.resetScore();
         log.info("Start new Game");
     }
+
+    /**
+     * game will be continued after short delay
+     */
     public void resumeGame(){
         Board.startObstacleTimerTask(5000);
         Board.startJumpTimerTask(5000);
     }
+
+    /**
+     * stops timer and game
+     */
     public void stopGame(){
         Board.stopTimerTasks();
     }
+
+    /**
+     * quits timer and game
+     */
     public void closeGame(){
         Board.closeTimers();
     }

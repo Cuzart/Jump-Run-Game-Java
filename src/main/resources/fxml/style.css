@@ -5,13 +5,13 @@
     -fx-background-size: 800 500;
 
 }
-
+/*
 .pane {
     -fx-background-color: black;
     -fx-opacity: 0.05;
 
 }
-
+*/
 .button {
     -fx-background-radius: 20px;
 }
