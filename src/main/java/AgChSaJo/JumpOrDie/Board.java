@@ -7,6 +7,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Timer;
 
+/**
+ * The class Board holds the game logic as it is the framework of the game.
+ */
 public class Board {
 
     private static Logger log = LogManager.getLogger(Board.class);
@@ -23,14 +26,18 @@ public class Board {
     private static int score;
 
     /**
+     * This method checks whether the player collided with an Obstacle by
+     * checking their exact positions and finding out if they overlap.
+     * If that is the case the game stops.
      *    y2|    |
      *      |    |
      *    y1|    |
      *      x1   x2
      *
      * @param obstacle which is near player
+     * @return true or false
      */
-    static void checkCollision(Obstacle obstacle){
+    static boolean checkCollision(Obstacle obstacle){
         double playerX1 = activePlayer.getX();
         double playerX2 = playerX1 + activePlayer.getWidth();
         double obstacleX1 = obstacle.getX();
@@ -47,13 +54,25 @@ public class Board {
                 log.info("GameOver - Collision detected");
                 stopTimerTasks();
                 App.gameController.gameOver();
+                return true;
             }
         }
+        return false;
     }
+
+    /**
+     * Saves in a variable whether a player is jumping or not.-
+     *
+     * @param v a variable true or false in case a player jumps or not
+     */
     private static void setJumping(boolean v){
         jumping = v;
         log.debug("Set jumping to: "+ v);
     }
+
+    /**
+     * Only if a player is not currently jumping he is able to jump.
+     */
     public static void playerJump(){
         if (!jumping) {
             jumpTimerTask = new PlayerJumpTimer();
@@ -61,6 +80,7 @@ public class Board {
             Board.setJumping(true);
         }
     }
+
     static void resetJumpingVariables(){
         setJumping(false);
         jumpCounter = 0;
@@ -110,5 +130,13 @@ public class Board {
     }
     static void resetScore(){
         score = 0;
+    }
+
+    //zum Testen
+    static boolean getDucking(){
+        return ducking;
+    }
+    static boolean getJumping(){
+        return jumping;
     }
 }

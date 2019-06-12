@@ -1,6 +1,9 @@
 package AgChSaJo;
-
+ /*
+  * The Interfaces determines that for every Player you need
+  * to get a nickname and a final score.
+  */
 public interface IPlayer {
-    public String getNickname();
-    public double getFinalScore();
+    String getNickname();
+    double getFinalScore();
 }

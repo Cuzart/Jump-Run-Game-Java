@@ -3,6 +3,10 @@ package AgChSaJo.JumpOrDie;
 import AgChSaJo.IPlayer;
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * This class defines every Player with a nickname, a final score, a height and width
+ * and a Y and X-Coordinate to show his position int the game.
+ */
 public class Player implements IPlayer {
 
     private String nickname;
@@ -11,11 +15,20 @@ public class Player implements IPlayer {
             y = 0,
             x = 100;
 
+        /**
+         * A Players exact height and width.
+         */
     Player(){
         height = 120;
         width = 60;
     }
 
+    /**
+     * A Player will get an own nickname and will reach an own score.
+     *
+     * @param nickname a players chosen name
+     * @param finalScore the score a player reached
+     */
     public Player(String nickname, int finalScore){
         setNickname(nickname);
         setFinalScore(finalScore);
@@ -47,10 +60,21 @@ public class Player implements IPlayer {
         return x;
     }
 
-
+        /**
+         * When a player jumps with a given speed the Y-Coordinate increases and he can move horizontally.
+         *
+         * @param speed how fast the player moves
+         */
     void jump(double speed){
         y += speed;
     }
+
+        /**
+         * When a player ducks his height gets cut in half. On the other
+         * side, if he gets in his normal state, he is set back to the original height.
+         *
+         * @param b a variable that if true lets a player duck, if false sets him back
+         */
     void duck(boolean b){
         if (b){
             height/=2;
