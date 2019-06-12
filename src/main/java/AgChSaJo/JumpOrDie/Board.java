@@ -67,10 +67,12 @@ public class Board {
     }
 
     public static void setDucking(boolean b){
-        ducking = b;
-        log.debug("Set ducking to: "+ b);
-        if(!b){
-            activePlayer.duck(false);
+        if(ducking != b){
+            ducking = b;
+            log.debug("Set ducking to: "+ b);
+            if (!ducking){
+                activePlayer.duck(false);
+            }
         }
     }
     public static void playerDuck(){
