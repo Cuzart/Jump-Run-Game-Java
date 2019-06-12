@@ -86,23 +86,23 @@ public class ObstacleManager {
 
         switch (obstacleCount){
             case 5:
-                obstacleSpeed = 7;
-                log.debug("set obstacleSpeed to "+obstacleSpeed);
-                break;
-            case 10:
                 obstacleSpeed = 7.5;
                 log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
-            case 15:
+            case 10:
                 obstacleSpeed = 8;
                 log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
-            case 20:
+            case 15:
                 obstacleSpeed = 8.5;
                 log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
-            case 25:
+            case 20:
                 obstacleSpeed = 9;
+                log.debug("set obstacleSpeed to "+obstacleSpeed);
+                break;
+            case 25:
+                obstacleSpeed = 9.5;
                 log.debug("set obstacleSpeed to "+obstacleSpeed);
                 break;
         }
@@ -141,7 +141,7 @@ public class ObstacleManager {
     static void setUp(){
         obstacle1 = generate();
         obstacle2 = null;
-        obstacleSpeed = 6;
+        obstacleSpeed = 7;
         obstacleCount = 0;
     }
 

@@ -18,7 +18,7 @@ public class Player implements IPlayer, Comparable<Player> {
          * A Players exact height and width.
          */
     Player(){
-        height = 120;
+        height = 125;
         width = 60;
     }
 

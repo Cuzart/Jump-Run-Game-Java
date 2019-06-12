@@ -32,7 +32,8 @@ public class GameController {
     public Canvas canvas;
 
     private GraphicsContext gc;
-    private Image background = new Image(getClass().getResourceAsStream("/images/background.jpg"));
+    private Image background = new Image(getClass().getResourceAsStream("/images/CanvasBackground.png"));
+    private Image player = new Image(getClass().getResourceAsStream("/images/kangaroo.png"));
     private double distanceFromBottom = 25;
 
 
@@ -109,9 +110,11 @@ public class GameController {
         gc.setFill(Color.BLACK);
         double x = Board.activePlayer.getX();
         double y = canvas.getHeight()-Board.activePlayer.getHeight()-Board.activePlayer.getY()-distanceFromBottom;
-        double width = Board.activePlayer.getWidth();
+
+        /*double width = Board.activePlayer.getWidth();
         double height = Board.activePlayer.getHeight();
-        gc.fillRect(x,y,width,height);
+        gc.fillRect(x,y,width,height);*/
+        gc.drawImage(player, x-39,y);
     }
     private void animateObstacles(){
         Obstacle ob1 = ObstacleManager.obstacle1;

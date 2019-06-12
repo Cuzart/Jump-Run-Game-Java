@@ -1,6 +1,12 @@
 
 #bg {
-    -fx-background-image: url("3075.jpg");
+    -fx-background-image: url("../images/backgroundBlurred.png");
+    -fx-background-position: center center;
+    -fx-background-size: 800 500;
+
+}
+#gameBG {
+    -fx-background-image: url("../images/background.png");
     -fx-background-position: center center;
     -fx-background-size: 800 500;
 
