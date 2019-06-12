@@ -25,19 +25,25 @@ public class ScoreController implements Initializable {
         App.scoreList = new Scene(scoreList,800,500);
     }
 
-    @FXML private TableView<List<StringProperty>> table;
-    @FXML private TableColumn<Player, String> Ranking;
-    @FXML private TableColumn<Player, String> Nickname;
-    @FXML private TableColumn<Player, String> Score;
+    @FXML private TableView<Player> table;
+    //@FXML private TableColumn<Integer> Ranking;
+    @FXML public TableColumn<Player, String> nameColumn = new TableColumn<>("Nickname");
+    @FXML private TableColumn<Player, Double> scoreColumn = new TableColumn<>("Score");
 
 
+
+    private ObservableList<Player> getScoreList(){
+        ObservableList<Player> data = FXCollections.observableArrayList();
+        data.addAll();
+        return data;
+    }
     @Override
     public void initialize(URL url, ResourceBundle fxml) {
-        TableColumn rank = new TableColumn("Ranking");
+        /*TableColumn rank = new TableColumn("Ranking");
         TableColumn nick = new TableColumn("Nickname");
         TableColumn score= new TableColumn("Score");
         table.getColumns().addAll(rank,nick,score);
-        //table.setItems();
+        //table.setItems();*/
     }
 /*
     // create ArrayList 1-10 for Ranking table

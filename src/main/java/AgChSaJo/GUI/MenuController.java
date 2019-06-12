@@ -1,6 +1,7 @@
 package AgChSaJo.GUI;
 
 import AgChSaJo.JumpOrDie.JumpOrDie;
+import AgChSaJo.ScoreList.Scorelist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,8 @@ public class MenuController {
     }
     @FXML
     public void showScorelist(ActionEvent event){
-       App.window.setScene((App.scoreList));
+        System.out.println(Scorelist.getScoreList());
+       //App.window.setScene((App.scoreList));
     }
     @FXML
     public void exitGame (ActionEvent event){

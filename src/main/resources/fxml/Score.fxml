@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.ScoreController">
+<AnchorPane id="bg" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.ScoreController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" />
-      <TableView fx:id="Table" layoutX="200.0" layoutY="38.0" prefHeight="500.0" prefWidth="400.0">
+      <TableView fx:id="table" layoutX="200.0" layoutY="38.0" prefHeight="500.0" prefWidth="400.0">
         <columns>
           <TableColumn fx:id="Ranking" prefWidth="80.0" text="Ranking" />
             <TableColumn fx:id="Nickname" prefWidth="160.0" text="Nickname" />

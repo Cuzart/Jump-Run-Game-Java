@@ -1,7 +1,10 @@
 package AgChSaJo.GUI;
 
+import AgChSaJo.JumpOrDie.Player;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +32,9 @@ public class App extends Application {
         menuController.setUp();
         gameController.setUp();
         //scoreController.setUp();
+
+        TableColumn<Player, String> nameColumn = new TableColumn<>("Nickname");
+        //nameColumn.setCellFactory(new PropertyValueFactory<>("nickname"));
 
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);

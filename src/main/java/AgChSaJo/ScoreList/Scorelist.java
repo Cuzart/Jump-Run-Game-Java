@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 
 public class Scorelist {
 
-    private static ArrayList<Player> scoreList;
+    private static ArrayList<Player> scoreList = new ArrayList<>();
     private static Logger log = LogManager.getLogger(Scorelist.class);
 
     public static void readScoreList(){
@@ -69,7 +69,7 @@ public class Scorelist {
     }
 
 
-    public void addNewScore(Player player){
+    public static void addNewScore(Player player){
         if (player.getFinalScore()<0 || player.getNickname()== null){
             throw new IllegalScoreExeption();
         }else{
@@ -77,7 +77,7 @@ public class Scorelist {
         }
 
     }
-    public ArrayList<Player> getScoreList() {
+    public static ArrayList<Player> getScoreList() {
         sortScoreList();
         return scoreList;
     }

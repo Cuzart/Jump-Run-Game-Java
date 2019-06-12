@@ -33,10 +33,10 @@ public class Player implements IPlayer, Comparable<Player> {
         setFinalScore(finalScore);
     }
 
-    private void setNickname(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    private void setFinalScore(int score){
+    void setFinalScore(int score){
         finalScore = score;
     }
     public String getNickname(){
@@ -87,7 +87,6 @@ public class Player implements IPlayer, Comparable<Player> {
     public String toString() {
         return getNickname()+"("+getFinalScore()+")";
     }
-
     @Override
     public int compareTo(Player other) {
         return other.getFinalScore()-getFinalScore();

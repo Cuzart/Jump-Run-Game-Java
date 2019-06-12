@@ -3,6 +3,7 @@ package AgChSaJo.GUI;
 import AgChSaJo.IGame;
 import AgChSaJo.JumpOrDie.*;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
+import AgChSaJo.ScoreList.Scorelist;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,15 +52,16 @@ public class GameController {
     }
     @FXML
     public void savePlayAgain(){
-        //saveScore
-        scoreView.setText(getNickname());
+        Board.activePlayer.setNickname(getNickname());
+        Scorelist.addNewScore(Board.activePlayer);
         showGameOverControl(false);
         jumpOrDie.playAgain();
         startAnimation();
     }
     @FXML
     public void saveBackToMenu(){
-        scoreView.setText(getNickname());
+        Board.activePlayer.setNickname(getNickname());
+        Scorelist.addNewScore(Board.activePlayer);
         showGameOverControl(false);
         App.window.setScene(App.menu);
     }

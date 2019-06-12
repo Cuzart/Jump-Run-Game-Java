@@ -54,6 +54,7 @@ public class Board {
             if (playerY1<= obstacleY2 && playerY2 >= obstacleY1){
                 log.info("GameOver - Collision detected");
                 stopTimerTasks();
+                activePlayer.setFinalScore(score);
                 App.gameController.gameOver();
                 return true;
             }
