@@ -23,9 +23,10 @@ import com.google.gson.Gson;
 
 public class Scorelist {
 
-    //private static ArrayList<Player> ScoreList = new ArrayList(10);
-    /*public static List<Player> loadPattern(){
-        ArrayList<Player> ScoreList = new ArrayList<>();
+    private ArrayList<Player> scoreList;
+
+    public static void readFile(){
+
         Gson gson = new Gson();
         JsonParser jsonParser = new JsonParser();
         try {
@@ -33,89 +34,25 @@ public class Scorelist {
             JsonElement jsonElement = jsonParser.parse(br);
 
         //Create generic type
-            Type type = new TypeToken<List<Player>>() {}.getType();
-            return gson.fromJson(jsonElement, type);
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    return ScoreList;
-}
-
-    private ArrayList readPlayerList() {
-        JSONParser parser = new JSONParser();
-        JSONArray sList = null;
-        ArrayList<Player> ScoreList = null;
-        try {
-            FileReader reader = new FileReader("ScoreList.json");
-
-            Object obj = parser.parse(reader);
-
-            sList = (JSONArray) obj;
-            ScoreList = (ArrayList<Player>) new ArrayList(sList.size());
-            for (int i = 0; i < sList.size(); i++) {
-                JSONObject p = (JSONObject) sList.get(i);
-                String name = (String) p.get("name");
-                double score = (double) p.get("score");
-                Player player = new Player(name, score);
-                ScoreList.add(i, player);
-            }
-
-            return ScoreList;
-            //players.forEach( player -> parsePlayersObject( (JSONObject) player));
-
-
-        } catch (FileNotFoundException e) {
-            try {
-                new File("ScoreList.json").createNewFile();
-                Object obj = parser.parse(new FileReader("ScoreList.json"));
-
-                sList = (JSONArray) obj;
-                return sList;
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (ParseException e1) {
-                e1.printStackTrace();
-            }
+            Type type = new TypeToken<ArrayList<Player>>() {}.getType();
+            scoreList = gson.fromJson(jsonElement, type);
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-        return ScoreList;
+
+    //return ScoreList;
+}
+
+    public void addPlayer(Player player){
+        scoreList.add(player);
     }
 
-    /*private static void parsePlayersObject(JSONObject player) {
-        JSONObject playersObject = (JSONObject) player.get("player");
-        String name = (String) playersObject.get("name");
-        double score = (double) playersObject.get("score");
-        }
-    */
-    /*private ArrayList<Player> addPlayer(){
-        ArrayList<Player> ScoreList = readPlayerList();
-        Player player = JumpOrDie.getPlayer();
-        ScoreList.add(player);
-
-        /*for (int i = 0; i<players.size();i++){
-            JSONObject player = (JSONObject) players.get(i);
-            Long score = (Long) player.get("score");
-
-            if(score< finalScore) {
-                JSONObject playerjson = new JSONObject();
-                playerjson.put("name",nickname);
-                playerjson.put("score",finalScore);
-                players.add(i,playerjson);
-            }
-
-        }*/
-      /*  if (players.size()>10){
-            players.remove(10);
-        }
-        return players;
+    public void saveScoreList(){
+        deleteExistingFile();
 
 
-        return ScoreList;
+
     }
     private void deleteExistingFile(){
             try {
@@ -128,13 +65,11 @@ public class Scorelist {
                 e.printStackTrace();
             }
     }
-    private  getPlayers(ArrayList<Player> ScoreList){
 
-    }
 
     private void writePlayerList(ArrayList<Player> ScoreList){
         try {
-            ArrayList<Player> ScoreList = addPlayer();
+            ArrayList<Player> scoreList = addPlayer();
             Gson gson = new Gson();
 
             JsonElement element =
@@ -148,9 +83,13 @@ public class Scorelist {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    public ArrayList<Player> getScoreList() {
+        return scoreList;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Scorelist scorelist = new Scorelist();
         Player p1 = new Player("Agil",1000);
         JSONArray scorelistJSONArray = scorelist.addPlayer(p1);

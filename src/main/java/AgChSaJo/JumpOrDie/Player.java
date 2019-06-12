@@ -16,14 +16,14 @@ public class Player implements IPlayer {
     }
 
     public Player(String nickname, int finalScore){
-        this.nickname = nickname;
-        this.finalScore = finalScore;
+        setNickname(nickname);
+        setFinalScore(finalScore);
     }
 
-    void setNickname(String nickname) {
+    private void setNickname(String nickname) {
         this.nickname = nickname;
     }
-    void setFinalScore(int score){
+    private void setFinalScore(int score){
         finalScore = score;
     }
     public String getNickname(){
