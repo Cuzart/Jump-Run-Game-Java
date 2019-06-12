@@ -1,6 +1,7 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.IPlayer;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Player implements IPlayer {
 

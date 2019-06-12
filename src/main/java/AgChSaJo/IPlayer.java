@@ -1,7 +1,6 @@
 package AgChSaJo;
 
 public interface IPlayer {
-
-    String getNickname();
-    double getFinalScore();
+    public String getNickname();
+    public double getFinalScore();
 }
