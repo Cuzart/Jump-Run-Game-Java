@@ -59,4 +59,8 @@ public class Player implements IPlayer {
 
     }
 
+    @Override
+    public String toString() {
+        return getNickname()+"("+getFinalScore()+")";
+    }
 }
