@@ -3,8 +3,7 @@ package AgChSaJo.ScoreList;
 import java.io.*;
 
 import AgChSaJo.JumpOrDie.*;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,17 +20,16 @@ public class Scorelist {
 
     private static ArrayList<Player> scoreList;
     private static Logger log = LogManager.getLogger(Scorelist.class);
-    static Gson gson = new Gson();
-    static JsonParser jsonParser = new JsonParser();
 
-    public static void readFile(){
+    public static void readScoreList(){
 
 
         try {
+            JsonParser jsonParser = new JsonParser();
             BufferedReader br = new BufferedReader(new FileReader("ScoreList.json"));
             JsonElement jsonElement = jsonParser.parse(br);
             Type type = new TypeToken<ArrayList<Player>>() {}.getType();
-            scoreList = gson.fromJson(jsonElement, type);
+            scoreList = new Gson().fromJson(jsonElement, type);
         } catch (IOException e) {
             e.printStackTrace();
             log.error("ScoreListFile not found!");
@@ -39,30 +37,18 @@ public class Scorelist {
 
 
     }
-
-    public void addPlayer(Player player){
-        scoreList.add(player);
-    }
-
-    public void saveScoreList(){
-        deleteExistingFile();
-
-
-
-    }
-    private void deleteExistingFile(){
-            try {
-                final File f = new File("ScoreList.json");
-                if (f.exists()) {
-                    f.delete();
-                }
-                f.createNewFile();
-            }catch (IOException e) {
-                e.printStackTrace();
+    public static void saveScoreList(){
+        try {
+            final File f = new File("ScoreList.json");
+            if (f.exists()) {
+                f.delete();
             }
+            f.createNewFile();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
-
-
     private void writePlayerList(ArrayList<Player> ScoreList){
         /*try {
             ArrayList<Player> scoreList = addPlayer();
@@ -82,13 +68,27 @@ public class Scorelist {
 
     }
 
+
+    public void addNewScore(Player player){
+        if (player.getFinalScore()<0 || player.getNickname()== null){
+            throw new IllegalScoreExeption();
+        }else{
+            scoreList.add(player);
+        }
+
+    }
     public ArrayList<Player> getScoreList() {
+        sortScoreList();
         return scoreList;
     }
 
-    public static void main(String[] args) {
-       readFile();
-       System.out.println(scoreList);
+    private static void sortScoreList(){
+        scoreList.sort(Player::compareTo);
     }
+
+    /*public static void main(String[] args) {
+       readScoreList();
+       System.out.println(scoreList);
+    }*/
 
 }

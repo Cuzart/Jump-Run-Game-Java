@@ -1,13 +1,12 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.IPlayer;
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  * This class defines every Player with a nickname, a final score, a height and width
  * and a Y and X-Coordinate to show his position int the game.
  */
-public class Player implements IPlayer {
+public class Player implements IPlayer, Comparable<Player> {
 
     private String nickname;
     private int finalScore;
@@ -43,7 +42,7 @@ public class Player implements IPlayer {
     public String getNickname(){
         return nickname;
     }
-    public double getFinalScore() {
+    public int getFinalScore() {
         return finalScore;
     }
 
@@ -87,5 +86,10 @@ public class Player implements IPlayer {
     @Override
     public String toString() {
         return getNickname()+"("+getFinalScore()+")";
+    }
+
+    @Override
+    public int compareTo(Player other) {
+        return other.getFinalScore()-getFinalScore();
     }
 }

@@ -1,4 +1,5 @@
-module AgChSaJo {                     //package-Name
+module AgChSaJo {
+
     requires javafx.controls;
     requires javafx.fxml;
     requires log4j.api;
@@ -7,3 +8,4 @@ module AgChSaJo {                     //package-Name
     opens AgChSaJo to javafx.fxml, log4j.api;
     exports AgChSaJo.GUI;
 }
+
