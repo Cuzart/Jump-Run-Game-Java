@@ -83,11 +83,20 @@ public class Board {
         }
     }
 
+    /**
+     * Resets the jumping mechanism: the jumping variable is false again and the
+     * jumpCounter is set to zero.
+     */
     static void resetJumpingVariables(){
         setJumping(false);
         jumpCounter = 0;
     }
 
+    /**
+     * Saves in a variable whether a player is ducking or not.
+     *
+     * @param b true if a player is ducking.
+     */
     public static void setDucking(boolean b){
         if(ducking != b){
             ducking = b;
@@ -97,6 +106,10 @@ public class Board {
             }
         }
     }
+
+    /**
+     * Only if a player is not currently ducking, he can duck.
+     */
     public static void playerDuck(){
         if (!ducking){
             activePlayer.duck(true);
@@ -105,6 +118,12 @@ public class Board {
 
     }
 
+    /**
+     * Starts the Timer Tasks of the ObstacleTimer and the ScoreTimer.
+     * Therefore and obstacle can move and a score per second can be added.
+     *
+     * @param delay the delay that passes before the Timer starts
+     */
     static void startTimerTasks(long delay){
         obstacleTimerTask = new ObstacleTimer();
         timer.schedule(obstacleTimerTask,delay,period);
@@ -112,10 +131,21 @@ public class Board {
         timer.schedule(scoreTimerTask, delay, 1000);
 
     }
+
+    /**
+     * Starts the Timer Task of the JumpTimer.
+     * Therefore a player can jump.
+     *
+     * @param delay the time that passes before the Timer starts
+     */
     static void startJumpTimerTask(long delay){
         jumpTimerTask = new PlayerJumpTimer();
         jumpTimer.scheduleAtFixedRate(jumpTimerTask, delay, period);
     }
+
+    /**
+     * Stops all Timer Tasks.
+     */
     static void stopTimerTasks(){
         obstacleTimerTask.cancel();
         scoreTimerTask.cancel();
@@ -123,17 +153,35 @@ public class Board {
             jumpTimerTask.cancel();
         }
     }
+
+    /**
+     * Cancels the Timers.
+     */
     static void closeTimers(){
         timer.cancel();
         jumpTimer.cancel();
     }
 
+    /**
+     * A method that counts the total score of a player.
+     * @param add how much score is added
+     */
     static synchronized void addToScore(int add){
         score += add;
     }
+
+    /**
+     * Gets the score of a player.
+     *
+     * @return the score of a player
+     */
     public static int getScore(){
         return score;
     }
+
+    /**
+     * Resets the score, so that a new player can start with zero.
+     */
     static void resetScore(){
         score = 0;
     }

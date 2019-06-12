@@ -4,6 +4,10 @@ import AgChSaJo.IGame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * This class contains the general game mechanism.
+ * Someone can stop the game, resume it, finish it and play again.
+ */
 public class JumpOrDie implements IGame {
 
     private static Logger log = LogManager.getLogger(JumpOrDie.class);
