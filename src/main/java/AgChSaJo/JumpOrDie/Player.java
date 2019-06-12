@@ -1,6 +1,7 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.IPlayer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * This class defines every Player with a nickname, a final score, a height and width
@@ -10,6 +11,7 @@ public class Player implements IPlayer, Comparable<Player> {
 
     private String nickname;
     private int finalScore;
+    @JsonIgnore
     private double height, width,
             y = 0,
             x = 100;

@@ -1,35 +1,32 @@
 package AgChSaJo.ScoreList;
 
-import java.io.*;
-
 import AgChSaJo.JumpOrDie.*;
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import com.google.gson.Gson;
+import java.util.Arrays;
 
 
 
 
 public class Scorelist {
 
-    private static ArrayList<Player> scoreList = new ArrayList<>();
+    private static ArrayList<Player> scoreList;
     private static Logger log = LogManager.getLogger(Scorelist.class);
 
     public static void readScoreList(){
 
 
         try {
-            JsonParser jsonParser = new JsonParser();
-            BufferedReader br = new BufferedReader(new FileReader("ScoreList.json"));
-            JsonElement jsonElement = jsonParser.parse(br);
-            Type type = new TypeToken<ArrayList<Player>>() {}.getType();
-            scoreList = new Gson().fromJson(jsonElement, type);
+            String content = new String(Files.readAllBytes(Paths.get("ScoreList.json")));
+            ObjectMapper objectMapper = new ObjectMapper();
+            Player[] playerArray = objectMapper.readValue(content,Player[].class);
+            scoreList =  new ArrayList<Player>(Arrays.asList(playerArray));
         } catch (IOException e) {
             e.printStackTrace();
             log.error("ScoreListFile not found!");
@@ -38,7 +35,14 @@ public class Scorelist {
 
     }
     public static void saveScoreList(){
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
+            objectMapper.writeValue(new File("ScoreList.json"), scoreList);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Unable to create new File!");
+        }
+        /*try {
             final File f = new File("ScoreList.json");
             if (f.exists()) {
                 f.delete();
@@ -46,7 +50,7 @@ public class Scorelist {
             f.createNewFile();
         }catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
     private void writePlayerList(ArrayList<Player> ScoreList){
@@ -88,6 +92,9 @@ public class Scorelist {
 
     public static void main(String[] args) {
        readScoreList();
+       addNewScore(new Player("Carles", 56));
+       sortScoreList();
+       saveScoreList();
        System.out.println(scoreList);
     }
 
