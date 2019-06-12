@@ -14,10 +14,11 @@ public class Board {
 
     private static Logger log = LogManager.getLogger(Board.class);
 
-    private static Timer obstacleTimer = new Timer();
+    private static Timer timer = new Timer();
     private static Timer jumpTimer = new Timer();
     private static ObstacleTimer obstacleTimerTask;
     private static PlayerJumpTimer jumpTimerTask;
+    private static ScoreTimer scoreTimerTask;
     private static int period = 20;
 
     public static Player activePlayer;
@@ -103,9 +104,12 @@ public class Board {
 
     }
 
-    static void startObstacleTimerTask(long delay){
+    static void startTimerTasks(long delay){
         obstacleTimerTask = new ObstacleTimer();
-        obstacleTimer.schedule(obstacleTimerTask,delay,period);
+        timer.schedule(obstacleTimerTask,delay,period);
+        scoreTimerTask = new ScoreTimer();
+        timer.schedule(scoreTimerTask, delay, 1000);
+
     }
     static void startJumpTimerTask(long delay){
         jumpTimerTask = new PlayerJumpTimer();
@@ -113,12 +117,13 @@ public class Board {
     }
     static void stopTimerTasks(){
         obstacleTimerTask.cancel();
+        scoreTimerTask.cancel();
         if(jumpTimerTask != null) {
             jumpTimerTask.cancel();
         }
     }
     static void closeTimers(){
-        obstacleTimer.cancel();
+        timer.cancel();
         jumpTimer.cancel();
     }
 

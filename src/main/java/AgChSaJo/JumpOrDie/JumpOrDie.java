@@ -14,7 +14,7 @@ public class JumpOrDie implements IGame {
     public void playAgain(){
         ObstacleManager.setUp();
         Board.activePlayer = new Player();
-        Board.startObstacleTimerTask(1000);
+        Board.startTimerTasks(1000);
         Board.resetJumpingVariables();
         Board.resetScore();
         log.info("Start new Game");
@@ -24,7 +24,7 @@ public class JumpOrDie implements IGame {
      * game will be continued after short delay
      */
     public void resumeGame(){
-        Board.startObstacleTimerTask(5000);
+        Board.startTimerTasks(5000);
         Board.startJumpTimerTask(5000);
     }
 
