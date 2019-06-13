@@ -35,9 +35,6 @@ public class App extends Application {
         //scoreController.setUp();
         ScoreList.readScoreList();
 
-        TableColumn<Player, String> nameColumn = new TableColumn<>("Nickname");
-        //nameColumn.setCellFactory(new PropertyValueFactory<>("nickname"));
-
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
         window.setTitle("JumpOrDie");

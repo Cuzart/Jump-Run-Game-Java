@@ -10,7 +10,6 @@
       <VBox prefHeight="200.0" prefWidth="100.0" />
       <TableView fx:id="table" layoutX="200.0" layoutY="38.0" prefHeight="500.0" prefWidth="400.0">
         <columns>
-          <TableColumn fx:id="Ranking" prefWidth="80.0" text="Ranking" />
             <TableColumn fx:id="Nickname" prefWidth="160.0" text="Nickname" />
           <TableColumn fx:id="Score" prefWidth="160.0" text="Score" />
         </columns>
