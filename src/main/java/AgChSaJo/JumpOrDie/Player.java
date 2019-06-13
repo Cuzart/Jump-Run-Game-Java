@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * This class defines every Player with a nickname, a final score, a height and width
- * and a Y and X-Coordinate to show his position int the game.
+ * and a Y and X-Coordinate to show his position in the game.
  */
 public class Player implements IPlayer, Comparable<Player> {
 

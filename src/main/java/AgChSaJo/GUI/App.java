@@ -1,6 +1,7 @@
 package AgChSaJo.GUI;
 
 import AgChSaJo.JumpOrDie.Player;
+import AgChSaJo.ScoreList.ScoreList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -32,6 +33,7 @@ public class App extends Application {
         menuController.setUp();
         gameController.setUp();
         //scoreController.setUp();
+        ScoreList.readScoreList();
 
         TableColumn<Player, String> nameColumn = new TableColumn<>("Nickname");
         //nameColumn.setCellFactory(new PropertyValueFactory<>("nickname"));
@@ -50,7 +52,7 @@ public class App extends Application {
         gameController.jumpOrDie.closeGame();
         gameController.stopAnimation();
         log.info("Close request - saveScoreList");
-        //saveScorelist
+        ScoreList.saveScoreList();
         System.exit(0);
     }
 
