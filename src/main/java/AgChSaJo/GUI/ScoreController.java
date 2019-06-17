@@ -39,7 +39,7 @@ public class ScoreController {
         TableColumn<Player, Integer> score = new TableColumn<>("Score");
         score.setMinWidth(200);
         score.setCellValueFactory(new PropertyValueFactory<>("finalScore"));
-        table.setItems(getData());
+
         table.getColumns().add(nickname);
         table.getColumns().add(score);
 
@@ -52,17 +52,20 @@ public class ScoreController {
 
     }
 
+    @FXML
+    public void backToMenu(){
+        App.window.setScene(App.menu);
+    }
+
+    public void updateScorelist(){
+        table.setItems(getData());
+    }
+
     // Creating Observable Array List
     private ObservableList<Player> getData(){
         ArrayList<Player> scoreTest = ScoreList.getScoreList();
         ObservableList<Player> data = FXCollections.observableArrayList(scoreTest);
         return data;
     }
-    // StackOverflow
-     //Nickname.setCellValueFactory(col ->new SimpleStringProperty(col.getValue().getNickname());
-     //Score.setCellValueFactory(col ->new SimpleIntegerProperty(col.getValue().getFinalScore());
-
-    // Adding data to the Observable List and setting Column Factories
-
 
 }
