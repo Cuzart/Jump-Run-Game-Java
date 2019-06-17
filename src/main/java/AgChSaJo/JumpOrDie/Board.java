@@ -14,8 +14,10 @@ public class Board {
 
     private static Logger log = LogManager.getLogger(Board.class);
 
-    private static Timer timer = new Timer();
+    private static Timer obstacleTimer = new Timer();
     private static Timer jumpTimer = new Timer();
+    //2nd Timer only for Thread Task
+    private static Timer scoreTimer = new Timer();
     private static ObstacleTimer obstacleTimerTask;
     private static PlayerJumpTimer jumpTimerTask;
     private static ScoreTimer scoreTimerTask;
@@ -126,9 +128,9 @@ public class Board {
      */
     static void startTimerTasks(long delay){
         obstacleTimerTask = new ObstacleTimer();
-        timer.schedule(obstacleTimerTask,delay,period);
+        obstacleTimer.schedule(obstacleTimerTask,delay,period);
         scoreTimerTask = new ScoreTimer();
-        timer.schedule(scoreTimerTask, delay, 1000);
+        scoreTimer.schedule(scoreTimerTask, delay, 1000);
 
     }
 
@@ -158,8 +160,9 @@ public class Board {
      * Cancels the Timers.
      */
     static void closeTimers(){
-        timer.cancel();
+        obstacleTimer.cancel();
         jumpTimer.cancel();
+        scoreTimer.cancel();
     }
 
     /**
