@@ -72,6 +72,7 @@ public class GameController {
         pauseControl = (VBox)gameLayout.lookup("#pauseControl");
         gameOverControl = (VBox)gameLayout.lookup("#gameOverControl");
         scoreView = (Label) gameLayout.lookup("#scoreView");
+        nickname = (TextField) gameLayout.lookup("#nickname");
         canvas = (Canvas) gameLayout.lookup("#canvas");
         gc = canvas.getGraphicsContext2D();
         gc.drawImage(background,0,0);
@@ -125,7 +126,7 @@ public class GameController {
 
         double x1 = ob1.getX();
         double y1 = canvas.getHeight()-ob1.getHeight()-ob1.getY()-distanceFromBottom;
-        gc.setFill(Color.ORANGE);
+        gc.setFill(Color.GREEN);
         gc.fillRect(x1,y1, ob1.getWidth(), ob1.getHeight());
 
         if (ob2 !=null){
@@ -155,6 +156,7 @@ public class GameController {
     private void showGameOverControl(boolean b){
         gameOverControl.setVisible(b);
         gameOverControl.setDisable(!b);
+        nickname.clear();
     }
     public void gameOver(){
         showGameOverControl(true);
@@ -163,7 +165,7 @@ public class GameController {
 
     private String getNickname(){
         String name = nickname.getText();
-        if (name.equals("")){
+        if (name.equals("")||name.equals(" ")){
             return "Unknown";
         }else{
             return name;
