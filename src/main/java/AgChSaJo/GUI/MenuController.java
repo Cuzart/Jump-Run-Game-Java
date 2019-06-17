@@ -20,8 +20,8 @@ public class MenuController {
     }
     @FXML
     public void showScorelist(ActionEvent event){
+        App.scoreController.updateScorelist();
         App.window.setScene((App.scoreList));
-        System.out.println(ScoreList.getScoreList());
     }
     @FXML
     public void exitGame (ActionEvent event){

@@ -15,7 +15,7 @@ public class App extends Application {
     static Scene menu, jumpOrDie, scoreList;
     private static MenuController menuController = new MenuController();
     public static GameController gameController = new GameController();
-    private static ScoreController scoreController = new ScoreController();
+    static ScoreController scoreController = new ScoreController();
 
 
 
