@@ -1,50 +1,68 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.JumpOrDie.JumpOrDie;
-import AgChSaJo.JumpOrDie.Player;
-import javafx.beans.property.StringProperty;
+import AgChSaJo.JumpOrDie.*;
+import AgChSaJo.ScoreList.ScoreList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
 
-public class ScoreController implements Initializable {
+public class ScoreController {
 
     @FXML
-    private TableView<Player> table;
-    @FXML
-    private TableColumn<Player, String> Nickname;
-    @FXML
-    private TableColumn<Player, Integer> Score;
-
-    // Creating Observable Array List
-    private ObservableList<Player> data = FXCollections.observableArrayList();
+    public VBox container;
 
     // Set up the Scene
     private Parent scoreList;
 
+    private TableView<Player> table = new TableView<>();
+
+
     void setUp() throws Exception{
+        // Load Scene
         scoreList = FXMLLoader.load(getClass().getResource("/fxml/Score.fxml"));
         App.scoreList = new Scene(scoreList,800,500);
+
+
+        // Nickname Column set up
+        TableColumn<Player, String> nickname = new TableColumn<>("Nickname");
+        nickname.setMinWidth(200);
+        nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        // Score Column set up
+        TableColumn<Player, Integer> score = new TableColumn<>("Score");
+        score.setMinWidth(200);
+        score.setCellValueFactory(new PropertyValueFactory<>("finalScore"));
+        table.setItems(getData());
+        table.getColumns().add(nickname);
+        table.getColumns().add(score);
+
+
+        // get Children
+        container = (VBox) scoreList.lookup("#container");
+        container.getChildren().addAll(table);
+
+
+
     }
 
+    // Creating Observable Array List
+    private ObservableList<Player> getData(){
+        ArrayList<Player> scoreTest = ScoreList.getScoreList();
+        ObservableList<Player> data = FXCollections.observableArrayList(scoreTest);
+        return data;
+    }
+    // StackOverflow
+     //Nickname.setCellValueFactory(col ->new SimpleStringProperty(col.getValue().getNickname());
+     //Score.setCellValueFactory(col ->new SimpleIntegerProperty(col.getValue().getFinalScore());
 
     // Adding data to the Observable List and setting Column Factories
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        data.add(new Player("Chris", 11));
-        data.add(new Player("Agil", 12));
-        Nickname.setCellValueFactory(new PropertyValueFactory<Player, String>("nickname"));
-        Score.setCellValueFactory(new PropertyValueFactory<Player, Integer>("finaleScore"));
-        table.setItems(data);
-    }
+
+
 }

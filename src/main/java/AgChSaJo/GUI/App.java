@@ -1,11 +1,8 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.JumpOrDie.Player;
 import AgChSaJo.ScoreList.ScoreList;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,14 +23,15 @@ public class App extends Application {
         launch(args);
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
 
         menuController.setUp();
         gameController.setUp();
-        //scoreController.setUp();
         ScoreList.readScoreList();
+        scoreController.setUp();
 
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
