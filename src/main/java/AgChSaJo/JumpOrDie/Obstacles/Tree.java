@@ -4,6 +4,10 @@ public class Tree extends Obstacle {
 
     public Tree (){
         setHeight(100);
-        setWidth(30);
+        setWidth(34);
+    }
+    @Override
+    public String toString() {
+        return "Tree";
     }
 }

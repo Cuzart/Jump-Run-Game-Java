@@ -35,10 +35,13 @@ public class ScoreController {
         TableColumn<Player, String> nickname = new TableColumn<>("Nickname");
         nickname.setMinWidth(200);
         nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        nickname.setSortable(false);
+
         // Score Column set up
         TableColumn<Player, Integer> score = new TableColumn<>("Score");
         score.setMinWidth(200);
         score.setCellValueFactory(new PropertyValueFactory<>("finalScore"));
+        score.setSortable(false);
 
         table.getColumns().add(nickname);
         table.getColumns().add(score);

@@ -24,35 +24,35 @@ public class ObstacleManager {
 
     /**
      *  This method generates an exact Kind of an Obstacle by choosing a random number.
-     *  If something is not working a Fence is created(default case).
+     *  If something is not working a Rock is created(default case).
      *
-     * @return new Fence(), new Tree(), new Hedge(), new BigHedge(), new Butterfly(), new Eagle()
+     * @return new Rock(), new Tree(), new Shrub(), new CactusRow(), new Mosquito(), new Seagull()
      */
     private static Obstacle generate(){
         Random r = new Random();
         int kind = r.nextInt(6);
         switch (kind){
             case 0:
-                log.debug("new Fence generated");
-                return new Fence();
+                log.debug("new Rock generated");
+                return new Rock();
             case 1:
                 log.debug("new Tree generated");
                 return new Tree();
             case 2:
-                log.debug("new Hedge generated");
-                return new Hedge();
+                log.debug("new Shrub generated");
+                return new Shrub();
             case 3:
-                log.debug("new BigHedge generated");
-                return new BigHedge();
+                log.debug("new CactusRow generated");
+                return new CactusRow();
             case 4:
-                log.debug("new Butterfly generated");
-                return new Butterfly();
+                log.debug("new Mosquito generated");
+                return new Mosquito();
             case 5:
-                log.debug("new Eagle generated");
-                return new Eagle();
+                log.debug("new Seagull generated");
+                return new Seagull();
             default:
-                log.warn("Should not happen - Fence generated");
-                return new Fence();
+                log.warn("Should not happen - Rock generated");
+                return new Rock();
         }
     }
 

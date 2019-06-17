@@ -1,6 +1,6 @@
 package AgChSaJo.JumpOrDie;
 
-import AgChSaJo.JumpOrDie.Obstacles.Fence;
+import AgChSaJo.JumpOrDie.Obstacles.Rock;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public class BoardTest {
         /*Board.activePlayer = new Player();
          Board.activePlayer.jump();*/
         setUpTest();
-        Obstacle testObstacle = new Fence();
+        Obstacle testObstacle = new Rock();
         testObstacle.setX(100);
         testObstacle.setY(0);
 

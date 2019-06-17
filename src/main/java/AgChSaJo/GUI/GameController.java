@@ -34,7 +34,14 @@ public class GameController {
 
     private GraphicsContext gc;
     private Image background = new Image(getClass().getResourceAsStream("/images/CanvasBackground.png"));
+
     private Image player = new Image(getClass().getResourceAsStream("/images/kangaroo.png"));
+    private Image cactusRow = new Image(getClass().getResourceAsStream("/images/Obstacles/cactusRow.png"));
+    private Image mosquito = new Image(getClass().getResourceAsStream("/images/Obstacles/mosquito.png"));
+    private Image rock = new Image(getClass().getResourceAsStream("/images/Obstacles/rock.png"));
+    private Image seagull = new Image(getClass().getResourceAsStream("/images/Obstacles/seagull.png"));
+    private Image shrub = new Image(getClass().getResourceAsStream("/images/Obstacles/shrub.png"));
+    private Image tree = new Image(getClass().getResourceAsStream("/images/Obstacles/tree.png"));
     private double distanceFromBottom = 25;
 
 
@@ -122,22 +129,37 @@ public class GameController {
     private void animateObstacles(){
         Obstacle ob1 = ObstacleManager.obstacle1;
         Obstacle ob2 = ObstacleManager.obstacle2;
+        Image ob1Image, ob2Image;
+
 
 
         double x1 = ob1.getX();
         double y1 = canvas.getHeight()-ob1.getHeight()-ob1.getY()-distanceFromBottom;
-        gc.setFill(Color.GREEN);
-        gc.fillRect(x1,y1, ob1.getWidth(), ob1.getHeight());
+        //gc.setFill(Color.GREEN);
+        //gc.fillRect(x1,y1, ob1.getWidth(), ob1.getHeight());
+        gc.drawImage(findObstacleImage(ob1),x1,y1);
 
         if (ob2 !=null){
             double x2 = ob2.getX();
             double y2 = canvas.getHeight()-ob2.getHeight()-ob2.getY()-distanceFromBottom;
-            gc.setFill(Color.OLIVE);
-            gc.fillRect(x2,y2, ob2.getWidth(), ob2.getHeight());
+            //gc.setFill(Color.OLIVE);
+            //gc.fillRect(x2,y2, ob2.getWidth(), ob2.getHeight());
+            gc.drawImage(findObstacleImage(ob2),x2,y2);
         }
 
 
 
+    }
+    private Image findObstacleImage(Obstacle obstacle){
+        switch (obstacle.toString()){
+            case "CactusRow": return cactusRow;
+            case "Mosquito": return mosquito;
+            case "Rock": return rock;
+            case "Seagull": return seagull;
+            case "Shrub": return shrub;
+            case "Tree": return tree;
+            default: return tree;
+        }
     }
     void updateScoreView(){
         scoreView.setText(""+Board.getScore());
