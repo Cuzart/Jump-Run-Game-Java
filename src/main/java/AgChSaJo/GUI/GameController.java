@@ -3,6 +3,7 @@ package AgChSaJo.GUI;
 import AgChSaJo.IGame;
 import AgChSaJo.JumpOrDie.*;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
+import AgChSaJo.ScoreList.IllegalScoreExeption;
 import AgChSaJo.ScoreList.ScoreList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class GameController {
+    private static Logger log = LogManager.getLogger(GameController.class);
 
 
     IGame jumpOrDie = new JumpOrDie();
@@ -69,7 +72,12 @@ public class GameController {
     @FXML
     public void saveBackToMenu(){
         Board.activePlayer.setNickname(getNickname());
-        ScoreList.addNewScore(Board.activePlayer);
+        try{
+        ScoreList.addNewScore(Board.activePlayer);}
+        catch(IllegalScoreExeption e){
+            log.info("Score not saved");
+        }
+
         showGameOverControl(false);
         App.window.setScene(App.menu);
     }
@@ -194,8 +202,8 @@ public class GameController {
 
     private String getNickname(){
         String name = nickname.getText();
-        if (name.equals("")||name.equals(" ")){
-            return "Unknown";
+        if (name.equals(" ")||name.equals("  ")){
+            return "";
         }else{
             return name;
         }

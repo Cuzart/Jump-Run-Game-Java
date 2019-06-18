@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 
 
-public class ScoreList {
+public class ScoreList{
 
     private static ArrayList<Player> scoreList;
     private static Logger log = LogManager.getLogger(ScoreList.class);
@@ -45,7 +45,7 @@ public class ScoreList {
     }
 
     public static void addNewScore(Player player) throws IllegalScoreExeption{
-        if (player.getFinalScore()<0 || player.getNickname()== null){
+        if (player.getFinalScore()<0 || player.getNickname().equals("")){
             throw new IllegalScoreExeption();
         }else{
             scoreList.add(player);
