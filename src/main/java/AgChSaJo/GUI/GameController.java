@@ -64,7 +64,11 @@ public class GameController {
     @FXML
     public void savePlayAgain(){
         Board.activePlayer.setNickname(getNickname());
-        ScoreList.addNewScore(Board.activePlayer);
+        try{
+        ScoreList.addNewScore(Board.activePlayer);}
+        catch(IllegalScoreExeption e){
+            log.info("Score not saved");
+        }
         showGameOverControl(false);
         jumpOrDie.playAgain();
         startAnimation();
