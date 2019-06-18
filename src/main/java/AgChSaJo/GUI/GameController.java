@@ -118,34 +118,39 @@ public class GameController {
         animateObstacles();
     }
     private void animatePlayer(){
-        gc.setFill(Color.BLACK);
+
         double x = Board.activePlayer.getX();
         double y = canvas.getHeight()-Board.activePlayer.getHeight()-Board.activePlayer.getY()-distanceFromBottom;
-
-        /*double width = Board.activePlayer.getWidth();
-        double height = Board.activePlayer.getHeight();
-        gc.fillRect(x,y,width,height);*/
         gc.drawImage(player, x-39,y);
+
+        //show hitBox
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(3);
+        double width = Board.activePlayer.getWidth();
+        double height = Board.activePlayer.getHeight();
+        gc.strokeRect(x,y,width,height);
     }
     private void animateObstacles(){
         Obstacle ob1 = ObstacleManager.obstacle1;
         Obstacle ob2 = ObstacleManager.obstacle2;
-        Image ob1Image, ob2Image;
-
-
 
         double x1 = ob1.getX();
         double y1 = canvas.getHeight()-ob1.getHeight()-ob1.getY()-distanceFromBottom;
-        //gc.setFill(Color.GREEN);
-        //gc.fillRect(x1,y1, ob1.getWidth(), ob1.getHeight());
         gc.drawImage(findObstacleImage(ob1),x1,y1);
+
+        //show hitBox
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(3);
+        gc.strokeRect(x1,y1, ob1.getWidth(), ob1.getHeight());
 
         if (ob2 !=null){
             double x2 = ob2.getX();
             double y2 = canvas.getHeight()-ob2.getHeight()-ob2.getY()-distanceFromBottom;
-            //gc.setFill(Color.OLIVE);
-            //gc.fillRect(x2,y2, ob2.getWidth(), ob2.getHeight());
             gc.drawImage(findObstacleImage(ob2),x2,y2);
+
+            //show hitBox
+            gc.strokeRect(x2,y2, ob2.getWidth(), ob2.getHeight());
+
         }
 
 
