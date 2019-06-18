@@ -30,7 +30,7 @@ public class ObstacleManager {
      */
     private static Obstacle generate(){
         Random r = new Random();
-        int kind = r.nextInt(6);
+        int kind = r.nextInt(7);
         switch (kind){
             case 0:
                 log.debug("new Rock generated");
@@ -50,6 +50,9 @@ public class ObstacleManager {
             case 5:
                 log.debug("new Seagull generated");
                 return new Seagull();
+            case 6:
+                log.debug("new Grass generated");
+                return new Grass();
             default:
                 log.warn("Should not happen - Rock generated");
                 return new Rock();

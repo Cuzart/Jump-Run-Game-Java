@@ -42,6 +42,7 @@ public class GameController {
     private Image seagull = new Image(getClass().getResourceAsStream("/images/Obstacles/seagull.png"));
     private Image shrub = new Image(getClass().getResourceAsStream("/images/Obstacles/shrub.png"));
     private Image tree = new Image(getClass().getResourceAsStream("/images/Obstacles/tree.png"));
+    private Image gras = new Image(getClass().getResourceAsStream("/images/Obstacles/grass.png"));
     private double distanceFromBottom = 25;
 
 
@@ -158,6 +159,7 @@ public class GameController {
             case "Seagull": return seagull;
             case "Shrub": return shrub;
             case "Tree": return tree;
+            case "Grass": return gras;
             default: return tree;
         }
     }
