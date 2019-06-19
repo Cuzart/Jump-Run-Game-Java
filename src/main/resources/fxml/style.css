@@ -1,4 +1,7 @@
 
+.button {
+    -fx-background-radius: 20px;
+}
 #bg {
     -fx-background-image: url("../images/backgroundBlurred.png");
     -fx-background-position: center center;
@@ -9,21 +12,5 @@
     -fx-background-image: url("../images/background.png");
     -fx-background-position: center center;
     -fx-background-size: 800 500;
+}
 
-}
-/*
-.pane {
-    -fx-background-color: black;
-    -fx-opacity: 0.05;
-
-}
-*/
-.button {
-    -fx-background-radius: 20px;
-}
-/*
-.iv {
-    -fx-background-image: url("/images/icon.png");
-    -fx-background-position: center center;
-}
- */

@@ -5,14 +5,26 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="gameBG" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.GameController">
-   <Label fx:id="scoreView" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="49.0" prefWidth="100.0" text="Score">
+   <ImageView blendMode="OVERLAY" fitHeight="40.0" fitWidth="40.0" layoutX="750.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/down-IV.png" />
+      </image>
+   </ImageView>
+   <ImageView blendMode="OVERLAY" fitHeight="40.0" fitWidth="40.0" layoutX="750.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/up-IV.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="scoreView" alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="350.0" layoutY="20.0" prefWidth="100.0" text="Score" textFill="#1a56ce">
       <font>
-         <Font name="Impact" size="30.0" />
+         <Font name="Impact" size="40.0" />
       </font>
    </Label>
    <Canvas fx:id="canvas" height="350.0" layoutY="130.0" width="800.0" />
@@ -28,13 +40,18 @@
          </VBox.margin>
       </Button>
    </VBox>
-   <VBox fx:id="gameOverControl" alignment="CENTER" disable="true" layoutX="250.0" layoutY="130.0" prefHeight="200.0" prefWidth="300.0" spacing="10.0" visible="false">
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="0.0" prefWidth="300.0" text="Game Over - Save your Score!" textAlignment="CENTER">
+   <VBox fx:id="gameOverControl" alignment="CENTER" disable="true" layoutX="250.0" layoutY="100.0" prefHeight="300.0" prefWidth="300.0" spacing="10.0" visible="false">
+      <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" prefHeight="50.0" prefWidth="300.0" text="GAME OVER!" textAlignment="CENTER" textFill="#1a56ce">
          <font>
-            <Font name="Forte" size="20.0" />
+            <Font name="Impact" size="50.0" />
          </font>
       </Label>
-      <TextField fx:id="nickname" alignment="CENTER" prefHeight="35.0" promptText="whoami" />
+      <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" prefHeight="30.0" prefWidth="300.0" text="type name for saving your score" textAlignment="CENTER" textFill="#1a56ce">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nickname" alignment="CENTER" prefHeight="40.0" prefWidth="300.0" promptText="nickname" />
       <Button mnemonicParsing="false" onAction="#savePlayAgain" prefHeight="40.0" prefWidth="300.0" text="Play Again" />
       <Button mnemonicParsing="false" onAction="#saveBackToMenu" prefHeight="40.0" prefWidth="300.0" text="Back to Menu" />
    </VBox>

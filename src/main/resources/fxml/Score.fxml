@@ -15,16 +15,13 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></VBox>
-      <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="320.0" layoutY="20.0" opacity="0.75" text="Scorelist" textAlignment="CENTER" textFill="#1953d0">
+      <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="316.0" layoutY="20.0" text="SCORELIST" textAlignment="CENTER" textFill="#1a56ce">
          <font>
-            <Font name="Bebas Neue Regular" size="50.0" />
+            <Font name="Impact" size="40.0" />
          </font>
          <effect>
             <Glow />
          </effect>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
       </Label>
    </children>
 </Pane>
