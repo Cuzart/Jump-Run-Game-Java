@@ -47,6 +47,7 @@ public class GameController {
     private Image tree = new Image(getClass().getResourceAsStream("/images/Obstacles/tree.png"));
     private Image gras = new Image(getClass().getResourceAsStream("/images/Obstacles/grass.png"));
     private double distanceFromBottom = 25;
+    private boolean showHitbox = false;
 
 
     @FXML
@@ -136,11 +137,13 @@ public class GameController {
         gc.drawImage(player, x-39,y);
 
         //show hitBox
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(3);
-        double width = Board.activePlayer.getWidth();
-        double height = Board.activePlayer.getHeight();
-        gc.strokeRect(x,y,width,height);
+        if(showHitbox) {
+            gc.setStroke(Color.BLACK);
+            gc.setLineWidth(2);
+            double width = Board.activePlayer.getWidth();
+            double height = Board.activePlayer.getHeight();
+            gc.strokeRect(x, y, width, height);
+        }
     }
     private void animateObstacles(){
         Obstacle ob1 = ObstacleManager.obstacle1;
@@ -151,17 +154,20 @@ public class GameController {
         gc.drawImage(findObstacleImage(ob1),x1,y1);
 
         //show hitBox
-        gc.setStroke(Color.BLACK);
-        gc.setLineWidth(3);
-        gc.strokeRect(x1,y1, ob1.getWidth(), ob1.getHeight());
-
+        if (showHitbox) {
+            gc.setStroke(Color.BLACK);
+            gc.setLineWidth(2);
+            gc.strokeRect(x1, y1, ob1.getWidth(), ob1.getHeight());
+        }
         if (ob2 !=null){
             double x2 = ob2.getX();
             double y2 = canvas.getHeight()-ob2.getHeight()-ob2.getY()-distanceFromBottom;
             gc.drawImage(findObstacleImage(ob2),x2,y2);
 
             //show hitBox
-            gc.strokeRect(x2,y2, ob2.getWidth(), ob2.getHeight());
+            if (showHitbox) {
+                gc.strokeRect(x2, y2, ob2.getWidth(), ob2.getHeight());
+            }
 
         }
 
@@ -211,6 +217,11 @@ public class GameController {
         }else{
             return name;
         }
+    }
+
+    void setShowHitbox(boolean b){
+        showHitbox = b;
+        log.debug("showHitbox set: "+ b);
     }
 
 }
