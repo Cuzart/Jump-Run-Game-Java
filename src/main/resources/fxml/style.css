@@ -2,7 +2,7 @@
 .button {
     -fx-background-radius: 20px;
 }
-#bg {
+#blurBG {
     -fx-background-image: url("../images/backgroundBlurred.png");
     -fx-background-position: center center;
     -fx-background-size: 800 500;

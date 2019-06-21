@@ -44,7 +44,7 @@
             </Button>
          </children>
       </VBox>
-      <VBox id="bg" fx:id="instructions" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" visible="false">
+      <VBox id="bg" fx:id="instructions" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css">
          <children>
             <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="316.0" layoutY="20.0" text="INSTRUCTIONS" textAlignment="CENTER" textFill="#1a56ce">
                <font>
@@ -54,12 +54,20 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </Label>
-            <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="350.0" layoutY="20.0" prefWidth="100.0" text="JUMP" textFill="#1a56ce">
+            <Label alignment="CENTER" blendMode="EXCLUSION" contentDisplay="CENTER" layoutX="350.0" layoutY="20.0" prefHeight="36.0" prefWidth="700.0" text="JUMP OR DUCK TO AVOID THE OBSTACLES OR YOU WILL DIE" textFill="#1a56ce">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>
                <padding>
-                  <Insets bottom="5.0" top="50.0" />
+                  <Insets bottom="5.0" top="10.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="350.0" layoutY="20.0" prefHeight="36.0" prefWidth="100.0" text="JUMP" textFill="#1a56ce">
+               <font>
+                  <Font name="Impact" size="20.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="25.0" />
                </padding>
             </Label>
             <ImageView blendMode="SOFT_LIGHT" fitHeight="40.0" fitWidth="40.0" layoutX="750.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
@@ -91,7 +99,7 @@
                   <Insets bottom="5.0" top="25.0" />
                </padding>
             </Label>
-            <CheckBox fx:id="hitbox" mnemonicParsing="false" onAction="#checkHitboxStatus" text="SHOW HITBOXES">
+            <CheckBox fx:id="hitbox" blendMode="MULTIPLY" mnemonicParsing="false" onAction="#checkHitboxStatus" text="ON" textFill="#868686">
                <font>
                   <Font name="Impact" size="20.0" />
                </font>

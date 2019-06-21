@@ -37,7 +37,6 @@ public class App extends Application {
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
         window.setTitle("JumpOrDie");
-
         window.setScene(menu);
         window.show();
 

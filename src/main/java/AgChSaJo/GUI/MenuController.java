@@ -1,7 +1,5 @@
 package AgChSaJo.GUI;
 
-import AgChSaJo.ScoreList.ScoreList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +12,7 @@ public class MenuController {
 
 
     private Parent root;
+
     @FXML
     public VBox menu;
     @FXML
@@ -21,41 +20,40 @@ public class MenuController {
     @FXML
     public CheckBox hitbox;
 
-    @FXML
-    public void startGame (ActionEvent event){
+    // event handling
+    @FXML // starts the game animation
+    public void startGame (){
         App.window.setScene(App.jumpOrDie);
         App.gameController.jumpOrDie.playAgain();
         App.gameController.startAnimation();
     }
-    @FXML
-    public void showScorelist(ActionEvent event){
+    @FXML // opens updated score list
+    public void showScorelist(){
         App.scoreController.updateScorelist();
         App.window.setScene((App.scoreList));
     }
-    @FXML
-    public void instructions (ActionEvent event){
+    @FXML // opens instructions menu
+    public void instructions (){
         showInstructions(true);
     }
-    @FXML
-    public void instructionsBack (ActionEvent event){
-        showInstructions(false);
-    }
-    @FXML
+    @FXML // go back to menu
+    public void instructionsBack () { showInstructions(false); }
+    @FXML // checks whether hit boxes are activated or not
     public void checkHitboxStatus(){
         App.gameController.setShowHitbox(hitbox.isSelected());
     }
-    @FXML
-    public void exitGame (ActionEvent event){
+    @FXML // exits the game
+    public void exitGame (){
         App.closeApp();
     }
 
-
+    // set up scene and FXML
     void setUp() throws Exception{
         root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
-        hitbox = (CheckBox) root.lookup("#hitbox");
         App.menu = new Scene(root,800,500);
     }
 
+    // changes visibility of VBox for menu and instructions
     private void showInstructions (boolean b){
         instructions.setVisible(b);
         instructions.setDisable(!b);
