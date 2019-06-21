@@ -1,5 +1,6 @@
 package AgChSaJo.JumpOrDie.Obstacles;
-/*
+
+/**
  * An abstract class that defines an Obstacle with a height,
  * width and a general X and Y-Coordinate to start from.
  */
@@ -9,8 +10,7 @@ public abstract class Obstacle {
 
     /**
      * This method gets an Obstacle to move by defining
-     * a new X-Coordinate Position depending on a given speed.
-     *
+     * a new X-Coordinate position depending on a given speed.
      */
     public void move(double speed){
         setX(getX()-speed);
@@ -29,10 +29,10 @@ public abstract class Obstacle {
         return y;
     }
 
-    public void setHeight(double height) {
+    void setHeight(double height) {
         this.height = height;
     }
-    public void setWidth(double width) {
+    void setWidth(double width) {
         this.width = width;
     }
     public void setX(double x) {
@@ -41,4 +41,5 @@ public abstract class Obstacle {
     public void setY(double y) {
         this.y = y;
     }
+
 }

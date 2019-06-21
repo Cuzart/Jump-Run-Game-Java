@@ -9,6 +9,7 @@ public class ScoreTimer extends TimerTask {
 
     /**
      * This method adds one point to the score while the ScoreTimer is running.
+     * It gets called every second
      */
     @Override
     public void run() {

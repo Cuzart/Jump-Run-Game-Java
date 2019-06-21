@@ -15,23 +15,20 @@ import javafx.scene.layout.VBox;
 
 public class ScoreController {
 
-
     @FXML
     public VBox container;
-
-    private Parent scoreList;
     private TableView<Player> table = new TableView<>();
 
 
     /**
      * sets the scene for the score list, creates the table columns and the binding to their content
      * adds the columns to the table and the container
-     * @throws Exception
+     * @throws Exception in case something goes wrong with the FXML file
      */
     void setUp() throws Exception{
 
-        scoreList = FXMLLoader.load(getClass().getResource("/fxml/Score.fxml"));
-        App.scoreList = new Scene(scoreList,800,500);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Score.fxml"));
+        App.scoreList = new Scene(root,800,500);
 
         // Nickname Column set up
         TableColumn<Player, String> nickname = new TableColumn<>("Nickname");
@@ -50,9 +47,8 @@ public class ScoreController {
         table.getColumns().add(score);
 
         // add children to container
-        container = (VBox) scoreList.lookup("#container");
+        container = (VBox) root.lookup("#container");
         container.getChildren().addAll(table);
-
     }
 
     /**
@@ -66,7 +62,7 @@ public class ScoreController {
     /**
      * updates the data in the table
      */
-    public void updateScorelist(){
+    void updateScorelist(){
         table.setItems(getData());
     }
 

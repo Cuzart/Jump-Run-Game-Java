@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Random;
 
+
 /**
  * The ObstacleManager manages the life and behaviour of obstacles.
  * It creates obstacles, defines their speed, counts obstacles that
@@ -19,14 +20,12 @@ public class ObstacleManager {
     public static Obstacle obstacle1, obstacle2;
     private static double obstacleSpeed;
     private static int obstacleCount;
-
     private static final int obstacleEnd = -50;
 
     /**
-     *  This method generates an exact Kind of an Obstacle by choosing a random number.
-     *  If something is not working a Rock is created(default case).
+     *  Factory for Obstacles
      *
-     * @return new Rock(), new Tree(), new Shrub(), new CactusRow(), new Mosquito(), new Seagull()
+     * @return a random generated obstacle
      */
     private static Obstacle generate(){
         Random r = new Random();
@@ -68,15 +67,17 @@ public class ObstacleManager {
      */
     static void manageObstacleLifetime(){
 
+        //watches obstacle 1
         if (obstacle1.getX() <= obstacleEnd){
             obstacle1 = generate();
             obstacleCount++;
             Board.addToScore(10);
         }
 
+        //watches obstacle 2
         if(obstacle2 == null){
-            if(obstacleCount >= 5){
-                if (obstacle1.getX() <=400){
+            if(obstacleCount >= 5){                             //after 5 obstacles a second obstacle gets added
+                if (obstacle1.getX() <=400){                    //to increase the difficulty
                     obstacle2 = generate();
                     log.info("second Obstacle on screen");
                 }
@@ -87,6 +88,7 @@ public class ObstacleManager {
                 Board.addToScore(10);
         }
 
+        //speed increase after a certain amount of obstacles to increase the difficulty
         switch (obstacleCount){
             case 5:
                 obstacleSpeed = 7.5;
@@ -112,9 +114,10 @@ public class ObstacleManager {
     }
 
     /**
-     * This method returns that obstacle that is closer to the player.
+     * This method returns the obstacle that is closer to the player
+     * to check a possible collision
      *
-     * @return obstacle1, obstacle2
+     * @return closer obstacle
      */
     static Obstacle getCloserObstacle(){
         if (obstacle2 ==null ){
@@ -138,7 +141,7 @@ public class ObstacleManager {
     }
 
     /**
-     * This method is the starting point of the life of an obstacle.
+     * If the game starts again this methods resets everything
      * The obstacles have their beginning speed and the counter is still on zero.
      */
     static void setUp(){
@@ -147,6 +150,5 @@ public class ObstacleManager {
         obstacleSpeed = 7;
         obstacleCount = 0;
     }
-
 
 }

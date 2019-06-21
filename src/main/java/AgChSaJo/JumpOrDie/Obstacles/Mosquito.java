@@ -7,8 +7,10 @@ public class Mosquito extends Obstacle{
         setWidth(50);
         setY(70);
     }
+
     @Override
     public String toString() {
         return "Mosquito";
     }
+
 }

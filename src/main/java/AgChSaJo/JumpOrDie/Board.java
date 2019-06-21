@@ -4,8 +4,8 @@ import AgChSaJo.GUI.App;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Timer;
+
 
 /**
  * The class Board holds the game logic as it is the framework of the game.
@@ -16,7 +16,7 @@ public class Board {
 
     private static Timer obstacleTimer = new Timer();
     private static Timer jumpTimer = new Timer();
-    //2nd Timer only for Thread Task
+    //additional scoreTimer only for Thread Task
     private static Timer scoreTimer = new Timer();
     private static ObstacleTimer obstacleTimerTask;
     private static PlayerJumpTimer jumpTimerTask;
@@ -65,9 +65,12 @@ public class Board {
     }
 
     /**
-     * Saves in a variable whether a player is jumping or not.-
+     * jumping is a variable which knows whether the player is jumping or not
+     * That is important because it isn't possible to start jumping again until
+     * the player is back on the ground (jumping = false)
+     * This method is for setting this value
      *
-     * @param v a variable true or false in case a player jumps or not
+     * @param v sets jumping to its value
      */
     private static void setJumping(boolean v){
         jumping = v;
@@ -75,7 +78,7 @@ public class Board {
     }
 
     /**
-     * Only if a player is not currently jumping he is able to jump.
+     * In case the player is able to jump he starts jumping
      */
     public static void playerJump(){
         if (!jumping) {
@@ -88,6 +91,7 @@ public class Board {
     /**
      * Resets the jumping mechanism: the jumping variable is false again and the
      * jumpCounter is set to zero.
+     * This happens when player is back on the ground or the game got interrupted
      */
     static void resetJumpingVariables(){
         setJumping(false);
@@ -96,6 +100,7 @@ public class Board {
 
     /**
      * Saves in a variable whether a player is ducking or not.
+     * In case the player is not ducking he gets his normal height
      *
      * @param b true if a player is ducking.
      */
@@ -131,7 +136,6 @@ public class Board {
         obstacleTimer.schedule(obstacleTimerTask,delay,period);
         scoreTimerTask = new ScoreTimer();
         scoreTimer.schedule(scoreTimerTask, delay, 1000);
-
     }
 
     /**
@@ -147,6 +151,7 @@ public class Board {
 
     /**
      * Stops all Timer Tasks.
+     * In case the game gets paused or is over (gameOver)
      */
     static void stopTimerTasks(){
         obstacleTimerTask.cancel();
@@ -157,7 +162,7 @@ public class Board {
     }
 
     /**
-     * Cancels the Timers.
+     * Closes all timers properly for closing the game
      */
     static void closeTimers(){
         obstacleTimer.cancel();

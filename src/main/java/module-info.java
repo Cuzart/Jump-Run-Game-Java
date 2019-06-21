@@ -11,5 +11,6 @@ module AgChSaJo {
     opens AgChSaJo.JumpOrDie to com.fasterxml.jackson.databind;
     exports AgChSaJo.GUI;
     exports AgChSaJo.JumpOrDie;
+    exports AgChSaJo.JumpOrDie.Obstacles;
 }
 

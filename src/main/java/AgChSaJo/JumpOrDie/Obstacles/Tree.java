@@ -6,8 +6,10 @@ public class Tree extends Obstacle {
         setHeight(100);
         setWidth(34);
     }
+
     @Override
     public String toString() {
         return "Tree";
     }
+
 }

@@ -11,4 +11,5 @@ public class CactusRow extends Obstacle {
     public String toString() {
         return "CactusRow";
     }
+
 }

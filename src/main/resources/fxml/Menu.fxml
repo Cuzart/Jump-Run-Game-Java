@@ -44,7 +44,7 @@
             </Button>
          </children>
       </VBox>
-      <VBox id="bg" fx:id="instructions" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css">
+      <VBox id="bg" fx:id="instructions" alignment="TOP_CENTER" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" visible="false">
          <children>
             <Label alignment="CENTER" blendMode="ADD" contentDisplay="CENTER" layoutX="316.0" layoutY="20.0" text="INSTRUCTIONS" textAlignment="CENTER" textFill="#1a56ce">
                <font>

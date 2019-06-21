@@ -3,7 +3,7 @@ package AgChSaJo.GUI;
 import AgChSaJo.IGame;
 import AgChSaJo.JumpOrDie.*;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
-import AgChSaJo.ScoreList.IllegalScoreExeption;
+import AgChSaJo.ScoreList.IllegalScoreException;
 import AgChSaJo.ScoreList.ScoreList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,22 +22,19 @@ import org.apache.logging.log4j.Logger;
 
 
 public class GameController {
-    private static Logger log = LogManager.getLogger(GameController.class);
 
+    private static Logger log = LogManager.getLogger(GameController.class);
 
     IGame jumpOrDie = new JumpOrDie();
     private GameAnimationTimer animationTimer = new GameAnimationTimer();
-    private Parent gameLayout;
 
     public VBox pauseControl;
     public VBox gameOverControl;
     public TextField nickname;
     public Label scoreView;
     public Canvas canvas;
-
     private GraphicsContext gc;
     private Image background = new Image(getClass().getResourceAsStream("/images/CanvasBackground.png"));
-
     private Image player = new Image(getClass().getResourceAsStream("/images/kangaroo.png"));
     private Image cactusRow = new Image(getClass().getResourceAsStream("/images/Obstacles/cactusRow.png"));
     private Image mosquito = new Image(getClass().getResourceAsStream("/images/Obstacles/mosquito.png"));
@@ -48,7 +45,6 @@ public class GameController {
     private Image gras = new Image(getClass().getResourceAsStream("/images/Obstacles/grass.png"));
     private double distanceFromBottom = 25;
     private boolean showHitbox = false;
-
 
     @FXML
     public void backToMenu(){
@@ -66,8 +62,8 @@ public class GameController {
     public void savePlayAgain(){
         Board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(Board.activePlayer);}
-        catch(IllegalScoreExeption e){
+        ScoreList.addNewScore(Board.activePlayer);
+        }catch(IllegalScoreException e){
             log.info("Score not saved");
         }
         showGameOverControl(false);
@@ -78,16 +74,16 @@ public class GameController {
     public void saveBackToMenu(){
         Board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(Board.activePlayer);}
-        catch(IllegalScoreExeption e){
+        ScoreList.addNewScore(Board.activePlayer);
+        }catch(IllegalScoreException e){
             log.info("Score not saved");
         }
-
         showGameOverControl(false);
         App.window.setScene(App.menu);
     }
 
     void setUp() throws Exception{
+        Parent gameLayout;
         gameLayout = FXMLLoader.load(getClass().getResource("/fxml/Game.fxml"));
         App.jumpOrDie = new Scene(gameLayout,800,500);
         pauseControl = (VBox)gameLayout.lookup("#pauseControl");
@@ -99,6 +95,15 @@ public class GameController {
         gc.drawImage(background,0,0);
         setUpKeyListener();
     }
+
+    /**
+     * In case the user presses 'Space' or 'Up' the player has to jump
+     * In case the user presses 'Down' the player should duck and if the key gets released
+     * the player needs to get his normal size again
+     *
+     * If 'Esc' gets pressed the gameplay gets paused
+     *
+     */
     private void setUpKeyListener(){
         App.jumpOrDie.setOnKeyPressed(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
@@ -110,11 +115,10 @@ public class GameController {
                 Board.playerDuck();
                 return;
             }
-            if (keyCode.equals(KeyCode.ESCAPE) && gameOverControl.isDisabled()){
+            if (keyCode.equals(KeyCode.ESCAPE) && gameOverControl.isDisabled()){ //pause mode should only pop up if the game is still running and is not gameOver
                 jumpOrDie.stopGame();
                 showPauseControl(true);
             }
-
         });
         App.jumpOrDie.setOnKeyReleased(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
@@ -125,21 +129,18 @@ public class GameController {
     }
 
     void animateGame (){
-
-        gc.drawImage(background,0,0);
-        animatePlayer();
+        gc.drawImage(background,0,0);       //'resets' canvas so that player and obstacles
+        animatePlayer();                          //can be drawn to their new position
         animateObstacles();
     }
     private void animatePlayer(){
-
         double x = Board.activePlayer.getX();
         double y = canvas.getHeight()-Board.activePlayer.getHeight()-Board.activePlayer.getY()-distanceFromBottom;
         gc.drawImage(player, x-39,y);
 
-        //show hitBox
         if(showHitbox) {
             gc.setStroke(Color.BLACK);
-            gc.setLineWidth(2);
+            gc.setLineWidth(2.5);
             double width = Board.activePlayer.getWidth();
             double height = Board.activePlayer.getHeight();
             gc.strokeRect(x, y, width, height);
@@ -149,31 +150,34 @@ public class GameController {
         Obstacle ob1 = ObstacleManager.obstacle1;
         Obstacle ob2 = ObstacleManager.obstacle2;
 
+        //draw Obstacle 1
         double x1 = ob1.getX();
         double y1 = canvas.getHeight()-ob1.getHeight()-ob1.getY()-distanceFromBottom;
         gc.drawImage(findObstacleImage(ob1),x1,y1);
-
-        //show hitBox
         if (showHitbox) {
             gc.setStroke(Color.BLACK);
-            gc.setLineWidth(2);
+            gc.setLineWidth(2.5);
             gc.strokeRect(x1, y1, ob1.getWidth(), ob1.getHeight());
         }
+        //draw Obstacle 2
+        //Obstacle 2 is null at the beginning an gets generated after a while
         if (ob2 !=null){
             double x2 = ob2.getX();
             double y2 = canvas.getHeight()-ob2.getHeight()-ob2.getY()-distanceFromBottom;
             gc.drawImage(findObstacleImage(ob2),x2,y2);
-
-            //show hitBox
             if (showHitbox) {
                 gc.strokeRect(x2, y2, ob2.getWidth(), ob2.getHeight());
             }
-
         }
-
-
-
     }
+
+    /**
+     * method to find out which obstacle is on the screen
+     * and which image should be drawn to the canvas
+     *
+     * @param obstacle which is on the screen
+     * @return  Image that belongs to obstacle
+     */
     private Image findObstacleImage(Obstacle obstacle){
         switch (obstacle.toString()){
             case "CactusRow": return cactusRow;
@@ -218,10 +222,8 @@ public class GameController {
             return name;
         }
     }
-
     void setShowHitbox(boolean b){
         showHitbox = b;
         log.debug("showHitbox set: "+ b);
     }
-
 }

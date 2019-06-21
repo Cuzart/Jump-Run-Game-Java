@@ -17,23 +17,13 @@ public class Player implements IPlayer, Comparable<Player> {
             x = 100;
 
     /**
-     * A Players exact height and width.
+     * Player Constructor defines height and width.
      */
     Player(){
         height = 125;
         width = 60;
     }
 
-    /**
-     * A Player will get an own nickname and will reach an own score.
-     *
-     * @param nickname a players chosen name
-     * @param finalScore the score a player reached
-     */
-    public Player(String nickname, int finalScore){
-        setNickname(nickname);
-        setFinalScore(finalScore);
-    }
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -79,21 +69,11 @@ public class Player implements IPlayer, Comparable<Player> {
         }else{
             height*=2;
         }
-
     }
 
-    /**
-     * returms the nickname and final score of a player.
-     *
-     * @return nickname, finalScore
-     */
-    @Override
-    public String toString() {
-        return getNickname()+"("+getFinalScore()+")";
-    }
     @Override
     public int compareTo(Player other) {
-        return other.getFinalScore()-getFinalScore();
+        return other.getFinalScore()-getFinalScore();       //sort players after their score
     }
 
 }

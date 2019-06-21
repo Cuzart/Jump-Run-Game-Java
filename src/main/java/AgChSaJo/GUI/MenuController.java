@@ -10,9 +10,6 @@ import javafx.scene.layout.VBox;
 
 public class MenuController {
 
-
-    private Parent root;
-
     @FXML
     public VBox menu;
     @FXML
@@ -49,7 +46,7 @@ public class MenuController {
 
     // set up scene and FXML
     void setUp() throws Exception{
-        root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
         App.menu = new Scene(root,800,500);
     }
 
@@ -60,5 +57,4 @@ public class MenuController {
         menu.setVisible(!b);
         menu.setDisable(b);
     }
-
 }

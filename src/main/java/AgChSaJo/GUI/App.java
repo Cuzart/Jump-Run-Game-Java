@@ -3,10 +3,10 @@ package AgChSaJo.GUI;
 import AgChSaJo.ScoreList.ScoreList;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 public class App extends Application {
 
@@ -19,21 +19,21 @@ public class App extends Application {
     static ScoreController scoreController = new ScoreController();
 
 
-
     public static void main(String[] args) {
         launch(args);
     }
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
 
+        //configuration: scenes
         menuController.setUp();
         gameController.setUp();
         ScoreList.readScoreList();
         scoreController.setUp();
 
+        //configuration: stage
         window.setOnCloseRequest(e -> closeApp());
         window.setResizable(false);
         window.setTitle("JumpOrDie");
@@ -43,7 +43,11 @@ public class App extends Application {
         log.debug("App started");
     }
 
-
+    /**
+     * method gets called when user exits the game
+     * It closes everything properly (timers)
+     * and saves the scoreList
+     */
     static void closeApp (){
         gameController.jumpOrDie.closeGame();
         gameController.stopAnimation();

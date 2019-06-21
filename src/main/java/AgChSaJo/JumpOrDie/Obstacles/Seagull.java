@@ -7,8 +7,10 @@ public class Seagull extends Obstacle{
         setWidth(99);
         setY(100);
     }
+
     @Override
     public String toString() {
         return "Seagull";
     }
+
 }

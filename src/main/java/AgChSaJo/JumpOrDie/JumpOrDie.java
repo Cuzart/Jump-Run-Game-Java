@@ -4,6 +4,7 @@ import AgChSaJo.IGame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 /**
  * This class contains the general game mechanism.
  * Someone can stop the game, resume it, finish it and play again.
@@ -26,14 +27,18 @@ public class JumpOrDie implements IGame {
 
     /**
      * game will be continued after short delay
+     * in case the game was paused
      */
     public void resumeGame(){
-        Board.startTimerTasks(5000);
-        Board.startJumpTimerTask(5000);
+        Board.startTimerTasks(3000);
+        Board.startJumpTimerTask(3000);
     }
 
     /**
      * stops timer and game
+     * this happens in 2 options
+     * 1: game got paused
+     * 2: game Over
      */
     public void stopGame(){
         Board.stopTimerTasks();
