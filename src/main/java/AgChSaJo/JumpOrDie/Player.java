@@ -23,6 +23,10 @@ public class Player implements IPlayer, Comparable<Player> {
         height = 125;
         width = 60;
     }
+    public Player (String nickname, int finalScore){
+        setNickname(nickname);
+        setFinalScore(finalScore);
+    }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;

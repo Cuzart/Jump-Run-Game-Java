@@ -1,5 +1,6 @@
 package AgChSaJo.GUI;
 
+import AgChSaJo.ScoreList.ScoreList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,6 +29,7 @@ public class MenuController {
     public void showScorelist(){
         App.scoreController.updateScorelist();
         App.window.setScene((App.scoreList));
+        ScoreList.getScoreList("Jonas");
     }
     @FXML // opens instructions menu
     public void instructions (){

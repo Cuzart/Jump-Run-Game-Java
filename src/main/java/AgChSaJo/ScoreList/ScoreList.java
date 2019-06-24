@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ScoreList{
@@ -29,7 +31,7 @@ public class ScoreList{
             log.debug("read ScoreList");
         } catch (IOException e) {
             log.error("ScoreListFile not found or damaged! - Creating a new one");
-            scoreList = new ArrayList<>();
+            createNewScoreList();
         }
     }
 
@@ -68,9 +70,19 @@ public class ScoreList{
         sortScoreList();
         return scoreList;
     }
+    public static ArrayList<Player> getScoreList(final String search) {
+        List<Player> list;
+        list = scoreList.stream().filter(p -> p.getNickname().equals(search)).sorted(Player::compareTo).collect(Collectors.toList());
+        ArrayList<Player> output = new ArrayList<>(list);
+        return output;
+    }
 
     private static void sortScoreList(){
         scoreList.sort(Player::compareTo);
+    }
+
+    static void createNewScoreList(){
+        scoreList = new ArrayList<>();
     }
 
 }

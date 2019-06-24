@@ -63,15 +63,15 @@ public class ScoreController {
      * updates the data in the table
      */
     void updateScorelist(){
-        table.setItems(getData());
+        table.setItems(loadScoreList());
     }
 
     /**
      * creates ObservableList with the ArrayList of the ScoreList class
      * @return data returns the ObservableList with the table content
      */
-    private ObservableList<Player> getData(){
-        ObservableList<Player> data = FXCollections.observableArrayList(ScoreList.getScoreList());
+    private ObservableList<Player> loadScoreList(){
+        ObservableList<Player> data = FXCollections.observableArrayList(ScoreList.getScoreList("Jonas"));
         return data;
     }
 
