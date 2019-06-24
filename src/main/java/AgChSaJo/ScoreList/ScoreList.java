@@ -40,6 +40,7 @@ public class ScoreList{
      * so that the scoreList survive across multiple processes
      */
     public static void saveScoreList(){
+        sortScoreList();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             objectMapper.writeValue(new File("src/main/resources/ScoreList.json"), scoreList);
@@ -67,14 +68,14 @@ public class ScoreList{
     }
 
     public static ArrayList<Player> getScoreList() {
-        sortScoreList();
-        return scoreList;
+        List<Player> list;
+        list = scoreList.stream().sorted(Player::compareTo).collect(Collectors.toList());
+        return new ArrayList<>(list);
     }
     public static ArrayList<Player> getScoreList(final String search) {
         List<Player> list;
         list = scoreList.stream().filter(p -> p.getNickname().equals(search)).sorted(Player::compareTo).collect(Collectors.toList());
-        ArrayList<Player> output = new ArrayList<>(list);
-        return output;
+        return new ArrayList<>(list);
     }
 
     private static void sortScoreList(){

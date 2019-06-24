@@ -29,7 +29,6 @@ public class MenuController {
     public void showScorelist(){
         App.scoreController.resetScoreListView();
         App.window.setScene((App.scoreList));
-        ScoreList.getScoreList("Jonas");
     }
     @FXML // opens instructions menu
     public void instructions (){

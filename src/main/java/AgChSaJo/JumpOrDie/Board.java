@@ -38,9 +38,8 @@ public class Board {
      *      x1   x2
      *
      * @param obstacle which is near player
-     * @return true or false
      */
-    static boolean checkCollision(Obstacle obstacle){
+    static void checkCollision(Obstacle obstacle){
         double playerX1 = activePlayer.getX();
         double playerX2 = playerX1 + activePlayer.getWidth();
         double obstacleX1 = obstacle.getX();
@@ -58,10 +57,8 @@ public class Board {
                 stopTimerTasks();
                 activePlayer.setFinalScore(score);
                 App.gameController.gameOver();
-                return true;
             }
         }
-        return false;
     }
 
     /**

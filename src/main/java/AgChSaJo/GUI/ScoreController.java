@@ -67,6 +67,7 @@ public class ScoreController {
     public void filterScorelist() {
         String search = input.getText();
         table.setItems(loadScorelist(search));
+        table.refresh();
     }
     /**
      * updates the data in the table

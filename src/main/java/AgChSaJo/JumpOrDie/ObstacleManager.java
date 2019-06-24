@@ -139,6 +139,9 @@ public class ObstacleManager {
     static double getObstacleSpeed(){
         return obstacleSpeed;
     }
+    static int getObstacleCount(){
+        return obstacleCount;
+    }
 
     /**
      * If the game starts again this methods resets everything
