@@ -27,7 +27,7 @@ public class MenuController {
     }
     @FXML // opens updated score list
     public void showScorelist(){
-        App.scoreController.updateScorelist();
+        App.scoreController.resetScoreListView();
         App.window.setScene((App.scoreList));
         ScoreList.getScoreList("Jonas");
     }

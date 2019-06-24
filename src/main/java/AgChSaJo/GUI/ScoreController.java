@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
@@ -17,6 +18,8 @@ public class ScoreController {
 
     @FXML
     public VBox container;
+    public TextField input;
+
     private TableView<Player> table = new TableView<>();
 
 
@@ -28,6 +31,7 @@ public class ScoreController {
     void setUp() throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Score.fxml"));
+        input =(TextField) root.lookup("#input");
         App.scoreList = new Scene(root,800,500);
 
         // Nickname Column set up
@@ -59,20 +63,31 @@ public class ScoreController {
         App.window.setScene(App.menu);
     }
 
+    @FXML
+    public void filterScorelist() {
+        String search = input.getText();
+        table.setItems(loadScorelist(search));
+    }
     /**
      * updates the data in the table
      */
-    void updateScorelist(){
-        table.setItems(loadScoreList());
+    void resetScoreListView(){
+        table.setItems(loadScorelist(""));
+        input.clear();
     }
 
     /**
      * creates ObservableList with the ArrayList of the ScoreList class
      * @return data returns the ObservableList with the table content
      */
-    private ObservableList<Player> loadScoreList(){
-        ObservableList<Player> data = FXCollections.observableArrayList(ScoreList.getScoreList("Jonas"));
-        return data;
+    private ObservableList<Player> loadScorelist(String s){
+        ObservableList<Player> data;
+        if (s.equals("")){
+            data = FXCollections.observableArrayList(ScoreList.getScoreList());
+        }else{
+            data = FXCollections.observableArrayList(ScoreList.getScoreList(s));
+        }
+        return  data;
     }
 
 }

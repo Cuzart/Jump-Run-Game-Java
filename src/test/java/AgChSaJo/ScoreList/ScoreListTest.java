@@ -19,7 +19,7 @@ public class ScoreListTest {
 
     @Test
     public void addNewScore() {
-        Player player1 = new Player("nickname",214)
+        Player player1 = new Player("nickname",214);
         ArrayList<Player> testDaten = new ArrayList<>();
         testDaten.add(player1);
         ScoreList.createNewScoreList();
