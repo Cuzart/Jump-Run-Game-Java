@@ -9,19 +9,21 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
 
+    private Board board = JumpOrDie.board;
+
     @Before
     public void setUpTest() {
-        Board.activePlayer = new Player();
+        board.activePlayer = new Player();
     }
 
 
     @Test
     public void setJumpingTest() {
-        Board.setDucking(true);
-        assertTrue(Board.getDucking());
+        board.setDucking(true);
+        assertTrue(board.getDucking());
 
-        Board.setDucking(false);
-        assertFalse(Board.getDucking());
+        board.setDucking(false);
+        assertFalse(board.getDucking());
     }
 
     /**
@@ -30,40 +32,41 @@ public class BoardTest {
      */
     @Test
     public void playerJumpTest() {
-        Board.playerJump();
-        assertTrue(Board.getJumping());
+        board.activePlayer = new Player();
+        board.playerJump();
+        assertTrue(board.getJumping());
         long start = System.currentTimeMillis();
         long time;
         //after 500ms the player is still jumping
         do {
             time = System.currentTimeMillis();
         } while (start + 500 >= time);
-        assertTrue(Board.getJumping());
+        assertTrue(board.getJumping());
         //after 900ms the player is back on the ground
         do {
             time = System.currentTimeMillis();
         } while (start + 900 >= time);
-        assertFalse(Board.getJumping());
+        assertFalse(board.getJumping());
 
     }
 
     @Test
     public void addToScoreTest() {
-        Board.addToScore(10);
-        assertEquals(Board.getScore(), 10);
-        Board.addToScore(20);
-        assertEquals(Board.getScore(), 30);
-        Board.addToScore(20);
-        assertEquals(Board.getScore(), 50);
+        board.addToScore(10);
+        assertEquals(board.getScore(), 10);
+        board.addToScore(20);
+        assertEquals(board.getScore(), 30);
+        board.addToScore(20);
+        assertEquals(board.getScore(), 50);
 
-        assertNotEquals(Board.getScore(), 60);
+        assertNotEquals(board.getScore(), 60);
     }
     @Test
     public void resetScoreTest(){
         addToScoreTest();
-        assertEquals(Board.getScore(),50);
-        Board.resetScore();
-        assertEquals(Board.getScore(),0);
+        assertEquals(board.getScore(),50);
+        board.resetScore();
+        assertEquals(board.getScore(),0);
     }
 
 }

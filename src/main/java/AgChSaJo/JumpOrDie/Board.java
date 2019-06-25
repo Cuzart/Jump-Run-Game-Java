@@ -14,19 +14,20 @@ public class Board {
 
     private static Logger log = LogManager.getLogger(Board.class);
 
-    private static Timer obstacleTimer = new Timer();
-    private static Timer jumpTimer = new Timer();
+    private Timer obstacleTimer = new Timer();
+    private Timer jumpTimer = new Timer();
     //additional scoreTimer only for Thread Task
-    private static Timer scoreTimer = new Timer();
-    private static ObstacleTimer obstacleTimerTask;
-    private static PlayerJumpTimer jumpTimerTask;
-    private static ScoreTimer scoreTimerTask;
-    private static int period = 20;
+    private Timer scoreTimer = new Timer();
+    private ObstacleTimer obstacleTimerTask;
+    private PlayerJumpTimer jumpTimerTask;
+    private ScoreTimer scoreTimerTask;
+    private int period = 20;
 
-    public static Player activePlayer;
-    private static boolean jumping, ducking;
-    static int jumpCounter = 0;
-    private static int score;
+    public ObstacleManager obstacleManager = new ObstacleManager();
+    public Player activePlayer;
+    private boolean jumping, ducking;
+    int jumpCounter = 0;
+    private int score;
 
     /**
      * This method checks whether the player collided with an Obstacle by
@@ -39,7 +40,7 @@ public class Board {
      *
      * @param obstacle which is near player
      */
-    static void checkCollision(Obstacle obstacle){
+    void checkCollision(Obstacle obstacle){
         double playerX1 = activePlayer.getX();
         double playerX2 = playerX1 + activePlayer.getWidth();
         double obstacleX1 = obstacle.getX();
@@ -69,7 +70,7 @@ public class Board {
      *
      * @param v sets jumping to its value
      */
-    private static void setJumping(boolean v){
+    private void setJumping(boolean v){
         jumping = v;
         log.debug("Set jumping to: "+ v);
     }
@@ -77,11 +78,11 @@ public class Board {
     /**
      * In case the player is able to jump he starts jumping
      */
-    public static void playerJump(){
+    public void playerJump(){
         if (!jumping) {
             jumpTimerTask = new PlayerJumpTimer();
             jumpTimer.scheduleAtFixedRate(jumpTimerTask, 5,period);
-            Board.setJumping(true);
+            setJumping(true);
         }
     }
 
@@ -90,7 +91,7 @@ public class Board {
      * jumpCounter is set to zero.
      * This happens when player is back on the ground or the game got interrupted
      */
-    static void resetJumpingVariables(){
+    void resetJumpingVariables(){
         setJumping(false);
         jumpCounter = 0;
     }
@@ -101,7 +102,7 @@ public class Board {
      *
      * @param b true if a player is ducking.
      */
-    public static void setDucking(boolean b){
+    public void setDucking(boolean b){
         if(ducking != b){
             ducking = b;
             log.debug("Set ducking to: "+ b);
@@ -114,10 +115,10 @@ public class Board {
     /**
      * Only if a player is not currently ducking, he can duck.
      */
-    public static void playerDuck(){
+    public void playerDuck(){
         if (!ducking){
             activePlayer.duck(true);
-            Board.setDucking(true);
+            setDucking(true);
         }
 
     }
@@ -128,7 +129,7 @@ public class Board {
      *
      * @param delay the delay that passes before the Timer starts
      */
-    static void startTimerTasks(long delay){
+    void startTimerTasks(long delay){
         obstacleTimerTask = new ObstacleTimer();
         obstacleTimer.schedule(obstacleTimerTask,delay,period);
         scoreTimerTask = new ScoreTimer();
@@ -141,7 +142,7 @@ public class Board {
      *
      * @param delay the time that passes before the Timer starts
      */
-    static void startJumpTimerTask(long delay){
+    void startJumpTimerTask(long delay){
         jumpTimerTask = new PlayerJumpTimer();
         jumpTimer.scheduleAtFixedRate(jumpTimerTask, delay, period);
     }
@@ -150,7 +151,7 @@ public class Board {
      * Stops all Timer Tasks.
      * In case the game gets paused or is over (gameOver)
      */
-    static void stopTimerTasks(){
+    void stopTimerTasks(){
         obstacleTimerTask.cancel();
         scoreTimerTask.cancel();
         if(jumpTimerTask != null) {
@@ -161,7 +162,7 @@ public class Board {
     /**
      * Closes all timers properly for closing the game
      */
-    static void closeTimers(){
+    void closeTimers(){
         obstacleTimer.cancel();
         jumpTimer.cancel();
         scoreTimer.cancel();
@@ -171,7 +172,7 @@ public class Board {
      * A method that counts the total score of a player.
      * @param add how much score is added
      */
-    static synchronized void addToScore(int add){
+    synchronized void addToScore(int add){
         score += add;
     }
 
@@ -180,22 +181,22 @@ public class Board {
      *
      * @return the score of a player
      */
-    public static int getScore(){
+    public int getScore(){
         return score;
     }
 
     /**
      * Resets the score, so that a new player can start with zero.
      */
-    static void resetScore(){
+    void resetScore(){
         score = 0;
     }
 
     //zum Testen
-    static boolean getDucking(){
+    boolean getDucking(){
         return ducking;
     }
-    static boolean getJumping(){
+    boolean getJumping(){
         return jumping;
     }
 }

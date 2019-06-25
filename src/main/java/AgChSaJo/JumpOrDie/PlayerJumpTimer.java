@@ -5,16 +5,18 @@ import java.util.TimerTask;
 
 public class PlayerJumpTimer extends TimerTask {
 
+    private Board board = JumpOrDie.board;
+
     @Override
     public void run() {                                     //player increases is y-Coordinate linear
-        Board.jumpCounter++;                                //then he stops on top a short time
-        if (Board.jumpCounter<=20){                         //after that the y-Coordinate decreases linear
-            Board.activePlayer.jump(10);              //through that it looks nearly like a jumping curve
-        }else if(Board.jumpCounter == 45){
-            Board.resetJumpingVariables();
+        board.jumpCounter++;                                //then he stops on top a short time
+        if (board.jumpCounter<=20){                         //after that the y-Coordinate decreases linear
+            board.activePlayer.jump(10);              //through that it looks nearly like a jumping curve
+        }else if(board.jumpCounter == 45){
+            board.resetJumpingVariables();
             this.cancel();
-        } else if (Board.jumpCounter >=25){
-            Board.activePlayer.jump(-10);
+        } else if (board.jumpCounter >=25){
+            board.activePlayer.jump(-10);
         }
     }
 }

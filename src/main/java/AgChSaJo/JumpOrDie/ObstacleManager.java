@@ -17,17 +17,17 @@ public class ObstacleManager {
 
     private static Logger log = LogManager.getLogger(ObstacleManager.class);
 
-    public static Obstacle obstacle1, obstacle2;
-    private static double obstacleSpeed;
-    private static int obstacleCount;
-    private static final int obstacleEnd = -50;
+    public Obstacle obstacle1, obstacle2;
+    private double obstacleSpeed;
+    private int obstacleCount;
+    private final int obstacleEnd = -50;
 
     /**
      *  Factory for Obstacles
      *
      * @return a random generated obstacle
      */
-    private static Obstacle generate(){
+    private Obstacle generate(){
         Random r = new Random();
         int kind = r.nextInt(7);
         switch (kind){
@@ -65,13 +65,13 @@ public class ObstacleManager {
      * The speed of an obstacle increases depending on how many obstacles have come
      * through.
      */
-    static void manageObstacleLifetime(){
+    void manageObstacleLifetime(){
 
         //watches obstacle 1
         if (obstacle1.getX() <= obstacleEnd){
             obstacle1 = generate();
             obstacleCount++;
-            Board.addToScore(10);
+            JumpOrDie.board.addToScore(10);
         }
 
         //watches obstacle 2
@@ -85,7 +85,7 @@ public class ObstacleManager {
         }else if (obstacle2.getX() <= obstacleEnd){
                 obstacle2 = generate();
                 obstacleCount++;
-                Board.addToScore(10);
+                JumpOrDie.board.addToScore(10);
         }
 
         //speed increase after a certain amount of obstacles to increase the difficulty
@@ -119,7 +119,7 @@ public class ObstacleManager {
      *
      * @return closer obstacle
      */
-    static Obstacle getCloserObstacle(){
+    Obstacle getCloserObstacle(){
         if (obstacle2 ==null ){
             return obstacle1;
         }else {
@@ -136,10 +136,10 @@ public class ObstacleManager {
      *
      * @return obstacleSpeed;
      */
-    static double getObstacleSpeed(){
+    double getObstacleSpeed(){
         return obstacleSpeed;
     }
-    static int getObstacleCount(){
+    int getObstacleCount(){
         return obstacleCount;
     }
 
@@ -147,7 +147,7 @@ public class ObstacleManager {
      * If the game starts again this methods resets everything
      * The obstacles have their beginning speed and the counter is still on zero.
      */
-    static void setUp(){
+    void setUp(){
         obstacle1 = generate();
         obstacle2 = null;
         obstacleSpeed = 7;

@@ -26,6 +26,7 @@ public class GameController {
     private static Logger log = LogManager.getLogger(GameController.class);
 
     IGame jumpOrDie = new JumpOrDie();
+    private Board board = JumpOrDie.board;
     private GameAnimationTimer animationTimer = new GameAnimationTimer();
 
     public VBox pauseControl;
@@ -60,9 +61,9 @@ public class GameController {
     }
     @FXML
     public void savePlayAgain(){
-        Board.activePlayer.setNickname(getNickname());
+        board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(Board.activePlayer);
+        ScoreList.addNewScore(board.activePlayer);
         }catch(IllegalScoreException e){
             log.info("Score not saved");
         }
@@ -72,9 +73,9 @@ public class GameController {
     }
     @FXML
     public void saveBackToMenu(){
-        Board.activePlayer.setNickname(getNickname());
+        board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(Board.activePlayer);
+        ScoreList.addNewScore(board.activePlayer);
         }catch(IllegalScoreException e){
             log.info("Score not saved");
         }
@@ -108,11 +109,11 @@ public class GameController {
         App.jumpOrDie.setOnKeyPressed(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
             if (keyCode.equals(KeyCode.SPACE)||keyCode.equals(KeyCode.UP)){
-                Board.playerJump();
+                board.playerJump();
                 return;
             }
             if (keyCode.equals((KeyCode.DOWN))){
-                Board.playerDuck();
+                board.playerDuck();
                 return;
             }
             if (keyCode.equals(KeyCode.ESCAPE) && gameOverControl.isDisabled()){ //pause mode should only pop up if the game is still running and is not gameOver
@@ -123,7 +124,7 @@ public class GameController {
         App.jumpOrDie.setOnKeyReleased(keyEvent -> {
             KeyCode keyCode = keyEvent.getCode();
             if (keyCode.equals((KeyCode.DOWN))){
-                Board.setDucking(false);
+                board.setDucking(false);
             }
         });
     }
@@ -134,21 +135,21 @@ public class GameController {
         animateObstacles();
     }
     private void animatePlayer(){
-        double x = Board.activePlayer.getX();
-        double y = canvas.getHeight()-Board.activePlayer.getHeight()-Board.activePlayer.getY()-distanceFromBottom;
+        double x = board.activePlayer.getX();
+        double y = canvas.getHeight()-board.activePlayer.getHeight()-board.activePlayer.getY()-distanceFromBottom;
         gc.drawImage(player, x-39,y);
 
         if(showHitbox) {
             gc.setStroke(Color.BLACK);
             gc.setLineWidth(2.5);
-            double width = Board.activePlayer.getWidth();
-            double height = Board.activePlayer.getHeight();
+            double width = board.activePlayer.getWidth();
+            double height = board.activePlayer.getHeight();
             gc.strokeRect(x, y, width, height);
         }
     }
     private void animateObstacles(){
-        Obstacle ob1 = ObstacleManager.obstacle1;
-        Obstacle ob2 = ObstacleManager.obstacle2;
+        Obstacle ob1 = board.obstacleManager.obstacle1;
+        Obstacle ob2 = board.obstacleManager.obstacle2;
 
         //draw Obstacle 1
         double x1 = ob1.getX();
@@ -191,7 +192,7 @@ public class GameController {
         }
     }
     void updateScoreView(){
-        scoreView.setText(""+Board.getScore());
+        scoreView.setText(""+board.getScore());
     }
     void startAnimation(){
         animationTimer.start();

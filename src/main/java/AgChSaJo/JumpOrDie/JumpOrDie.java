@@ -13,15 +13,17 @@ public class JumpOrDie implements IGame {
 
     private static Logger log = LogManager.getLogger(JumpOrDie.class);
 
+    public static Board board = new Board();
+
     /**
      * resets activePlayer and all variables and starts a new game
      */
     public void playAgain(){
-        ObstacleManager.setUp();
-        Board.activePlayer = new Player();
-        Board.startTimerTasks(1000);
-        Board.resetJumpingVariables();
-        Board.resetScore();
+        board.obstacleManager.setUp();
+        board.activePlayer = new Player();
+        board.startTimerTasks(1000);
+        board.resetJumpingVariables();
+        board.resetScore();
         log.info("Start new Game");
     }
 
@@ -30,8 +32,8 @@ public class JumpOrDie implements IGame {
      * in case the game was paused
      */
     public void resumeGame(){
-        Board.startTimerTasks(3000);
-        Board.startJumpTimerTask(3000);
+        board.startTimerTasks(3000);
+        board.startJumpTimerTask(3000);
     }
 
     /**
@@ -41,14 +43,14 @@ public class JumpOrDie implements IGame {
      * 2: game Over
      */
     public void stopGame(){
-        Board.stopTimerTasks();
+        board.stopTimerTasks();
     }
 
     /**
      * quits timer and game
      */
     public void closeGame(){
-        Board.closeTimers();
+        board.closeTimers();
     }
 
 }
