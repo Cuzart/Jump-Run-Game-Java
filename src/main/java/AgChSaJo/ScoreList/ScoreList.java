@@ -32,7 +32,7 @@ public class ScoreList{
             scoreList =  new ArrayList<>(Arrays.asList(playerArray));
             log.debug("read ScoreList");
         } catch (IOException e) {
-            log.error("ScoreListFile not found or damaged! - Creating a new one");
+            log.error("ScoreListFile not found or damaged!");
             createNewScoreList();
         }
     }
@@ -71,12 +71,12 @@ public class ScoreList{
 
     public ArrayList<Player> getScoreList() {
         List<Player> list;
-        list = scoreList.stream().sorted(Player::compareTo).collect(Collectors.toList());
+        list = scoreList.parallelStream().sorted(Player::compareTo).collect(Collectors.toList());
         return new ArrayList<>(list);
     }
     public ArrayList<Player> getScoreList(final String search) {
         List<Player> list;
-        list = scoreList.stream().filter(p -> p.getNickname().equals(search)).sorted(Player::compareTo).collect(Collectors.toList());
+        list = scoreList.parallelStream().filter(p -> p.getNickname().equals(search)).sorted(Player::compareTo).collect(Collectors.toList());
         return new ArrayList<>(list);
     }
 
@@ -86,6 +86,7 @@ public class ScoreList{
 
     void createNewScoreList(){
         scoreList = new ArrayList<>();
+        log.info("Creating a new ScoreList!");
     }
 
 }

@@ -1,7 +1,6 @@
 package AgChSaJo.GUI;
 
 import AgChSaJo.JumpOrDie.JumpOrDie;
-import AgChSaJo.ScoreList.ScoreList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
