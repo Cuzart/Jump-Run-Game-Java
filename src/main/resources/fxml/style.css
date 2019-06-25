@@ -1,8 +1,14 @@
 
 .button {
     -fx-background-radius: 20px;
-      -fx-blend-mode: multiply;
-    /*    -fx-text-fill: blue; */
+    -fx-blend-mode: multiply;
+    -fx-text-fill: black;
+    /*
+    -fx-font-family: Impact,Impact,sans-serif;
+    -fx-font-size: 18;
+    
+     */
+
 }
 #bg {
     -fx-background-image: url("../images/backgroundBlurred.png");

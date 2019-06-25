@@ -72,6 +72,7 @@ public class ScoreList{
         list = scoreList.stream().sorted(Player::compareTo).collect(Collectors.toList());
         return new ArrayList<>(list);
     }
+
     public static ArrayList<Player> getScoreList(final String search) {
         List<Player> list;
         list = scoreList.stream().filter(p -> p.getNickname().equals(search)).sorted(Player::compareTo).collect(Collectors.toList());

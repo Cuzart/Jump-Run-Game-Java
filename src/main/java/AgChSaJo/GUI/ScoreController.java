@@ -69,8 +69,9 @@ public class ScoreController {
         table.setItems(loadScorelist(search));
         table.refresh();
     }
+
     /**
-     * updates the data in the table
+     * resets the data in the table
      */
     void resetScoreListView(){
         table.setItems(loadScorelist(""));
@@ -87,6 +88,7 @@ public class ScoreController {
             data = FXCollections.observableArrayList(ScoreList.getScoreList());
         }else{
             data = FXCollections.observableArrayList(ScoreList.getScoreList(s));
+
         }
         return  data;
     }
