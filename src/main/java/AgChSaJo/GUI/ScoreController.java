@@ -69,8 +69,9 @@ public class ScoreController {
         table.setItems(loadScorelist(search));
         table.refresh();
     }
+
     /**
-     * updates the data in the table
+     * resets the data in the table
      */
     void resetScoreListView(){
         table.setItems(loadScorelist(""));

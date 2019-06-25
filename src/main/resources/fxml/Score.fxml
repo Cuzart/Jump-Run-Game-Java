@@ -12,7 +12,7 @@
 <Pane id="bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgChSaJo.GUI.ScoreController">
    <children>
       <Button alignment="CENTER" blendMode="MULTIPLY" layoutX="250.0" layoutY="420.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="40.0" prefWidth="300.0" text="Back" />
-      <VBox fx:id="container" alignment="CENTER" layoutX="200.0" layoutY="90.0" prefHeight="300.0" prefWidth="400.0">
+      <VBox fx:id="container" alignment="CENTER" blendMode="MULTIPLY" layoutX="200.0" layoutY="75.0" prefHeight="300.0" prefWidth="400.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></VBox>
@@ -24,7 +24,7 @@
             <Glow />
          </effect>
       </Label>
-      <TextField fx:id="input" layoutX="280.0" layoutY="385.0" prefWidth="190" promptText="nickname" />
-      <Button layoutX="470.0" layoutY="385.0" mnemonicParsing="false" onAction="#filterScorelist" text="Filter" />
+      <TextField fx:id="input" layoutX="280.0" layoutY="385.0" prefWidth="190" promptText="nickname" styleClass="button" />
+      <Button fx:id="look" layoutX="470.0" layoutY="385.0" mnemonicParsing="false" onAction="#filterScorelist" text="Filter" />
    </children>
 </Pane>
