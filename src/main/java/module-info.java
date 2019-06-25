@@ -12,5 +12,6 @@ module AgChSaJo {
     exports AgChSaJo.GUI;
     exports AgChSaJo.JumpOrDie;
     exports AgChSaJo.JumpOrDie.Obstacles;
+    exports AgChSaJo.ScoreList;
 }
 

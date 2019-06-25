@@ -1,5 +1,6 @@
 package AgChSaJo.GUI;
 
+import AgChSaJo.JumpOrDie.JumpOrDie;
 import AgChSaJo.ScoreList.ScoreList;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,7 +31,7 @@ public class App extends Application {
         //configuration: scenes
         menuController.setUp();
         gameController.setUp();
-        ScoreList.readScoreList();
+        JumpOrDie.scoreList.readScoreList();
         scoreController.setUp();
 
         //configuration: stage
@@ -52,7 +53,7 @@ public class App extends Application {
         gameController.jumpOrDie.closeGame();
         gameController.stopAnimation();
         log.info("Close request - saveScoreList");
-        ScoreList.saveScoreList();
+        JumpOrDie.scoreList.saveScoreList();
         System.exit(0);
     }
 

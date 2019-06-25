@@ -4,7 +4,6 @@ import AgChSaJo.IGame;
 import AgChSaJo.JumpOrDie.*;
 import AgChSaJo.JumpOrDie.Obstacles.Obstacle;
 import AgChSaJo.ScoreList.IllegalScoreException;
-import AgChSaJo.ScoreList.ScoreList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -63,7 +62,7 @@ public class GameController {
     public void savePlayAgain(){
         board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(board.activePlayer);
+        JumpOrDie.scoreList.addNewScore(board.activePlayer);
         }catch(IllegalScoreException e){
             log.info("Score not saved");
         }
@@ -75,7 +74,7 @@ public class GameController {
     public void saveBackToMenu(){
         board.activePlayer.setNickname(getNickname());
         try{
-        ScoreList.addNewScore(board.activePlayer);
+        JumpOrDie.scoreList.addNewScore(board.activePlayer);
         }catch(IllegalScoreException e){
             log.info("Score not saved");
         }

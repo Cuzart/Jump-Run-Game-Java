@@ -10,14 +10,15 @@ import static org.junit.Assert.*;
 
 public class ScoreListTest {
 
+    private ScoreList scoreList = new ScoreList();
     private ArrayList<Player> testDaten = new ArrayList<>();
     private ArrayList<Player> originalScoreList;
 
     @Before
     public void setUpTest(){
-        ScoreList.readScoreList();
-        originalScoreList = ScoreList.getScoreList();
-        ScoreList.createNewScoreList();
+        scoreList.readScoreList();
+        originalScoreList = scoreList.getScoreList();
+        scoreList.createNewScoreList();
     }
 
 
@@ -26,19 +27,19 @@ public class ScoreListTest {
         Player player1 = new Player("nickname",214);
         Player player2 = new Player("nick2",119);
         testDaten.add(player1);
-        ScoreList.addNewScore(player1);
-        assertEquals(testDaten,ScoreList.getScoreList());
+        scoreList.addNewScore(player1);
+        assertEquals(testDaten,scoreList.getScoreList());
         testDaten.add(player2);
-        ScoreList.addNewScore(player2);
-        assertEquals(testDaten,ScoreList.getScoreList());
+        scoreList.addNewScore(player2);
+        assertEquals(testDaten,scoreList.getScoreList());
     }
     @Test (expected = IllegalScoreException.class)
     public void addNewScoreTestInvalid1(){
-        ScoreList.addNewScore(new Player("Nickname",-1));
+        scoreList.addNewScore(new Player("Nickname",-1));
     }
     @Test (expected = IllegalScoreException.class)
     public void addNewScoreTestInvalid2(){
-        ScoreList.addNewScore(new Player("",123));
+        scoreList.addNewScore(new Player("",123));
     }
 
 
@@ -51,12 +52,12 @@ public class ScoreListTest {
     public void getScoreListTest1() {
         Player player1 = new Player("nick1",214);
         Player player2 = new Player("nick2",519);
-        ScoreList.addNewScore(player1);
-        ScoreList.addNewScore(player2);
+        scoreList.addNewScore(player1);
+        scoreList.addNewScore(player2);
         testDaten.add(player2);
         testDaten.add(player1);
 
-        assertEquals(testDaten,ScoreList.getScoreList());
+        assertEquals(testDaten,scoreList.getScoreList());
     }
     /**
      * In diesem Test wird noch zusätzlich gefiltert nach einem nickname
@@ -69,24 +70,24 @@ public class ScoreListTest {
         Player player4 = new Player("nick3",519);
         testDaten.add(player2);
         testDaten.add(player1);
-        ScoreList.addNewScore(player1);
-        ScoreList.addNewScore(player2);
-        ScoreList.addNewScore(player3);
-        ScoreList.addNewScore(player4);
+        scoreList.addNewScore(player1);
+        scoreList.addNewScore(player2);
+        scoreList.addNewScore(player3);
+        scoreList.addNewScore(player4);
 
-        assertEquals(testDaten,ScoreList.getScoreList("nick1"));
+        assertEquals(testDaten,scoreList.getScoreList("nick1"));
     }
 
     @Test
     public void getScoreListTest3() {
         Player player1 = new Player("nick1",214);
         Player player2 = new Player("nick2",519);
-        ScoreList.addNewScore(player1);
-        ScoreList.addNewScore(player2);
+        scoreList.addNewScore(player1);
+        scoreList.addNewScore(player2);
         testDaten.add(player1);
         testDaten.add(player2);
 
-        assertNotEquals(testDaten,ScoreList.getScoreList());
+        assertNotEquals(testDaten,scoreList.getScoreList());
     }
 
     @Test
@@ -95,29 +96,29 @@ public class ScoreListTest {
         Player player2 = new Player("nick2",519);
         testDaten.add(player1);
         testDaten.add(player2);
-        ScoreList.addNewScore(player1);
-        ScoreList.addNewScore(player2);
-        ScoreList.saveScoreList();      //Player werden gespeichert in ScoreList.json
-        ScoreList.readScoreList();      //Beim lesen werden neue Player erstellt (Objektreferenz not equals)
-        Player newPlayer1 = ScoreList.getScoreList().get(0);
-        Player newPlayer2 = ScoreList.getScoreList().get(1);
+        scoreList.addNewScore(player1);
+        scoreList.addNewScore(player2);
+        scoreList.saveScoreList();      //Player werden gespeichert in ScoreList.json
+        scoreList.readScoreList();      //Beim lesen werden neue Player erstellt (Objektreferenz not equals)
+        Player newPlayer1 = scoreList.getScoreList().get(0);
+        Player newPlayer2 = scoreList.getScoreList().get(1);
 
         assertEquals(player1.getNickname(),newPlayer1.getNickname());
         assertEquals(player1.getFinalScore(),newPlayer1.getFinalScore());
         assertEquals(player2.getNickname(),newPlayer2.getNickname());
         assertEquals(player2.getFinalScore(),newPlayer2.getFinalScore());
-        assertNotEquals(testDaten,ScoreList.getScoreList());
+        assertNotEquals(testDaten,scoreList.getScoreList());
         assertNotEquals(player1.getNickname(),newPlayer2.getNickname());
 
         saveOriginalScoreList();
     }
 
     private void saveOriginalScoreList(){
-        ScoreList.createNewScoreList();
+        scoreList.createNewScoreList();
         for (Player player: originalScoreList) {
-            ScoreList.addNewScore(player);
+            scoreList.addNewScore(player);
         }
-        ScoreList.saveScoreList();
+        scoreList.saveScoreList();
     }
 
 

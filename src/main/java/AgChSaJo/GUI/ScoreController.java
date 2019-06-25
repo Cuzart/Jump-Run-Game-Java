@@ -84,9 +84,9 @@ public class ScoreController {
     private ObservableList<Player> loadScorelist(String s){
         ObservableList<Player> data;
         if (s.equals("")){
-            data = FXCollections.observableArrayList(ScoreList.getScoreList());
+            data = FXCollections.observableArrayList(JumpOrDie.scoreList.getScoreList());
         }else{
-            data = FXCollections.observableArrayList(ScoreList.getScoreList(s));
+            data = FXCollections.observableArrayList(JumpOrDie.scoreList.getScoreList(s));
         }
         return  data;
     }

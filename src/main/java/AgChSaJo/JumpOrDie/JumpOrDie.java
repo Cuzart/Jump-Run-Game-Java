@@ -1,6 +1,7 @@
 package AgChSaJo.JumpOrDie;
 
 import AgChSaJo.IGame;
+import AgChSaJo.ScoreList.ScoreList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,6 +15,7 @@ public class JumpOrDie implements IGame {
     private static Logger log = LogManager.getLogger(JumpOrDie.class);
 
     public static Board board = new Board();
+    public static ScoreList scoreList = new ScoreList();
 
     /**
      * resets activePlayer and all variables and starts a new game
