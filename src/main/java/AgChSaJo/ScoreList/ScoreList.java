@@ -18,7 +18,7 @@ public class ScoreList{
 
     private static Logger log = LogManager.getLogger(ScoreList.class);
 
-    private ArrayList<Player> scoreList;
+    private List<Player> scoreList;
 
 
     /**
