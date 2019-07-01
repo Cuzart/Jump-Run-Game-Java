@@ -1,20 +1,16 @@
 package AgChSaJo.GUI;
 
 import AgChSaJo.JumpOrDie.*;
-import AgChSaJo.ScoreList.ScoreList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-
 
 public class ScoreController {
 
@@ -22,9 +18,6 @@ public class ScoreController {
     public VBox container;
     public TextField input;
     public TableView<Player> table;
-
-    private TableColumn<Player, String> nickname;
-    private TableColumn<Player, Integer> score;
 
     /**
      * sets the scene for the score list, creates the table columns and the binding to their content
@@ -39,13 +32,15 @@ public class ScoreController {
 
         App.scoreList = new Scene(root,800,500);
 
-        // Nickname Column set up
+        // Nickname column set up
+        TableColumn<Player, String> nickname;
         nickname = new TableColumn<>("Nickname");
         nickname.setMinWidth(200);
         nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
         nickname.setSortable(false);
 
-        // Score Column set up
+        // Score column set up
+        TableColumn<Player, Integer> score;
         score = new TableColumn<>("Score");
         score.setMinWidth(200);
         score.setCellValueFactory(new PropertyValueFactory<>("finalScore"));
@@ -69,8 +64,6 @@ public class ScoreController {
     public void filterScorelist() {
         String search = input.getText();
         table.setItems(loadScorelist(search));
-        table.refresh();
-        System.out.println("Button Pressed");
 
     }
 

@@ -3,12 +3,10 @@
     -fx-background-radius: 20px;
     -fx-blend-mode: multiply;
     -fx-text-fill: black;
+    -fx-font-size: 14;
     /*
-    -fx-font-family: Impact,Impact,sans-serif;
-    -fx-font-size: 18;
-    
-     */
-
+    -fx-font-family: System,System,"Code Bold";
+    */
 }
 #bg {
     -fx-background-image: url("../images/backgroundBlurred.png");
